@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android">
+    <translate
+        android:duration="1500"
+        android:fromXDelta="-100%"
+        android:interpolator="@android:anim/accelerate_decelerate_interpolator"
+        android:toXDelta="0%" />
+
+    <alpha
+        android:duration="1500"
+        android:fromAlpha="0.1"
+        android:toAlpha="1.0">
+    </alpha>
+</set>
+
+<!--
+duration -> 초 단위를 말합니다.
+fromXDelta -> x좌표가 어디서 시작하는지를 나타냅니다.
+toXDelta -> 이동될 x좌표를 나타냅니다.
+fromAlpha -> 투명도 0를 나타냅니다
+toAlpha -> 투명도 1를 나타냅니다
+-->
