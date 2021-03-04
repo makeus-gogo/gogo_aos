@@ -75,17 +75,47 @@
 
     </LinearLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/post_second_rv_color"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/post_second_ll_color"
         android:visibility="gone"
-        android:layout_height="30dp"
+        android:layout_width="wrap_content"
+        android:orientation="horizontal"
         android:layout_above="@+id/rl_style_sheet"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="15dp"
-        android:orientation="horizontal"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/item_color" />
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/bg_circle_40"
+            android:backgroundTint="@color/white">
+
+            <View
+                android:id="@+id/view_color"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:background="@drawable/bg_circle_35"
+                android:backgroundTint="@color/item_color_bg"
+                android:layout_centerInParent="true" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:src="@drawable/ic_pen" />
+
+        </RelativeLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/post_second_rv_color"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_color" />
+    </LinearLayout>
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/post_second_rv_txt"

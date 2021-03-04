@@ -17,6 +17,7 @@
     <!-- item_txt -->
     <color name="item_txt_bg_1">#1AFFFFFF</color>
     <color name="item_txt_bg_2">#1A000000</color>
+    <color name="item_color_bg">#80000000</color>
 
     <!-- post third -->
     <color name="post_third_txt">#4A5BF7</color>
