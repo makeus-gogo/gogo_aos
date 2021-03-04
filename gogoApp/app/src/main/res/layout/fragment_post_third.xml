@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".src.post.fragment.PostThirdFragment">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:text="업로드 완료!\n비슷한 고민 해결을 도와주세요"
+        android:textColor="@color/post_third_txt"
+        android:textSize="24sp" />
+
+    <ImageView
+        android:id="@+id/img_back"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/rectangle_big" />
+
+    <LinearLayout
+        android:id="@+id/ll_eyes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/img_back"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="27dp"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/bg_circle_40"
+            android:backgroundTint="@color/white">
+
+            <View
+                android:layout_width="9dp"
+                android:layout_height="9dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="1dp"
+                android:background="@drawable/bg_circle_40"
+                android:backgroundTint="@color/main_blue" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="15dp"
+            android:background="@drawable/bg_circle_40"
+            android:backgroundTint="@color/white">
+
+            <View
+                android:layout_width="9dp"
+                android:layout_height="9dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="1dp"
+                android:background="@drawable/bg_circle_40"
+                android:backgroundTint="@color/main_blue" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/ll_eyes"
+        android:layout_toLeftOf="@+id/ll_eyes"
+        android:src="@drawable/random_shy" />
+
+    <ImageView
+        android:id="@+id/img_shy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/ll_eyes"
+        android:layout_toRightOf="@+id/ll_eyes"
+        android:src="@drawable/random_shy" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/post_third_rv_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_marginVertical="20dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:layout_below="@+id/img_shy"
+        tools:listitem="@layout/item_worry_long"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+</RelativeLayout>

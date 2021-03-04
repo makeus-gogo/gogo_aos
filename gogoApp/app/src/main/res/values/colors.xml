@@ -7,4 +7,18 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="white_op_50">#80FFFFFF</color>
+
+    <color name="main_blue">#4854FB</color>
+    <color name="main_blue_op">#CC0527FB</color>
+    <color name="post_select_back">#4D0C1DAD</color>
+    <color name="main_pink">#FC49C6</color>
+
+    <!-- item_txt -->
+    <color name="item_txt_bg_1">#1AFFFFFF</color>
+    <color name="item_txt_bg_2">#1A000000</color>
+
+    <!-- post third -->
+    <color name="post_third_txt">#4A5BF7</color>
+
 </resources>

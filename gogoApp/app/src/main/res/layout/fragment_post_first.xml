@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#EBEBF4"
+    tools:context=".src.post.fragment.PostFirstFragment">
+
+
+    <ImageView
+        android:id="@+id/post_second_next_bg"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="10dp"
+        android:src="@drawable/next_bg" />
+
+    <ImageView
+        android:id="@+id/post_first_next"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="15dp"
+        android:padding="10dp"
+        android:src="@drawable/ic_next" />
+
+    <TextView
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/post_second_next_bg"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+        android:layout_marginBottom="90dp"
+        android:gravity="center"
+        android:text="오늘 저녁에 식당 어디갈지 모르겠어요 모르겠어요 모르겠어요"
+        android:textColor="@color/black"
+        android:textSize="22sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:id="@+id/post_first_select"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <RelativeLayout
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginEnd="60dp"
+            android:background="@drawable/bg_circle_40"
+            android:backgroundTint="@color/white">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/ic_post_o_blue" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:background="@drawable/bg_circle_40"
+            android:backgroundTint="@color/white">
+
+            <ImageView
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/ic_post_o_blue" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="horizontal">
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="255dp"
+        android:layout_height="140dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/bg_circle_35"
+        android:backgroundTint="@color/white_op_50"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:src="@drawable/random_circle" />
+
+            <RelativeLayout
+                android:layout_width="120dp"
+                android:layout_height="65dp"
+                android:background="@drawable/random_ox_bg">
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/img_line"
+                    android:src="@drawable/ic_select_o" />
+
+                <ImageView
+                    android:id="@+id/img_line"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/line" />
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/img_line"
+                    android:src="@drawable/ic_select_o" />
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/img_back"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="25dp"
+        android:text="O/X 답변용으로 추천드려요" />
+
+    <ImageView
+        android:id="@+id/img_back"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/rectangle" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/img_back"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="27dp"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/bg_circle_40"
+            android:backgroundTint="@color/white">
+
+            <View
+                android:layout_width="9dp"
+                android:layout_height="9dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="1dp"
+                android:background="@drawable/bg_circle_40"
+                android:backgroundTint="@color/main_blue" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="15dp"
+            android:background="@drawable/bg_circle_40"
+            android:backgroundTint="@color/white">
+
+            <View
+                android:layout_width="9dp"
+                android:layout_height="9dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="1dp"
+                android:background="@drawable/bg_circle_40"
+                android:backgroundTint="@color/main_blue" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/bg_circle_40"
+        android:backgroundTint="@color/post_select_back">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/line"
+            android:src="@drawable/ic_select_o" />
+
+        <ImageView
+            android:id="@+id/line"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="20dp"
+            android:src="@drawable/line" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="15dp"
+            android:src="@drawable/ic_arrow_left" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="15dp"
+            android:src="@drawable/ic_arrow_right" />
+    </RelativeLayout>
+
+</RelativeLayout>

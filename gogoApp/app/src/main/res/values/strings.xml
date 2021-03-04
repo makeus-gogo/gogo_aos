@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">gogoApp</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="kakao_app_key">01a404aabef97ace6b01f9314142e38d</string>
+    <string name="default_web_client_id">01a404aabef97ace6b01f9314142e38d</string>
 </resources>
