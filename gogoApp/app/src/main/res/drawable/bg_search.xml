@@ -3,7 +3,11 @@
     <item>
         <shape>
             <corners android:radius="40dp" />
-            <solid android:color="@color/splash_icon" />
+            <gradient
+                android:endColor="#051EAB"
+                android:startColor="#3347F4"
+                android:angle="0"
+                android:type="linear" />
         </shape>
     </item>
 </selector>

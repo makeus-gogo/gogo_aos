@@ -3,8 +3,12 @@ package com.sixthank.gogo.src.common;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.viewbinding.ViewBinding;
 
-public class BaseFragment extends Fragment {
+import com.sixthank.gogo.databinding.FragmentPostFirstBinding;
+
+public class BaseFragment<B extends ViewBinding> extends Fragment {
+    protected B binding;
 
     public void showCustomToast(final String message) {
         Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();

@@ -1,18 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="customTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <item name="colorPrimary">@color/main_blue</item>
+        <item name="colorPrimary">@color/splash_icon</item>
         <item name="colorPrimaryDark">@color/white</item>
-        <item name="colorAccent">@color/main_blue</item>
+        <item name="colorAccent">@color/splash_icon</item>
         <item name="android:windowLightStatusBar">true</item>
 
     </style>
 
     <style name="fullTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <item name="colorPrimary">@color/main_blue</item>
+        <item name="colorPrimary">@color/splash_icon</item>
         <item name="colorPrimaryDark">@color/white</item>
-        <item name="colorAccent">@color/main_blue</item>
+        <item name="colorAccent">@color/splash_icon</item>
         <item name="android:windowFullscreen">true</item>
-
     </style>
+
+    <style name="customThemeBlue" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">false</item>
+    </style>
+
+    <style name="whiteTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@color/main_blue</item>
+        <item name="colorPrimaryDark">@color/nav_theme</item>
+        <item name="colorAccent">@color/nav_theme</item>
+    </style>
+
 </resources>

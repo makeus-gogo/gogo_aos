@@ -1,4 +1,4 @@
-package com.sixthank.gogo.src.main.adapter;
+package com.sixthank.gogo.src.main.home.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.sixthank.gogo.R;
-import com.sixthank.gogo.src.main.models.WorryResponse;
+import com.sixthank.gogo.src.main.home.models.WorryResponse;
 
 import java.util.ArrayList;
 

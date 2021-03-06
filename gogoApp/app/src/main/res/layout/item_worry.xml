@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -20,32 +20,45 @@
             android:scaleType="fitXY"
             android:src="@drawable/temp_worry" />
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:layout_margin="20dp"
-            android:orientation="horizontal">
+            android:layout_height="300dp">
+
+            <View
+                android:layout_width="match_parent"
+                android:background="@drawable/bg_gradient_black"
+                android:layout_height="match_parent" />
 
             <ImageView
+                android:id="@+id/item_worry_profile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
                 android:src="@drawable/ic_user" />
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:gravity="center_vertical"
+                android:layout_toRightOf="@+id/item_worry_profile"
                 android:text="닉네임입니다"
+                android:textColor="@color/white"
+                android:layout_marginTop="25dp"
                 android:textSize="12sp" />
-        </LinearLayout>
+
+
+        </RelativeLayout>
 
         <TextView
             android:id="@+id/worry_item_txt_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="내"
+            android:textSize="20sp"
             android:layout_marginStart="20dp"
             android:layout_marginTop="70dp"
-            android:textColor="@color/black" />
+            android:textColor="@color/white" />
     </androidx.cardview.widget.CardView>
-</LinearLayout>
+
+</RelativeLayout>

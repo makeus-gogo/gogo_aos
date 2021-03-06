@@ -7,6 +7,11 @@
     android:background="#3C4FE8"
     tools:context=".src.post.fragment.PostSecondFragment">
 
+    <ImageView
+        android:id="@+id/post_second_img"
+        android:scaleType="fitXY"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
     <ImageView
         android:id="@+id/post_second_next_bg"

@@ -45,7 +45,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="1dp"
                 android:background="@drawable/bg_circle_40"
-                android:backgroundTint="@color/main_blue" />
+                android:backgroundTint="@color/splash_icon" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -62,7 +62,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="1dp"
                 android:background="@drawable/bg_circle_40"
-                android:backgroundTint="@color/main_blue" />
+                android:backgroundTint="@color/splash_icon" />
         </RelativeLayout>
 
     </LinearLayout>

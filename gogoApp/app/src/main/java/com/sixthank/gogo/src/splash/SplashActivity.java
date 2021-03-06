@@ -21,7 +21,7 @@ public class SplashActivity extends BaseActivity<ActivitySplashBinding> {
         setContentView(binding.getRoot());
 
         Animation aniFade = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in);
-        binding.splashTxt.startAnimation(aniFade);
+        binding.splashLogoTxt.startAnimation(aniFade);
         binding.splashLogo.startAnimation(aniFade);
 
         Handler handler = new Handler();

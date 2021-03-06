@@ -9,7 +9,11 @@
     <color name="white">#FFFFFFFF</color>
     <color name="white_op_50">#80FFFFFF</color>
 
-    <color name="main_blue">#4854FB</color>
+    <!-- gogo -->
+
+    <color name="splash_icon">#4854FB</color>
+    <color name="main_blue">#051EAB</color>
+
     <color name="main_blue_op">#CC0527FB</color>
     <color name="post_select_back">#4D0C1DAD</color>
     <color name="main_pink">#FC49C6</color>
@@ -21,5 +25,10 @@
 
     <!-- post third -->
     <color name="post_third_txt">#4A5BF7</color>
+    <!-- navigation -->
+    <color name="nav_theme">#EAECFF</color>
+    
+    <!-- explore -->
+    <color name="explore_gray">#EDEDF1</color>
 
 </resources>

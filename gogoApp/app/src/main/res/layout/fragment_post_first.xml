@@ -6,6 +6,12 @@
     android:background="#EBEBF4"
     tools:context=".src.post.fragment.PostFirstFragment">
 
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:padding="12dp"
+        android:layout_margin="10dp"
+        android:src="@drawable/ic_close" />
 
     <ImageView
         android:id="@+id/post_second_next_bg"
@@ -37,13 +43,13 @@
         android:textSize="22sp"
         android:textStyle="bold" />
 
+    <!-- o/x -->
     <LinearLayout
-        android:id="@+id/post_first_select"
+        android:id="@+id/post_first_ll_ox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:orientation="horizontal"
-        android:visibility="gone">
+        android:orientation="horizontal">
 
         <RelativeLayout
             android:layout_width="80dp"
@@ -70,28 +76,58 @@
                 android:layout_width="28dp"
                 android:layout_height="28dp"
                 android:layout_centerInParent="true"
-                android:src="@drawable/ic_post_o_blue" />
+                android:src="@drawable/ic_post_x_blue" />
 
         </RelativeLayout>
 
     </LinearLayout>
 
+    <!-- select -->
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:orientation="horizontal">
-
-    </LinearLayout>
-
-    <LinearLayout
+        android:id="@+id/post_first_ll_select"
         android:layout_width="255dp"
         android:layout_height="140dp"
         android:layout_centerInParent="true"
         android:background="@drawable/bg_circle_35"
         android:backgroundTint="@color/white_op_50"
         android:gravity="center"
+        android:visibility="gone"
         android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_random_bar_blue" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
+                android:src="@drawable/ic_random_bar" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_random_bar" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- random -->
+    <LinearLayout
+        android:id="@+id/post_first_ll_random"
+        android:layout_width="255dp"
+        android:layout_height="140dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/bg_circle_35"
+        android:backgroundTint="@color/white_op_50"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:visibility="gone">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -127,7 +163,7 @@
                     android:layout_height="25dp"
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@id/img_line"
-                    android:src="@drawable/ic_select_o" />
+                    android:src="@drawable/ic_select_x" />
             </RelativeLayout>
         </LinearLayout>
     </LinearLayout>
@@ -168,7 +204,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="1dp"
                 android:background="@drawable/bg_circle_40"
-                android:backgroundTint="@color/main_blue" />
+                android:backgroundTint="@color/splash_icon" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -184,7 +220,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="1dp"
                 android:background="@drawable/bg_circle_40"
-                android:backgroundTint="@color/main_blue" />
+                android:backgroundTint="@color/splash_icon" />
         </RelativeLayout>
 
     </LinearLayout>
@@ -198,35 +234,69 @@
         android:background="@drawable/bg_circle_40"
         android:backgroundTint="@color/post_select_back">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toLeftOf="@+id/line"
-            android:src="@drawable/ic_select_o" />
+        <!-- o/x -->
+        <RelativeLayout
+            android:id="@+id/post_first_rl_ox"
+            android:layout_width="match_parent"
+            android:layout_height="70dp">
 
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/line"
+                android:src="@drawable/ic_select_o" />
+
+            <ImageView
+                android:id="@+id/line"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginHorizontal="20dp"
+                android:src="@drawable/line" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/line"
+                android:src="@drawable/ic_select_x" />
+        </RelativeLayout>
+        <!-- select -->
         <ImageView
-            android:id="@+id/line"
+            android:id="@+id/post_first_img_select"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:layout_marginStart="20dp"
-            android:src="@drawable/line" />
-
+            android:src="@drawable/ic_random_bar_whole"
+            android:visibility="gone" />
+        <!-- random -->
         <ImageView
+            android:id="@+id/post_first_img_random"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@drawable/ic_random_txt"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/post_first_img_left"
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
-            android:layout_marginStart="15dp"
+            android:layout_marginStart="5dp"
+            android:padding="13dp"
             android:src="@drawable/ic_arrow_left" />
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/post_first_img_right"
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:layout_marginEnd="15dp"
+            android:layout_marginEnd="5dp"
+            android:padding="13dp"
             android:src="@drawable/ic_arrow_right" />
     </RelativeLayout>
 
