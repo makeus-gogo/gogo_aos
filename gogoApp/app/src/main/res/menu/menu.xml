@@ -5,15 +5,15 @@
         android:id="@+id/menu_home"
         android:title=""
         app:showAsAction="always"
-        android:icon="@drawable/ic_home_on" />
+        android:icon="@drawable/menu_icon_home" />
     <item
         android:id="@+id/menu_explore"
         android:title=""
         app:showAsAction="always"
-        android:icon="@drawable/ic_post_o_blue" />
+        android:icon="@drawable/menu_icon_explore" />
     <item
         android:id="@+id/menu_my_page"
         android:title=""
         app:showAsAction="always"
-        android:icon="@drawable/ic_post_o_blue" />
+        android:icon="@drawable/menu_icon_mypage" />
 </menu>

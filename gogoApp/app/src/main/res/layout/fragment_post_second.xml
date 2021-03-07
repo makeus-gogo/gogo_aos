@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#3C4FE8"
+    android:background="@drawable/bg_gradient_blue"
     tools:context=".src.post.fragment.PostSecondFragment">
 
     <ImageView
@@ -74,7 +74,7 @@
                 android:layout_width="28dp"
                 android:layout_height="28dp"
                 android:layout_centerInParent="true"
-                android:src="@drawable/ic_select_o" />
+                android:src="@drawable/ic_select_x" />
 
         </RelativeLayout>
 
@@ -85,7 +85,7 @@
         android:visibility="gone"
         android:layout_width="wrap_content"
         android:orientation="horizontal"
-        android:layout_above="@+id/rl_style_sheet"
+        android:layout_above="@+id/post_second_style"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="15dp"
         android:layout_height="wrap_content">
@@ -112,6 +112,7 @@
                 android:src="@drawable/ic_pen" />
 
         </RelativeLayout>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/post_second_rv_color"
             android:layout_width="wrap_content"
@@ -127,52 +128,47 @@
         android:layout_width="wrap_content"
         android:visibility="gone"
         android:layout_height="30dp"
-        android:layout_above="@+id/rl_style_sheet"
+        android:layout_above="@+id/post_second_style"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="15dp"
         android:orientation="horizontal"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/item_txt" />
 
-    <RelativeLayout
-        android:id="@+id/rl_style_sheet"
+    <RadioGroup
+        android:id="@+id/post_second_style"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:layout_alignParentBottom="true"
         android:layout_marginHorizontal="20dp"
         android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:orientation="horizontal"
         android:background="@drawable/bg_circle_40"
         android:backgroundTint="@color/white">
 
-        <LinearLayout
-            android:id="@+id/ll"
+        <RadioButton
+            android:id="@+id/post_second_camera"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:orientation="horizontal">
+            android:button="@color/transparent"
+            android:background="@drawable/selector_camera" />
 
-            <ImageView
-                android:id="@+id/post_second_img_picture"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:padding="10dp"
-                android:clickable="true"
-                android:src="@drawable/style_picture" />
+        <RadioButton
+            android:id="@+id/post_second_write"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@color/transparent"
+            android:layout_marginHorizontal="20dp"
+            android:background="@drawable/selector_write" />
 
-            <ImageView
-                android:id="@+id/post_second_img_draw"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:padding="12dp"
-                android:src="@drawable/style_draw" />
+        <RadioButton
+            android:id="@+id/post_second_typo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@color/transparent"
+            android:background="@drawable/selector_typo" />
 
-            <ImageView
-                android:id="@+id/post_second_img_txt"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:padding="15dp"
-                android:src="@drawable/ic_text" />
-        </LinearLayout>
-    </RelativeLayout>
+    </RadioGroup>
 
 </RelativeLayout>

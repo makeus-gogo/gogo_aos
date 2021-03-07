@@ -48,7 +48,7 @@
             android:id="@+id/item_worry_profile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_user" />
+            android:src="@drawable/ic_profile" />
 
         <TextView
             android:layout_width="wrap_content"

@@ -14,6 +14,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.sixthank.gogo.R;
+
 import com.sixthank.gogo.databinding.ActivityMainBinding;
 import com.sixthank.gogo.src.common.BaseActivity;
 import com.sixthank.gogo.src.main.explore.ExploreFragment;
@@ -40,6 +41,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements B
         initView();
 
         binding.bottomNav.setOnNavigationItemSelectedListener(this);
+        binding.bottomNav.setItemIconTintList(null);
 
         fm.beginTransaction().add(R.id.main_container, myPageFragment, "3").hide(myPageFragment).commit();
         fm.beginTransaction().add(R.id.main_container, exploreFragment, "2").hide(exploreFragment).commit();

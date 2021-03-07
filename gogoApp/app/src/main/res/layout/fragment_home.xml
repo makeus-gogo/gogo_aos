@@ -1,84 +1,143 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".src.main.MainActivity">
+    app:layoutDescription="@xml/home_collapsing_animation_scene">
 
-    <RelativeLayout
+    <View
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="0dp"
+        android:background="@drawable/bg_gradient_blue"
+        android:elevation="4dp"
+        app:layout_constraintBottom_toTopOf="@id/guideline_toolbar"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.appcompat.widget.Toolbar
-            android:layout_width="match_parent"
-            android:layout_height="160dp"
-            android:background="@drawable/bg_gradient_blue" />
-        <!--        <View-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="160dp"-->
-        <!--            android:background="@drawable/bg_gradient_blue" />-->
+    <TextView
+        android:id="@+id/text_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="80dp"
+        android:elevation="4dp"
+        android:background="@drawable/bg_circle_25"
+        android:paddingStart="25dp"
+        android:paddingTop="12dp"
+        android:text="오늘은 어떤 고민이 있으신가요?"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_text_view" />
 
-        <TextView
-            android:id="@+id/home_txt_posting"
-            android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:background="@drawable/bg_circle_35"
-            android:backgroundTint="@color/white"
-            android:padding="15dp"
-            android:layout_marginTop="60dp"
-            android:layout_marginHorizontal="20dp"
-            android:text="오늘은 무슨 고민이 있으신가요?" />
-    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/menu_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="4dp"
+        android:src="@drawable/home_pink_ball"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_pink_ball"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_toolbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="160dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="180dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_pink_ball"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="200dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="40dp" />
 
     <androidx.core.widget.NestedScrollView
-        android:layout_marginTop="50dp"
+        android:id="@+id/scrollable_content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guideline_toolbar">
+
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/guideline_recyclerview">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
                 android:textStyle="bold"
-                android:textSize="24dp"
+                android:textSize="22sp"
+                android:text="같이 고민하면 답이 나올거에요!"
                 android:layout_marginStart="20dp"
-                android:text="인기순 TOP5" />
+                android:textColor="@color/black" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/main_rv_top5"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:orientation="horizontal"
-                tools:listitem="@layout/item_worry"
-                android:layout_marginVertical="10dp"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_worry_rank" />
 
+            <!-- 뷰가 반씩 차지해야 하는 경우면 constraintLayout 필요 -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
                 android:textStyle="bold"
-                android:textSize="24sp"
+                android:layout_marginTop="40dp"
+                android:textSize="22sp"
+                android:text="우유님 같이 고민해주세요!"
                 android:layout_marginStart="20dp"
-                android:text="최근엔 어떤 고민들이 있을까?" />
+                android:textColor="@color/black" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/main_rv_list"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:listitem="@layout/item_worry"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="16dp"
                 android:orientation="vertical"
-                android:layout_marginVertical="10dp"
-                android:layout_gravity="center_horizontal"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_worry" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
-</LinearLayout>
+
+    <!--    <androidx.recyclerview.widget.RecyclerView-->
+    <!--        android:id="@+id/scrollable_content"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginTop="16dp"-->
+    <!--        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@id/guideline_toolbar2" />-->
+
+</androidx.constraintlayout.motion.widget.MotionLayout>

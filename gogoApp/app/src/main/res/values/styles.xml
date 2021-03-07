@@ -15,10 +15,16 @@
         <item name="android:windowFullscreen">true</item>
     </style>
 
-    <style name="customThemeBlue" parent="Theme.MaterialComponents.Light.NoActionBar">
+    <style name="customThemeNoStatusBar" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
         <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">false</item>
+    </style>
+
+    <style name="customThemeNoStatusBar2" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="android:statusBarColor">@color/black</item>
+        <item name="android:windowLightStatusBar">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds">false</item>
     </style>
 
@@ -26,6 +32,12 @@
         <item name="colorPrimary">@color/main_blue</item>
         <item name="colorPrimaryDark">@color/nav_theme</item>
         <item name="colorAccent">@color/nav_theme</item>
+    </style>
+
+    <style name="postTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@color/post_bg</item>
+        <item name="colorPrimaryDark">@color/post_bg</item>
+        <item name="colorAccent">@color/post_bg</item>
     </style>
 
 </resources>
