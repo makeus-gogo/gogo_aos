@@ -10,8 +10,7 @@
         android:layout_width="310dp"
         android:layout_height="230dp"
         app:cardCornerRadius="14dp"
-        android:layout_marginStart="10dp"
-        android:layout_gravity="center">
+        android:layout_marginStart="10dp">
 
         <ImageView
             android:id="@+id/rank_img"

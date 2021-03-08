@@ -32,7 +32,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="60dp"
             android:layout_marginEnd="80dp"
-            android:background="@drawable/bg_circle_35"
+            android:background="@drawable/bg_circle_25"
             android:backgroundTint="@color/white"
             android:padding="15dp"
             android:text="Nice to meet u"

@@ -59,6 +59,8 @@ public class PostSecondFragment extends BaseFragment<FragmentPostSecondBinding> 
     }
 
     private void initView() {
+        String worryContent = mParentActivity.getMap().get("worryContent").toString();
+        binding.postSecondTvWorryCont.setText(worryContent);
         binding.postSecondRvColor.setAdapter(new ColorListAdapter());
         binding.postSecondRvTxt.setAdapter(new TextListAdapter());
     }
@@ -88,7 +90,11 @@ public class PostSecondFragment extends BaseFragment<FragmentPostSecondBinding> 
 
 
         binding.postSecondNext.setOnClickListener(v -> {
-            mParentActivity.switchFragment(2);
+            mParentActivity.switchFragment(4);
+        });
+
+        binding.postSecondImgClose.setOnClickListener(v->{
+            mParentActivity.finish();
         });
     }
 
@@ -114,7 +120,7 @@ public class PostSecondFragment extends BaseFragment<FragmentPostSecondBinding> 
     PermissionListener permissionListener = new PermissionListener() {
         @Override
         public void onPermissionGranted() {
-            showCustomToast("accent");
+//            showCustomToast("accent");
         }
 
         @Override

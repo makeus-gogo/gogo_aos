@@ -18,19 +18,23 @@ import com.sixthank.gogo.R;
 import com.sixthank.gogo.databinding.ActivityPostBinding;
 import com.sixthank.gogo.src.common.BaseActivity;
 import com.sixthank.gogo.src.post.fragment.PostFirstFragment;
+import com.sixthank.gogo.src.post.fragment.PostRandomFragment;
 import com.sixthank.gogo.src.post.fragment.PostSecondFragment;
+import com.sixthank.gogo.src.post.fragment.PostSelectFragment;
 import com.sixthank.gogo.src.post.fragment.PostThirdFragment;
 import com.sixthank.gogo.src.post.fragment.service.PostService;
 import com.sixthank.gogo.src.post.interfaces.PostActivityView;
 
 import java.io.File;
 import java.io.InputStream;
+import java.util.HashMap;
 
 public class PostActivity extends BaseActivity<ActivityPostBinding> implements PostActivityView {
 
     private Uri mImageUri;
     private Fragment fr;
     private PostService mPostService;
+    private HashMap<String, Object> map = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +62,12 @@ public class PostActivity extends BaseActivity<ActivityPostBinding> implements P
                 fr = PostSecondFragment.newInstance();
                 break;
             case 2:
+                fr = new PostSelectFragment();
+                break;
+            case 3:
+                fr = new PostRandomFragment();
+                break;
+            case 4:
                 fr = new PostThirdFragment();
                 break;
         }
@@ -88,5 +98,14 @@ public class PostActivity extends BaseActivity<ActivityPostBinding> implements P
 
     public Uri getImageUri() {
         return mImageUri;
+    }
+    public void setValueString(String key, String value) {
+        map.put(key, value);
+    }
+    public void setValueNum(String key, int value) {
+        map.put(key, value);
+    }
+    public HashMap<String, Object> getMap() {
+        return map;
     }
 }

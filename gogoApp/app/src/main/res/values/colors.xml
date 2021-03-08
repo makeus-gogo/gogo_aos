@@ -9,6 +9,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="transparent">#00FFFFFF</color>
     <color name="white_op_50">#80FFFFFF</color>
+    <color name="black_op_20">#33000000</color>
 
     <!-- gogo -->
 

@@ -4,8 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/post_select_rl_bg"
     android:background="@drawable/bg_gradient_blue"
-    tools:context=".src.post.fragment.PostSecondFragment">
+    tools:context=".src.post.fragment.PostSelectFragment">
 
     <ImageView
         android:id="@+id/post_second_img"
@@ -14,7 +15,7 @@
         android:layout_height="match_parent" />
 
     <ImageView
-        android:id="@+id/post_second_img_close"
+        android:id="@+id/post_select_close"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:padding="11dp"
@@ -32,7 +33,7 @@
         android:src="@drawable/next_bg" />
 
     <ImageView
-        android:id="@+id/post_second_next"
+        android:id="@+id/post_select_next"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_alignParentEnd="true"
@@ -42,7 +43,7 @@
         android:src="@drawable/ic_next" />
 
     <TextView
-        android:id="@+id/post_second_tv_worry_cont"
+        android:id="@+id/post_select_tv_worry_cont"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_above="@+id/post_second_select"
@@ -56,41 +57,32 @@
 
     <LinearLayout
         android:id="@+id/post_second_select"
-        android:layout_width="wrap_content"
+        android:layout_width="255dp"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:orientation="horizontal">
+        android:paddingHorizontal="20dp"
+        android:paddingTop="20dp"
+        android:background="@drawable/bg_round_rectangle_white"
+        android:orientation="vertical">
 
-        <RelativeLayout
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_marginEnd="60dp"
-            android:background="@drawable/bg_circle_40"
-            android:backgroundTint="@color/white_op_50">
+        <include
+            android:id="@+id/post_select_inc_1"
+            layout="@layout/custom_post_selection" />
+        <include
+            android:id="@+id/post_select_inc_2"
+            layout="@layout/custom_post_selection" />
+        <include
+            android:id="@+id/post_select_inc_3"
+            layout="@layout/custom_post_selection" />
 
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_centerInParent="true"
-                android:src="@drawable/ic_select_o" />
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:background="@drawable/bg_circle_40"
-            android:backgroundTint="@color/white_op_50">
-
-            <ImageView
-                android:layout_width="28dp"
-                android:layout_height="28dp"
-                android:layout_centerInParent="true"
-                android:src="@drawable/ic_select_x" />
-
-        </RelativeLayout>
-
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginVertical="10dp"
+            android:src="@drawable/ic_plus" />
     </LinearLayout>
+
 
     <LinearLayout
         android:id="@+id/post_second_ll_color"
