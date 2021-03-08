@@ -26,6 +26,9 @@ import com.sixthank.gogo.src.login.models.LoginResponse;
 import com.sixthank.gogo.src.login.service.LoginService;
 import com.sixthank.gogo.src.main.MainActivity;
 import com.sixthank.gogo.src.signup.SignUpActivity;
+import com.sixthank.gogo.src.signup.models.SignUpBody;
+
+import java.io.Serializable;
 
 
 public class LoginActivity extends BaseActivity<ActivityLoginBinding> implements LoginActivityView {
@@ -36,6 +39,8 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding> implements
     private static final int RC_SIGN_IN = 9001;
 
     private LoginService mLoginService;
+    private UserAccount mKakaoAccount;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +70,47 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding> implements
 
     }
 
+    private SignUpBody getUserInfo(String type) {
+        // 카카오 계정 정보
+        SignUpBody userInfo = null;
+        if(type.equals("KAKAO")) {
+            if (mKakaoAccount != null) {
+
+                String email = mKakaoAccount.getEmail();
+                if (email != null) {
+                    Log.i("KAKAO_API", "email: " + email);
+
+                } else if (mKakaoAccount.emailNeedsAgreement() == OptionalBoolean.TRUE) {
+                    // 동의 요청 후 이메일 획득 가능
+                    // 단, 선택 동의로 설정되어 있다면 서비스 이용 시나리오 상에서 반드시 필요한 경우에만 요청해야 합니다.
+
+                } else {
+                    // 이메일 획득 불가
+                }
+
+                // 프로필
+                Profile profile = mKakaoAccount.getProfile();
+
+                if (profile != null) {
+                    Log.d("KAKAO_API", "nickname: " + profile.getNickname());
+                    Log.d("KAKAO_API", "profile image: " + profile.getProfileImageUrl());
+                    Log.d("KAKAO_API", "thumbnail image: " + profile.getThumbnailImageUrl());
+
+                } else if (mKakaoAccount.profileNeedsAgreement() == OptionalBoolean.TRUE) {
+                    // 동의 요청 후 프로필 정보 획득 가능
+
+                } else {
+                    // 프로필 획득 불가
+                }
+                userInfo = new SignUpBody(email, profile.getNickname(), profile.getProfileImageUrl());
+                userInfo.setProvider(type);
+            }
+        } else {
+
+        }
+        return userInfo;
+    }
+
     private void googleLogin() {
 
     }
@@ -92,8 +138,12 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding> implements
     @Override
     public void getLoginSuccess(LoginResponse.Data data) {
         Intent intent;
-        if(data.getType().equals("SIGN_UP"))
+        if(data.getType().equals("SIGN_UP")) {
             intent = new Intent(LoginActivity.this, SignUpActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("userInfo", getUserInfo(data.getProvider()));
+            intent.putExtras(bundle);
+        }
         else
             intent = new Intent(LoginActivity.this, MainActivity.class);
 
@@ -136,8 +186,10 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding> implements
                         public void onSuccess(MeV2Response result) {
                             String accessToken = Session.getCurrentSession().getTokenInfo().getAccessToken();
                             Log.i("KAKAO_API", "token: " + accessToken); // 이메일 아님
+
+                            mKakaoAccount = result.getKakaoAccount();
+
                             mLoginService.login(accessToken);
-//                            UserAccount kakaoAccount = result.getKakaoAccount();
 //                            if (kakaoAccount != null) {
 //                                // 이메일
 //                                String email = kakaoAccount.getEmail();
