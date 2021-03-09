@@ -7,8 +7,8 @@ public class LoginResponse {
 
     @SerializedName("data")
     private Data mData;
-    @SerializedName("httpCode")
-    private String mHttpCode;
+    @SerializedName("errorCode")
+    private String mErrorCode;
     @SerializedName("message")
     private String mMessage;
 
@@ -20,12 +20,12 @@ public class LoginResponse {
         mData = data;
     }
 
-    public String getHttpCode() {
-        return mHttpCode;
+    public String getErrorCode() {
+        return mErrorCode;
     }
 
-    public void setHttpCode(String httpCode) {
-        mHttpCode = httpCode;
+    public void setErrorCode(String errorCode) {
+        mErrorCode = errorCode;
     }
 
     public String getMessage() {
