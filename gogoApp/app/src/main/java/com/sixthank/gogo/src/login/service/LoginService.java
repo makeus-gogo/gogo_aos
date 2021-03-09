@@ -8,7 +8,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.sixthank.gogo.config.ApplicationClass.X_ACCESS_TOKEN;
 import static com.sixthank.gogo.config.ApplicationClass.getRetrofit;
+import static com.sixthank.gogo.config.ApplicationClass.putSharedPreferenceString;
 
 public class LoginService {
     private final LoginActivityView loginActivityView;
@@ -28,6 +30,8 @@ public class LoginService {
                     loginActivityView.getLoginFailure(null);
                     return;
                 }
+                putSharedPreferenceString(X_ACCESS_TOKEN,  loginResponse.getData().getToken());
+
                 loginActivityView.getLoginSuccess(loginResponse.getData());
             }
 

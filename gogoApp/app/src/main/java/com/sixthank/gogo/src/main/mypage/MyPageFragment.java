@@ -9,58 +9,38 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.sixthank.gogo.R;
+import com.sixthank.gogo.databinding.FragmentMyPageBinding;
+import com.sixthank.gogo.src.common.BaseFragment;
+import com.sixthank.gogo.src.main.mypage.interfaces.MyPageFragmentView;
+import com.sixthank.gogo.src.main.mypage.service.MyPageService;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link MyPageFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class MyPageFragment extends Fragment {
+public class MyPageFragment extends BaseFragment<FragmentMyPageBinding> implements MyPageFragmentView {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private MyPageService mMyPageService;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public MyPageFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment MyPageFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static MyPageFragment newInstance(String param1, String param2) {
-        MyPageFragment fragment = new MyPageFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_my_page, container, false);
+        binding = FragmentMyPageBinding.inflate(inflater);
+        initVariable();
+
+        mMyPageService.getMember();
+
+        return binding.getRoot();
+    }
+
+    private void initVariable() {
+        mMyPageService = new MyPageService(this);
+    }
+
+    @Override
+    public void getMemberSuccess() {
+        showCustomToast("마이페이지 조회 성공");
+    }
+
+    @Override
+    public void getMemberFailure() {
+        showCustomToast("마이페이지 조회 실패");
     }
 }
