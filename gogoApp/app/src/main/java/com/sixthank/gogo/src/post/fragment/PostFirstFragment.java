@@ -1,5 +1,6 @@
 package com.sixthank.gogo.src.post.fragment;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 
@@ -7,51 +8,71 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.sixthank.gogo.R;
 import com.sixthank.gogo.databinding.FragmentPostFirstBinding;
 import com.sixthank.gogo.src.common.BaseFragment;
 import com.sixthank.gogo.src.post.PostActivity;
 import com.sixthank.gogo.src.post.fragment.adapter.RandomPagerAdapter;
 
+import java.util.ArrayList;
+import java.util.List;
 
-public class PostFirstFragment extends BaseFragment<FragmentPostFirstBinding> {
 
-    private PostActivity mParentActivity;
+public class PostFirstFragment extends BaseFragment<FragmentPostFirstBinding> implements View.OnClickListener {
+
+    private PostActivity mParentAt;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentPostFirstBinding.inflate(inflater, container, false);
-        mParentActivity = (PostActivity) getActivity();
 
-        binding.postFirstViewPager.setAdapter(new RandomPagerAdapter(getContext()));
+        initVariable();
+        initListener();
 
-        binding.postFirstNext.setOnClickListener(v->{
-            int index = binding.postFirstViewPager.getCurrentItem();
-            mParentActivity.setValueString("worryContent", binding.postFirstWorryContent.getText().toString());
-            mParentActivity.switchFragment(index+1);
-        });
-
-        binding.postFirstImgLeft.setOnClickListener(v->{
-            int index = binding.postFirstViewPager.getCurrentItem();
-            if(index != 0) {
-                binding.postFirstViewPager.setCurrentItem(index-1);
-                setAnswerKind(index-1);
-            }
-        });
-
-        binding.postFirstImgRight.setOnClickListener(v->{
-            int index = binding.postFirstViewPager.getCurrentItem();
-            if(index != 2) {
-                binding.postFirstViewPager.setCurrentItem(index+1);
-                setAnswerKind(index+1);
-            }
-        });
-
-        binding.postFirstImgClose.setOnClickListener(v->{
-            getActivity().finish();
-        });
         return binding.getRoot();
 
+    }
+
+    @SuppressLint("NonConstantResourceId")
+    @Override
+    public void onClick(View v) {
+        int index = binding.postFirstViewPager.getCurrentItem();
+        switch (v.getId()) {
+            case R.id.post_first_next:
+                mParentAt.setValueString("description", binding.postFirstWorryContent.getText().toString());
+                mParentAt.switchFragment(index+1);
+                break;
+            case R.id.post_first_img_left:
+                if(index != 0) {
+                    binding.postFirstViewPager.setCurrentItem(index-1);
+                    setAnswerKind(index-1);
+                }
+                break;
+            case R.id.post_first_img_right:
+                if(index != 2) {
+                    binding.postFirstViewPager.setCurrentItem(index+1);
+                    setAnswerKind(index+1);
+                }
+                break;
+            case R.id.post_first_img_close:
+                getActivity().finish();
+                break;
+
+        }
+    }
+
+    private void initListener() {
+        binding.postFirstNext.setOnClickListener(this);
+        binding.postFirstImgLeft.setOnClickListener(this);
+        binding.postFirstImgRight.setOnClickListener(this);
+        binding.postFirstImgClose.setOnClickListener(this);
+    }
+
+    private void initVariable() {
+        mParentAt = (PostActivity) getActivity();
+        binding.postFirstViewPager.setAdapter(new RandomPagerAdapter(getContext()));
     }
 
     private void setAnswerKind(int index) {
