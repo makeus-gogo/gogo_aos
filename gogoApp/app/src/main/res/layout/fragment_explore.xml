@@ -6,8 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".src.main.explore.ExploreFragment">
 
-    <TextView
-        android:id="@+id/txt_search"
+    <EditText
+        android:id="@+id/explore_et_keyword"
         android:layout_width="0dp"
         android:layout_height="45dp"
         android:layout_marginHorizontal="20dp"
@@ -16,7 +16,8 @@
         android:backgroundTint="@color/explore_gray"
         android:gravity="center_vertical"
         android:paddingStart="15dp"
-        android:text="나의 비슷한 고민을 찾아보세요!"
+        android:textSize="15sp"
+        android:hint="나의 비슷한 고민을 찾아보세요!"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -26,9 +27,9 @@
         android:layout_width="80dp"
         android:layout_height="45dp"
         android:background="@drawable/bg_search"
-        app:layout_constraintBottom_toBottomOf="@+id/txt_search"
-        app:layout_constraintEnd_toEndOf="@+id/txt_search"
-        app:layout_constraintTop_toTopOf="@+id/txt_search" />
+        app:layout_constraintBottom_toBottomOf="@+id/explore_et_keyword"
+        app:layout_constraintEnd_toEndOf="@+id/explore_et_keyword"
+        app:layout_constraintTop_toTopOf="@+id/explore_et_keyword" />
 
     <ImageView
         android:layout_width="wrap_content"

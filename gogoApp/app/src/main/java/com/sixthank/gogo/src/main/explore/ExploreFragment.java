@@ -13,32 +13,20 @@ import com.sixthank.gogo.databinding.FragmentExploreBinding;
 import com.sixthank.gogo.src.common.BaseFragment;
 import com.sixthank.gogo.src.main.MainActivity;
 import com.sixthank.gogo.src.main.explore.adpater.ExploreWorryListAdapter;
+import com.sixthank.gogo.src.main.explore.interfaces.ExploreFragmentView;
+import com.sixthank.gogo.src.main.explore.service.ExploreService;
 
 import java.util.ArrayList;
 
 
-public class ExploreFragment extends BaseFragment<FragmentExploreBinding> {
+public class ExploreFragment extends BaseFragment<FragmentExploreBinding> implements ExploreFragmentView {
 
     private MainActivity mParentActivity;
-    public ExploreFragment() {
-        // Required empty public constructor
-    }
-
-
-    public static ExploreFragment newInstance(String param1, String param2) {
-        ExploreFragment fragment = new ExploreFragment();
-        Bundle args = new Bundle();
-
-        fragment.setArguments(args);
-        return fragment;
-    }
+    private ExploreService mExploreService;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-           
-        }
 
         mParentActivity = (MainActivity) getActivity();
     }
@@ -51,7 +39,28 @@ public class ExploreFragment extends BaseFragment<FragmentExploreBinding> {
         ArrayList<String> list = new ArrayList<>();
         for(int i = 0; i < 6; i++)
             list.add("a");
+        mExploreService = new ExploreService(this);
+
         binding.exploreRvWorries.setAdapter(new ExploreWorryListAdapter(list));
+        binding.exploreViewSearch.setOnClickListener(v->{
+            String keyword = binding.exploreEtKeyword.toString();
+            if(keyword.isEmpty()) {
+                showCustomToast("검색어를 입력해주세요");
+                return;
+            }
+            mExploreService.getSearchList(keyword);
+        });
+
         return binding.getRoot();
+    }
+
+    @Override
+    public void getSearchListSuccess() {
+        showCustomToast("검색 성공");
+    }
+
+    @Override
+    public void getSearchListFailure() {
+        showCustomToast("검색 실페");
     }
 }
