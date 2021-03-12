@@ -11,6 +11,7 @@
     <color name="white_op_50">#80FFFFFF</color>
     <color name="black_op_20">#33000000</color>
 
+    <color name="clickable">#EDEDF1</color>
     <!-- gogo -->
 
     <color name="splash_icon">#4854FB</color>
