@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_gradient_blue"
+    tools:context=".src.post.fragment.PostSecondFragment">
+
+    <ImageView
+        android:id="@+id/board_ox_img"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY" />
+
+    <ImageView
+        android:id="@+id/board_ox_iv_close"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginTop="25dp"
+        android:padding="11dp"
+        android:src="@drawable/ic_close"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/board_ox_iv_next"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="25dp"
+        android:src="@drawable/next_bg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="36dp"
+        android:src="@drawable/ic_next"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="60dp"
+        android:layout_marginBottom="90dp"
+        android:background="@drawable/bg_circle_25"
+        android:backgroundTint="@color/white_op_50"
+        android:gravity="center"
+        android:padding="20dp"
+        android:text="오늘 저녁에 식당 어디갈지 모르겠어요 모르겠어요 모르겠어요"
+        android:textColor="@color/white"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/board_ox_iv_next" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_circle_25"
+        android:paddingHorizontal="8dp"
+        android:paddingVertical="5dp"
+        android:text="99.9%"
+        android:textSize="13sp"
+        app:layout_constraintStart_toStartOf="@id/board_ox_guide_v_center"
+        app:layout_constraintBottom_toBottomOf="@id/board_ox_guide_h_center"
+        android:layout_marginStart="45dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_circle_25"
+        android:paddingHorizontal="8dp"
+        android:paddingVertical="5dp"
+        android:text="99.9%"
+        app:layout_constraintBottom_toBottomOf="@id/board_ox_guide_h_center"
+        app:layout_constraintEnd_toEndOf="@id/board_ox_guide_v_center"
+        android:layout_marginEnd="45dp" />
+
+    <RadioGroup
+        android:id="@+id/board_ox_radio_group"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/board_ox_guide_h_center"
+        android:layout_width="wrap_content"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:id="@+id/board_radio_o"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/transparent"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/selector_btn_o" />
+
+        <RadioButton
+            android:id="@+id/board_radio_x"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/transparent"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/selector_btn_x" />
+    </RadioGroup>
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/board_ox_guide_h_center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.6" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/board_ox_guide_v_center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
