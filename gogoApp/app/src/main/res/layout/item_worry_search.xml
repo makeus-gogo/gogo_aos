@@ -25,7 +25,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="220dp"
-            android:background="@drawable/bg_gradient_black" />
+            android:background="@drawable/selector_card_click" />
 
 
         <TextView

@@ -27,7 +27,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/bg_gradient_black" />
+                android:background="@drawable/selector_card_click" />
 
 <!--            <ImageView-->
 <!--                android:id="@+id/item_worry_profile"-->

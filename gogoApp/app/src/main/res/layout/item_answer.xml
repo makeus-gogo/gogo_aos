@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--<LinearLayout-->
-<!--    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"-->
-<!--    android:layout_height="match_parent">-->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
     <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="35dp"
         android:layout_marginTop="5dp"
@@ -18,13 +18,22 @@
             android:src="@drawable/ic_select_order" />
 
         <EditText
-            android:layout_width="match_parent"
+            android:id="@+id/item_answer_et_content"
+            android:layout_width="175dp"
             android:layout_height="match_parent"
             android:background="@drawable/bg_circle_5"
             android:textSize="13sp"
             android:padding="10dp"
             android:textColorHint="@color/black"
             android:hint="답변을 입력해주세요" />
+
+        <ImageView
+            android:id="@+id/item_answer_iv_remove"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="5dp"
+            android:src="@drawable/ic_close" />
     </LinearLayout>
 
-<!--</LinearLayout>-->
+</LinearLayout>
