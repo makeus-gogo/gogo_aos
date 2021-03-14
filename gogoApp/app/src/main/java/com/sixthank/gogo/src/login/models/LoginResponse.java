@@ -3,7 +3,9 @@ package com.sixthank.gogo.src.login.models;
 
 import com.google.gson.annotations.SerializedName;
 
-public class LoginResponse {
+import java.io.Serializable;
+
+public class LoginResponse implements Serializable {
 
     @SerializedName("data")
     private Data mData;
@@ -36,7 +38,7 @@ public class LoginResponse {
         mMessage = message;
     }
 
-    public static class Data {
+    public static class Data implements Serializable{
 
         @SerializedName("email")
         private String mEmail;
@@ -48,6 +50,8 @@ public class LoginResponse {
         private String mToken;
         @SerializedName("type")
         private String mType;
+        @SerializedName("profileUrl")
+        private String mProfileUrl;
 
         public String getEmail() {
             return mEmail;
@@ -87,6 +91,14 @@ public class LoginResponse {
 
         public void setType(String type) {
             mType = type;
+        }
+
+        public String getProfileUrl() {
+            return mProfileUrl;
+        }
+
+        public void setProfileUrl(String profileUrl) {
+            mProfileUrl = profileUrl;
         }
 
     }

@@ -7,6 +7,7 @@ import com.google.android.gms.auth.api.signin.internal.SignInHubActivity;
 import com.sixthank.gogo.R;
 import com.sixthank.gogo.databinding.ActivitySignUpBinding;
 import com.sixthank.gogo.src.common.BaseActivity;
+import com.sixthank.gogo.src.login.models.LoginResponse;
 import com.sixthank.gogo.src.signup.interfaces.SignUpActivityView;
 import com.sixthank.gogo.src.signup.models.SignUpBody;
 import com.sixthank.gogo.src.signup.service.SignUpService;
@@ -30,7 +31,8 @@ public class SignUpActivity extends BaseActivity<ActivitySignUpBinding> implemen
     private void initVariable() {
         Bundle bundle = getIntent().getExtras();
         if(bundle != null) {
-            mSignUpBody =  (SignUpBody) bundle.getSerializable("userInfo");
+            LoginResponse.Data data = (LoginResponse.Data) bundle.getSerializable("userInfo");
+            mSignUpBody =  new SignUpBody(data.getEmail(), data.getName(),data.getProfileUrl(), data.getProvider());
         }
 
         mSignUpService = new SignUpService(this);

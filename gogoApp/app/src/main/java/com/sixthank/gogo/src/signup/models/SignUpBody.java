@@ -59,9 +59,10 @@ public class SignUpBody implements Serializable {
         mProvider = provider;
     }
 
-    public SignUpBody(String mEmail, String mName, String mProfileUrl) {
+    public SignUpBody(String mEmail, String mName, String mProfileUrl, String mProvider) {
         this.mEmail = mEmail;
         this.mName = mName;
         this.mProfileUrl = mProfileUrl;
+        this.mProvider = mProvider;
     }
 }
