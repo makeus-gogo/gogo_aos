@@ -4,10 +4,21 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
 import com.kakao.auth.ISessionCallback;
 import com.kakao.auth.Session;
 import com.kakao.network.ErrorResult;
@@ -19,6 +30,7 @@ import com.kakao.usermgmt.response.model.Profile;
 import com.kakao.usermgmt.response.model.UserAccount;
 import com.kakao.util.OptionalBoolean;
 import com.kakao.util.exception.KakaoException;
+import com.sixthank.gogo.R;
 import com.sixthank.gogo.databinding.ActivityLoginBinding;
 import com.sixthank.gogo.src.common.BaseActivity;
 import com.sixthank.gogo.src.login.interfaces.LoginActivityView;
@@ -64,55 +76,61 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding> implements
         });
 
         binding.loginBtnGoogle.setOnClickListener(v -> {
-            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-            startActivity(intent);
+            googleLogin();
+        });
+
+        binding.logoutBtnGoogle.setOnClickListener(v -> {
+            FirebaseAuth.getInstance().signOut();
         });
 
     }
 
-    private SignUpBody getUserInfo(String type) {
-        // 카카오 계정 정보
-        SignUpBody userInfo = null;
-        if(type.equals("KAKAO")) {
-            if (mKakaoAccount != null) {
+    private void googleLogin() {
+        mAuth = FirebaseAuth.getInstance();
 
-                String email = mKakaoAccount.getEmail();
-                if (email != null) {
-                    Log.i("KAKAO_API", "email: " + email);
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
-                } else if (mKakaoAccount.emailNeedsAgreement() == OptionalBoolean.TRUE) {
-                    // 동의 요청 후 이메일 획득 가능
-                    // 단, 선택 동의로 설정되어 있다면 서비스 이용 시나리오 상에서 반드시 필요한 경우에만 요청해야 합니다.
-
-                } else {
-                    // 이메일 획득 불가
-                }
-
-                // 프로필
-                Profile profile = mKakaoAccount.getProfile();
-
-                if (profile != null) {
-                    Log.d("KAKAO_API", "nickname: " + profile.getNickname());
-                    Log.d("KAKAO_API", "profile image: " + profile.getProfileImageUrl());
-                    Log.d("KAKAO_API", "thumbnail image: " + profile.getThumbnailImageUrl());
-
-                } else if (mKakaoAccount.profileNeedsAgreement() == OptionalBoolean.TRUE) {
-                    // 동의 요청 후 프로필 정보 획득 가능
-
-                } else {
-                    // 프로필 획득 불가
-                }
-                userInfo = new SignUpBody(email, profile.getNickname(), profile.getProfileImageUrl());
-                userInfo.setProvider(type);
-            }
-        } else {
-
-        }
-        return userInfo;
+        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+        startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
-    private void googleLogin() {
+    private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
 
+        Log.d("GOOGLE_API","serverAuthCode: " + acct.getServerAuthCode());
+        Log.d("GOOGLE_API","token: " + acct.getIdToken());
+
+
+        AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
+        mLoginService.googleLogin(acct.getIdToken());
+        mAuth.signInWithCredential(credential)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            showCustomToast("Login Success!");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            mAuth.getAccessToken(true).toString();
+                            updateUI(user);
+                        } else {
+                            showCustomToast("Login Failure!");
+                            updateUI(null);
+                        }
+                    }
+                });
+    }
+
+    private void updateUI(FirebaseUser user) { //update ui code here
+        if (user != null) {
+            Log.d("GOOGLE_API","display Name: " + user.getDisplayName());
+            Log.d("GOOGLE_API","profile url: " + user.getPhotoUrl());
+//            Intent intent = new Intent(this, MainActivity.class);
+//            startActivity(intent);
+//            finish();
+        }
     }
 
     @Override
@@ -127,10 +145,19 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding> implements
         super.onActivityResult(requestCode, resultCode, data);
         // 간편로그인 실행 결과를 받아서 SDK로 전달
 //        showCustomToast("onActivityResult: " + mSession.getAccessTokenCallback());
-        Log.d("KAKAO_API", "onActivityResultStart");
-        if (Session.getCurrentSession().handleActivityResult(requestCode, resultCode, data)) {
-            Log.d("KAKAO_API", "onActivityResultEnd");
-            return;
+        if (requestCode == RC_SIGN_IN) {
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            try {
+                // Google Sign In was successful, authenticate with Firebase
+                GoogleSignInAccount account = task.getResult(ApiException.class);
+                firebaseAuthWithGoogle(account);
+            } catch (ApiException e) {
+            }
+        } else {
+            if (Session.getCurrentSession().handleActivityResult(requestCode, resultCode, data)) {
+                Log.d("KAKAO_API", "onActivityResultEnd");
+                return;
+            }
         }
 
     }
@@ -141,7 +168,8 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding> implements
         if(data.getType().equals("SIGN_UP")) {
             intent = new Intent(LoginActivity.this, SignUpActivity.class);
             Bundle bundle = new Bundle();
-            bundle.putSerializable("userInfo", getUserInfo(data.getProvider()));
+//            bundle.putSerializable("userInfo", getUserInfo(data.getProvider()));
+            bundle.putSerializable("userInfo", data);
             intent.putExtras(bundle);
         }
         else
@@ -185,43 +213,54 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding> implements
                         @Override
                         public void onSuccess(MeV2Response result) {
                             String accessToken = Session.getCurrentSession().getTokenInfo().getAccessToken();
-                            Log.i("KAKAO_API", "token: " + accessToken); // 이메일 아님
+                            Log.i("KAKAO_API", "token: " + accessToken);
 
                             mKakaoAccount = result.getKakaoAccount();
 
-                            mLoginService.login(accessToken);
-//                            if (kakaoAccount != null) {
-//                                // 이메일
-//                                String email = kakaoAccount.getEmail();
-//
-//                                if (email != null) {
-//                                    Log.i("KAKAO_API", "email: " + email);
-//
-//                                } else if (kakaoAccount.emailNeedsAgreement() == OptionalBoolean.TRUE) {
-//                                    // 동의 요청 후 이메일 획득 가능
-//                                    // 단, 선택 동의로 설정되어 있다면 서비스 이용 시나리오 상에서 반드시 필요한 경우에만 요청해야 합니다.
-//
-//                                } else {
-//                                    // 이메일 획득 불가
-//                                }
-//
-//                                // 프로필
-//                                Profile profile = kakaoAccount.getProfile();
-//
-//                                if (profile != null) {
-//                                    Log.d("KAKAO_API", "nickname: " + profile.getNickname());
-//                                    Log.d("KAKAO_API", "profile image: " + profile.getProfileImageUrl());
-//                                    Log.d("KAKAO_API", "thumbnail image: " + profile.getThumbnailImageUrl());
-//
-//                                } else if (kakaoAccount.profileNeedsAgreement() == OptionalBoolean.TRUE) {
-//                                    // 동의 요청 후 프로필 정보 획득 가능
-//
-//                                } else {
-//                                    // 프로필 획득 불가
-//                                }
-//                            }
+                            mLoginService.kakaoLogin(accessToken);
                         }
                     });
         }
     }
+
+//    private SignUpBody getUserInfo(String type) {
+//        // 카카오 계정 정보
+//        SignUpBody userInfo = null;
+//        if(type.equals("KAKAO")) {
+//            if (mKakaoAccount != null) {
+//
+//                String email = mKakaoAccount.getEmail();
+//                if (email != null) {
+//                    Log.i("KAKAO_API", "email: " + email);
+//
+//                } else if (mKakaoAccount.emailNeedsAgreement() == OptionalBoolean.TRUE) {
+//                    // 동의 요청 후 이메일 획득 가능
+//                    // 단, 선택 동의로 설정되어 있다면 서비스 이용 시나리오 상에서 반드시 필요한 경우에만 요청해야 합니다.
+//
+//                } else {
+//                    // 이메일 획득 불가
+//                }
+//
+//                // 프로필
+//                Profile profile = mKakaoAccount.getProfile();
+//
+//                if (profile != null) {
+//                    Log.d("KAKAO_API", "nickname: " + profile.getNickname());
+//                    Log.d("KAKAO_API", "profile image: " + profile.getProfileImageUrl());
+//                    Log.d("KAKAO_API", "thumbnail image: " + profile.getThumbnailImageUrl());
+//
+//                } else if (mKakaoAccount.profileNeedsAgreement() == OptionalBoolean.TRUE) {
+//                    // 동의 요청 후 프로필 정보 획득 가능
+//
+//                } else {
+//                    // 프로필 획득 불가
+//                }
+////                userInfo = new SignUpBody(email, profile.getNickname(), profile.getProfileImageUrl());
+////                userInfo.setProvider(type);
+//            }
+//        } else {
+//
+//        }
+//        return userInfo;
+//    }
 }
