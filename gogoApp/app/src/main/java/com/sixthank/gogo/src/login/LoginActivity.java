@@ -7,10 +7,12 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -34,6 +36,7 @@ import com.sixthank.gogo.R;
 import com.sixthank.gogo.databinding.ActivityLoginBinding;
 import com.sixthank.gogo.src.common.BaseActivity;
 import com.sixthank.gogo.src.login.interfaces.LoginActivityView;
+import com.sixthank.gogo.src.login.models.LoginBody;
 import com.sixthank.gogo.src.login.models.LoginResponse;
 import com.sixthank.gogo.src.login.service.LoginService;
 import com.sixthank.gogo.src.main.MainActivity;
@@ -105,7 +108,9 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding> implements
 
 
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
-        mLoginService.googleLogin(acct.getIdToken());
+        String ttt = credential.zza().toString();
+        Log.d("GOOGLE_API", ttt);
+//        mLoginService.googleLogin(acct.getIdToken());
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -146,6 +151,9 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding> implements
         // 간편로그인 실행 결과를 받아서 SDK로 전달
 //        showCustomToast("onActivityResult: " + mSession.getAccessTokenCallback());
         if (requestCode == RC_SIGN_IN) {
+            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+            String mbc = result.getSignInAccount().getIdToken();
+            Log.d("GOOGLE_API", "this: " + mbc);
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
                 // Google Sign In was successful, authenticate with Firebase
@@ -217,7 +225,7 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding> implements
 
                             mKakaoAccount = result.getKakaoAccount();
 
-                            mLoginService.kakaoLogin(accessToken);
+                            mLoginService.kakaoLogin(new LoginBody(accessToken));
                         }
                     });
         }
