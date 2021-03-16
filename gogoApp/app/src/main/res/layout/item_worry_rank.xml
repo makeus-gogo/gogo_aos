@@ -13,7 +13,7 @@
         android:layout_marginStart="10dp">
 
         <ImageView
-            android:id="@+id/rank_img"
+            android:id="@+id/item_worry_rank_img"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="fitXY"
@@ -29,7 +29,7 @@
                 android:layout_height="match_parent" />
 
             <ImageView
-                android:id="@+id/item_worry_profile"
+                android:id="@+id/item_worry_rank_profile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -62,7 +62,7 @@
         </RelativeLayout>
 
         <TextView
-            android:id="@+id/worry_item_txt_content"
+            android:id="@+id/item_worry_rank_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="내"

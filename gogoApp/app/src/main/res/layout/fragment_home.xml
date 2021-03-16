@@ -98,7 +98,7 @@
                 android:textColor="@color/black" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/main_rv_top5"
+                android:id="@+id/main_rv_top3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -107,6 +107,13 @@
                 android:layout_marginStart="10dp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:listitem="@layout/item_worry_rank" />
+
+            <TextView
+                android:id="@+id/main_tv_top3"
+                android:layout_width="match_parent"
+                android:layout_height="230dp"
+                android:visibility="gone"
+                android:gravity="center" />
 
             <!-- 뷰가 반씩 차지해야 하는 경우면 constraintLayout 필요 -->
             <TextView
@@ -128,6 +135,13 @@
                 android:orientation="vertical"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:listitem="@layout/item_worry" />
+
+            <TextView
+                android:id="@+id/main_tv_list"
+                android:layout_width="match_parent"
+                android:layout_height="230dp"
+                android:visibility="gone"
+                android:gravity="center" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
