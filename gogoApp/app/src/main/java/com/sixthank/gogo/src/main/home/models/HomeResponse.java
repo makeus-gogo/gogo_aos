@@ -2,6 +2,7 @@
 package com.sixthank.gogo.src.main.home.models;
 
 import java.util.List;
+
 import com.google.gson.annotations.SerializedName;
 
 
@@ -39,7 +40,7 @@ public class HomeResponse {
     }
 
 
-    public static class Data {
+    public static class Board {
 
         @SerializedName("description")
         private String mDescription;
@@ -53,8 +54,6 @@ public class HomeResponse {
         private String mPictureUrl;
         @SerializedName("startDateTime")
         private String mStartDateTime;
-        @SerializedName("title")
-        private String mTitle;
         @SerializedName("type")
         private String mType;
 
@@ -106,20 +105,93 @@ public class HomeResponse {
             mStartDateTime = startDateTime;
         }
 
-        public String getTitle() {
-            return mTitle;
-        }
-
-        public void setTitle(String title) {
-            mTitle = title;
-        }
-
         public String getType() {
             return mType;
         }
 
         public void setType(String type) {
             mType = type;
+        }
+
+    }
+
+    public static class Creator {
+
+        @SerializedName("email")
+        private String mEmail;
+        @SerializedName("id")
+        private Long mId;
+        @SerializedName("name")
+        private String mName;
+        @SerializedName("profileUrl")
+        private String mProfileUrl;
+        @SerializedName("provider")
+        private String mProvider;
+
+        public String getEmail() {
+            return mEmail;
+        }
+
+        public void setEmail(String email) {
+            mEmail = email;
+        }
+
+        public Long getId() {
+            return mId;
+        }
+
+        public void setId(Long id) {
+            mId = id;
+        }
+
+        public String getName() {
+            return mName;
+        }
+
+        public void setName(String name) {
+            mName = name;
+        }
+
+        public String getProfileUrl() {
+            return mProfileUrl;
+        }
+
+        public void setProfileUrl(String profileUrl) {
+            mProfileUrl = profileUrl;
+        }
+
+        public String getProvider() {
+            return mProvider;
+        }
+
+        public void setProvider(String provider) {
+            mProvider = provider;
+        }
+
+    }
+
+
+    public static class Data {
+
+        @SerializedName("board")
+        private Board mBoard;
+        @SerializedName("creator")
+        private Creator mCreator;
+
+        public Board getBoard() {
+            return mBoard;
+        }
+
+        public void setBoard(Board board) {
+            mBoard = board;
+        }
+
+        public Creator getCreator() {
+            return mCreator;
+        }
+
+        public void setCreator(Creator creator) {
+            mCreator = creator;
         }
 
     }
