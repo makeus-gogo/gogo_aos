@@ -6,23 +6,31 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.sixthank.gogo.R;
+import com.sixthank.gogo.src.common.OnItemClickListener;
+import com.sixthank.gogo.src.detail.models.BoardDetailResponse;
 
 import java.util.ArrayList;
 
 public class AnswerListAdapter extends RecyclerView.Adapter<AnswerListAdapter.AnswerHolder> {
 
-    Context context;
-    ArrayList<String> list;
+    private ArrayList<BoardDetailResponse.Content> list;
+    private OnItemClickListener listener;
 
-    public AnswerListAdapter(Context context, ArrayList<String> list) {
-        this.context = context;
+    public AnswerListAdapter(ArrayList<BoardDetailResponse.Content> list) {
         this.list = list;
+    }
+
+    public AnswerListAdapter() { }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
     }
 
     @NonNull
@@ -35,7 +43,7 @@ public class AnswerListAdapter extends RecyclerView.Adapter<AnswerListAdapter.An
 
     @Override
     public void onBindViewHolder(@NonNull AnswerListAdapter.AnswerHolder holder, int position) {
-
+        holder.content.setText(list.get(position).getContent());
     }
 
     @Override
@@ -44,31 +52,18 @@ public class AnswerListAdapter extends RecyclerView.Adapter<AnswerListAdapter.An
     }
 
     public class AnswerHolder extends RecyclerView.ViewHolder {
-        EditText content;
-        ImageView removeChoice;
+        TextView content;
+
         public AnswerHolder(@NonNull View itemView) {
             super(itemView);
-            content = itemView.findViewById(R.id.item_answer_et_content);
-            removeChoice = itemView.findViewById(R.id.item_answer_iv_remove);
-
-            removeChoice.setOnClickListener(v->{
-                removeItem(this.getAdapterPosition());
+            content = itemView.findViewById(R.id.item_answer_tv_content);
+            content.setOnClickListener(v -> {
+                if(listener != null) {
+                    listener.onItemClick(v, list.get(getAdapterPosition()));
+                }
             });
         }
+
     }
 
-    public void addItem() {
-        String item = "";
-        list.add(item);
-        notifyItemInserted(getItemCount()-1);
-    }
-
-    public void removeItem(int position) {
-        if(getItemCount() == 2) {
-            Toast.makeText(context, "최소 2개의 선택지가 필요합니다.", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        list.remove(position);
-        notifyItemRemoved(position);
-    }
 }

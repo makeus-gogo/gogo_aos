@@ -17,23 +17,16 @@
             android:layout_gravity="center_vertical"
             android:src="@drawable/ic_select_order" />
 
-        <EditText
-            android:id="@+id/item_answer_et_content"
+        <TextView
+            android:id="@+id/item_answer_tv_content"
             android:layout_width="175dp"
             android:layout_height="match_parent"
             android:background="@drawable/bg_circle_5"
             android:textSize="13sp"
-            android:padding="10dp"
-            android:textColorHint="@color/black"
-            android:hint="답변을 입력해주세요" />
+            android:paddingTop="7dp"
+            android:paddingEnd="10dp"
+            android:paddingStart="10dp" />
 
-        <ImageView
-            android:id="@+id/item_answer_iv_remove"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginStart="5dp"
-            android:src="@drawable/ic_close" />
     </LinearLayout>
 
 </LinearLayout>

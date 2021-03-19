@@ -69,7 +69,8 @@ public class BoardDetailChoiceFragment extends BaseFragment<FragmentBoardChoiceB
     private void initData() {
         binding.boardChoiceRv.setAdapter(mAnswerListAdapter);
         binding.boardChoiceTvContent.setText(boardItem.getDescription());
-        Glide.with(getContext()).load(Uri.parse(boardItem.getPictureUrl())).into(binding.boardChoiceImg);
+        if(getContext() != null && !boardItem.getPictureUrl().isEmpty())
+            Glide.with(getContext()).load(Uri.parse(boardItem.getPictureUrl())).into(binding.boardChoiceImg);
     }
 
     @Override
