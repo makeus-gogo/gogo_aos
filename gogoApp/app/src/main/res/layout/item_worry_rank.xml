@@ -19,7 +19,7 @@
             android:scaleType="fitXY"
             android:src="@drawable/temp" />
 
-        <RelativeLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="wrap_content"
             android:layout_height="230dp">
 
@@ -30,8 +30,10 @@
 
             <ImageView
                 android:id="@+id/item_worry_rank_profile"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginTop="20dp"
                 android:layout_marginStart="20dp"
                 android:src="@drawable/ic_profile" />
@@ -41,25 +43,26 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:gravity="center_vertical"
-                android:layout_toRightOf="@+id/item_worry_profile"
+                app:layout_constraintTop_toTopOf="@id/item_worry_rank_profile"
+                app:layout_constraintStart_toEndOf="@id/item_worry_rank_profile"
+                android:layout_toRightOf="@+id/item_worry_rank_profile"
                 android:text="닉네임"
+                app:layout_constraintBottom_toBottomOf="@id/item_worry_rank_profile"
                 android:textColor="@color/white"
-                android:layout_marginTop="25dp"
                 android:textSize="12sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
-                android:layout_toRightOf="@+id/item_worry_rank_nickname"
+                app:layout_constraintStart_toEndOf="@id/item_worry_rank_nickname"
+                app:layout_constraintTop_toTopOf="@id/item_worry_rank_nickname"
                 android:text="님의 고민"
                 android:textColor="@color/white"
-                android:layout_marginTop="25dp"
                 android:textSize="12sp" />
 
 
-        </RelativeLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
             android:id="@+id/item_worry_rank_content"
