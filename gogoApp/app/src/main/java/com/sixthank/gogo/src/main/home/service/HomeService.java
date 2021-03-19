@@ -2,6 +2,7 @@ package com.sixthank.gogo.src.main.home.service;
 
 import com.sixthank.gogo.src.main.home.interfaces.HomeFragmentView;
 import com.sixthank.gogo.src.main.home.interfaces.HomeRetrofitInterface;
+import com.sixthank.gogo.src.main.home.models.BoardTopNResponse;
 import com.sixthank.gogo.src.main.home.models.HomeResponse;
 
 import retrofit2.Call;
@@ -20,19 +21,19 @@ public class HomeService {
     }
 
     public void getTopNListBoardList() {
-        homeRetrofitInterface.getTopNBoardList(0, 3).enqueue(new Callback<HomeResponse>() {
+        homeRetrofitInterface.getTopNBoardList().enqueue(new Callback<BoardTopNResponse>() {
             @Override
-            public void onResponse(Call<HomeResponse> call, Response<HomeResponse> response) {
-                HomeResponse homeResponse = response.body();
-                if(homeResponse == null) {
+            public void onResponse(Call<BoardTopNResponse> call, Response<BoardTopNResponse> response) {
+                BoardTopNResponse boardTopNResponse = response.body();
+                if (boardTopNResponse == null) {
                     homeFragmentView.getTopNBoardListFailure();
                     return;
                 }
-                homeFragmentView.getTopNBoardListSuccess(homeResponse.getData());
+                homeFragmentView.getTopNBoardListSuccess(boardTopNResponse.getData());
             }
 
             @Override
-            public void onFailure(Call<HomeResponse> call, Throwable t) {
+            public void onFailure(Call<BoardTopNResponse> call, Throwable t) {
                 homeFragmentView.getTopNBoardListFailure();
             }
         });

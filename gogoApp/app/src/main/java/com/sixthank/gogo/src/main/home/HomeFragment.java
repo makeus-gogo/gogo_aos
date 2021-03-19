@@ -7,19 +7,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.sixthank.gogo.databinding.FragmentHomeBinding;
 import com.sixthank.gogo.src.common.BaseFragment;
+import com.sixthank.gogo.src.common.OnItemClickListener;
 import com.sixthank.gogo.src.common.OnLoadMoreScrollListener;
 import com.sixthank.gogo.src.main.MainActivity;
 import com.sixthank.gogo.src.main.home.adapter.WorryListAdapter;
 import com.sixthank.gogo.src.main.home.adapter.WorryRankAdapter;
 import com.sixthank.gogo.src.main.home.interfaces.HomeFragmentView;
+import com.sixthank.gogo.src.main.home.models.BoardTopNResponse;
 import com.sixthank.gogo.src.main.home.models.HomeResponse;
-import com.sixthank.gogo.src.main.home.models.WorryResponse;
 import com.sixthank.gogo.src.main.home.service.HomeService;
 import com.sixthank.gogo.src.post.PostActivity;
 
@@ -27,11 +27,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class HomeFragment extends BaseFragment<FragmentHomeBinding> implements HomeFragmentView {
+public class HomeFragment extends BaseFragment<FragmentHomeBinding> implements HomeFragmentView{
 
     private MainActivity mParentActivity;
     private HomeService mHomeService;
-    private OnLoadMoreScrollListener onLoadMoreScrollListener;
+    private WorryListAdapter mWorryListAdapter;
+    private OnItemClickListener mOnItemClickListener;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -40,12 +41,6 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> implements H
 
         initVariable();
         initListener();
-
-
-
-
-
-
 
         return binding.getRoot();
     }
@@ -60,13 +55,26 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> implements H
             startActivity(new Intent(getActivity(), PostActivity.class));
         });
 
-        
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        binding.mainRvList.setLayoutManager(linearLayoutManager);
+        OnLoadMoreScrollListener onLoadMoreScrollListener = new OnLoadMoreScrollListener(linearLayoutManager) {
+            @Override
+            public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
+//                mWorryListAdapter.addItems();
+                binding.mainRvList.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        mWorryListAdapter.notifyDataSetChanged();
+                    }
+                });
+            }
+        };
     }
 
-    private ArrayList<WorryResponse> getData() {
-        ArrayList<WorryResponse> wList = new ArrayList<>();
-        for(int i = 0; i < 10; i++)
-            wList.add(new WorryResponse("귀농을 할까? 주말농장을 할까? 귀농을 할까? 주말농장을 할까? 귀농을 할까? 주말농장을 할까? 귀농을..."));
+    private ArrayList<HomeResponse.Data> getData() {
+        ArrayList<HomeResponse.Data> wList = new ArrayList<>();
+//        for(int i = 0; i < 10; i++)
+//            wList.add(new WorryResponse("귀농을 할까? 주말농장을 할까? 귀농을 할까? 주말농장을 할까? 귀농을 할까? 주말농장을 할까? 귀농을..."));
 
         return wList;
     }
@@ -78,12 +86,12 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> implements H
     }
 
     @Override
-    public void getTopNBoardListSuccess(List<HomeResponse.Data> data) {
+    public void getTopNBoardListSuccess(List<BoardTopNResponse.Data> data) {
         if(data.size() == 0) {
             binding.mainTvTop3.setVisibility(View.VISIBLE);
             binding.mainTvTop3.setText("조회 목록이 없습니다.");
         }
-        WorryRankAdapter worryRankAdapter = new WorryRankAdapter(data);
+        WorryRankAdapter worryRankAdapter = new WorryRankAdapter(getContext(), data);
         binding.mainRvTop3.setAdapter(worryRankAdapter);
     }
 
@@ -107,4 +115,6 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> implements H
     public void getBoardListFailure() {
 
     }
+
+
 }
