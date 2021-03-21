@@ -2,8 +2,6 @@ package com.sixthank.gogo.src.signup.fragment;
 
 import android.os.Bundle;
 
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,7 +45,13 @@ public class SetNicknameFragment extends BaseFragment<FragmentSetNicknameBinding
             return false;
         }
 
-        // 숫자 및 영문자만 가능
-        return Pattern.matches("^[a-zA-Z0-9]*$", input);
+        // 숫자,영문자,한글만 가능
+        boolean flag = Pattern.matches("^[a-zA-Z0-9가-힣]*$", input);
+        if(!flag) {
+            showCustomToast("특수문자 및 이모티콘은 불가능합니다.");
+            return false;
+        }
+
+        return true;
     }
 }
