@@ -3,11 +3,17 @@ package com.sixthank.gogo.src.signup;
 
 import android.os.Bundle;
 
+import androidx.fragment.app.FragmentManager;
+
 import com.google.android.gms.auth.api.signin.internal.SignInHubActivity;
 import com.sixthank.gogo.R;
 import com.sixthank.gogo.databinding.ActivitySignUpBinding;
 import com.sixthank.gogo.src.common.BaseActivity;
+import com.sixthank.gogo.src.detail.fragment.BoardDetailChoiceFragment;
+import com.sixthank.gogo.src.detail.fragment.BoardDetailOXFragment;
 import com.sixthank.gogo.src.login.models.LoginResponse;
+import com.sixthank.gogo.src.signup.fragment.CompletedSignUpFragment;
+import com.sixthank.gogo.src.signup.fragment.SetNicknameFragment;
 import com.sixthank.gogo.src.signup.interfaces.SignUpActivityView;
 import com.sixthank.gogo.src.signup.models.SignUpBody;
 import com.sixthank.gogo.src.signup.service.SignUpService;
@@ -16,6 +22,7 @@ public class SignUpActivity extends BaseActivity<ActivitySignUpBinding> implemen
 
     private SignUpService mSignUpService;
     private SignUpBody mSignUpBody;
+    private final FragmentManager fm = getSupportFragmentManager();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +32,8 @@ public class SignUpActivity extends BaseActivity<ActivitySignUpBinding> implemen
 
         initVariable();
 
-        signUp();
+        fm.beginTransaction().replace(R.id.sign_up_container, new SetNicknameFragment()).commit();
+
     }
 
     private void initVariable() {
@@ -41,6 +49,7 @@ public class SignUpActivity extends BaseActivity<ActivitySignUpBinding> implemen
     @Override
     public void signUpSuccess() {
         showCustomToast(getString(R.string.sign_up_success));
+        fm.beginTransaction().replace(R.id.board_detail_container, new CompletedSignUpFragment()).commit();
     }
 
     @Override
@@ -48,7 +57,9 @@ public class SignUpActivity extends BaseActivity<ActivitySignUpBinding> implemen
         showCustomToast(getString(R.string.sign_up_fail));
     }
 
-    private void signUp() {
+    public void signUp() {
         mSignUpService.signUp(mSignUpBody);
     }
+
+    public void setNickname(String nickname) { mSignUpBody.setName(nickname); }
 }
