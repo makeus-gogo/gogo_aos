@@ -3,18 +3,15 @@ package com.sixthank.gogo.src.main.home;
 import android.content.Intent;
 import android.os.Bundle;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.sixthank.gogo.databinding.FragmentHomeBinding;
 import com.sixthank.gogo.src.common.BaseFragment;
-import com.sixthank.gogo.src.common.OnItemClickListener;
-import com.sixthank.gogo.src.common.OnLoadMoreScrollListener;
-import com.sixthank.gogo.src.main.MainActivity;
 import com.sixthank.gogo.src.main.home.adapter.WorryListAdapter;
 import com.sixthank.gogo.src.main.home.adapter.WorryRankAdapter;
 import com.sixthank.gogo.src.main.home.interfaces.HomeFragmentView;
@@ -27,12 +24,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class HomeFragment extends BaseFragment<FragmentHomeBinding> implements HomeFragmentView{
+public class HomeFragment extends BaseFragment<FragmentHomeBinding> implements HomeFragmentView {
 
-    private MainActivity mParentActivity;
     private HomeService mHomeService;
     private WorryListAdapter mWorryListAdapter;
-    private OnItemClickListener mOnItemClickListener;
+    private int mNotifyStartRange = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -41,58 +37,61 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> implements H
 
         initVariable();
         initListener();
+        initData();
 
         return binding.getRoot();
-    }
-
-    private void initVariable() {
-        mParentActivity = (MainActivity) getActivity();
-        mHomeService = new HomeService(this);
-    }
-
-    private void initListener() {
-        binding.textView.setOnClickListener(v->{
-            startActivity(new Intent(getActivity(), PostActivity.class));
-        });
-
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-        binding.mainRvList.setLayoutManager(linearLayoutManager);
-        OnLoadMoreScrollListener onLoadMoreScrollListener = new OnLoadMoreScrollListener(linearLayoutManager) {
-            @Override
-            public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
-//                mWorryListAdapter.addItems();
-                binding.mainRvList.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        mWorryListAdapter.notifyDataSetChanged();
-                    }
-                });
-            }
-        };
-    }
-
-    private ArrayList<HomeResponse.Data> getData() {
-        ArrayList<HomeResponse.Data> wList = new ArrayList<>();
-//        for(int i = 0; i < 10; i++)
-//            wList.add(new WorryResponse("귀농을 할까? 주말농장을 할까? 귀농을 할까? 주말농장을 할까? 귀농을 할까? 주말농장을 할까? 귀농을..."));
-
-        return wList;
     }
 
     @Override
     public void onStart() {
         super.onStart();
+
+    }
+
+    private void initVariable() {
+        mHomeService = new HomeService(this);
+        mWorryListAdapter = new WorryListAdapter(getContext());
+        binding.mainRvList.setAdapter(mWorryListAdapter);
+    }
+
+    private void initListener() {
+        binding.textView.setOnClickListener(v -> {
+            startActivity(new Intent(getActivity(), PostActivity.class));
+        });
+
+        binding.scrollableContent.getViewTreeObserver()
+                .addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
+                    @Override
+                    public void onScrollChanged() {
+                        if (binding.scrollableContent.getChildAt(0).getBottom()
+                                <= (binding.scrollableContent.getHeight() + binding.scrollableContent.getScrollY())) {
+                            Log.d("HomeFragment", "bottom");
+
+                            // 스크롤뷰가 전체화면이지 않을 때 문제 발생. size <= 2
+                            mNotifyStartRange = mWorryListAdapter.getItemCount();
+                            mHomeService.getListBoardList(mWorryListAdapter.getLastId(), 10);
+
+                        } else {
+                            //scroll view is not at bottom
+                            Log.d("HomeFragment", "no bottom");
+
+                        }
+                    }
+                });
+
+    }
+
+    private void initData() {
         mHomeService.getTopNListBoardList();
     }
 
     @Override
     public void getTopNBoardListSuccess(List<BoardTopNResponse.Data> data) {
-        if(data.size() == 0) {
+        if (data.size() == 0) {
             binding.mainTvTop3.setVisibility(View.VISIBLE);
             binding.mainTvTop3.setText("조회 목록이 없습니다.");
         }
-        WorryRankAdapter worryRankAdapter = new WorryRankAdapter(getContext(), data);
-        binding.mainRvTop3.setAdapter(worryRankAdapter);
+        binding.mainRvTop3.setAdapter(new WorryRankAdapter(getContext(), data));
     }
 
     @Override
@@ -102,18 +101,25 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> implements H
 
     @Override
     public void getBoardListSuccess(List<HomeResponse.Data> data) {
-        if(data.size() == 0) {
+
+        if(data.size() != 0) {
+            mWorryListAdapter.addItems((ArrayList<HomeResponse.Data>) data);
+            binding.mainRvList.post(new Runnable() {
+                @Override
+                public void run() {
+                    mWorryListAdapter.notifyItemRangeInserted(mNotifyStartRange, mWorryListAdapter.getItemCount());
+                }
+            });
+        }
+        if (mWorryListAdapter.getItemCount() == 0) {
             binding.mainTvList.setVisibility(View.VISIBLE);
             binding.mainTvList.setText("조회 목록이 없습니다.");
         }
-
-        WorryListAdapter wAdapter = new WorryListAdapter(getData());
-        binding.mainRvList.setAdapter(wAdapter);
     }
 
     @Override
     public void getBoardListFailure() {
-
+        showCustomToast("List Failure");
     }
 
 

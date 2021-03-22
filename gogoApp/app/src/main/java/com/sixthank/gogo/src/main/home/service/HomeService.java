@@ -39,7 +39,7 @@ public class HomeService {
         });
     }
 
-    public void getNListBoardList(int lastBoardId, int size) {
+    public void getListBoardList(int lastBoardId, int size) {
         homeRetrofitInterface.getBoardList(lastBoardId, size).enqueue(new Callback<HomeResponse>() {
             @Override
             public void onResponse(Call<HomeResponse> call, Response<HomeResponse> response) {
