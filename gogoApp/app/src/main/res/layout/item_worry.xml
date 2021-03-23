@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
-            android:src="@drawable/temp_worry" />
+            android:background="@color/bg_default_img" />
 
 <!--        <RelativeLayout-->
 <!--            android:layout_width="wrap_content"-->
@@ -35,26 +35,36 @@
 <!--                android:layout_height="wrap_content"-->
 <!--                android:layout_marginStart="20dp"-->
 <!--                android:layout_marginTop="20dp"-->
-<!--                android:src="@drawable/ic_user" />-->
+<!--                android:src="@drawable/ic_profile" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/item_worry_nickname"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="10dp"-->
+<!--                android:layout_marginTop="24dp"-->
+<!--                android:layout_toEndOf="@+id/item_worry_profile"-->
+<!--                android:gravity="center_vertical"-->
+<!--                android:text="닉네임"-->
+<!--                android:textColor="@color/white"-->
+<!--                android:textSize="12sp" />-->
 
 <!--            <TextView-->
 <!--                android:layout_width="wrap_content"-->
 <!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginStart="10dp"-->
-<!--                android:layout_marginTop="25dp"-->
-<!--                android:layout_toRightOf="@+id/item_worry_profile"-->
+<!--                android:layout_marginTop="24dp"-->
+<!--                android:layout_toEndOf="@+id/item_worry_nickname"-->
 <!--                android:gravity="center_vertical"-->
-<!--                android:text="닉네임입니다"-->
+<!--                android:text="님의 고민"-->
 <!--                android:textColor="@color/white"-->
 <!--                android:textSize="12sp" />-->
-
 
 <!--        </RelativeLayout>-->
 
         <TextView
             android:id="@+id/item_worry_txt_content"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_margin="20dp"
             android:textColor="@color/white"
             android:textSize="14sp" />

@@ -17,10 +17,7 @@ import com.sixthank.gogo.R;
 import com.sixthank.gogo.src.detail.BoardDetailActivity;
 import com.sixthank.gogo.src.main.home.models.HomeResponse;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
-import java.util.List;
 
 public class WorryListAdapter extends RecyclerView.Adapter<WorryListAdapter.WorryHolder> {
     private Context context;
@@ -49,6 +46,7 @@ public class WorryListAdapter extends RecyclerView.Adapter<WorryListAdapter.Worr
         holder.tvContent.setText(board.getDescription());
         if(!board.getPictureUrl().isEmpty())
             Glide.with(context).load(Uri.parse(board.getPictureUrl())).into(holder.ivImage);
+
     }
 
     @Override
@@ -63,6 +61,7 @@ public class WorryListAdapter extends RecyclerView.Adapter<WorryListAdapter.Worr
             super(itemView);
             tvContent = itemView.findViewById(R.id.item_worry_txt_content);
             ivImage = itemView.findViewById(R.id.item_worry_img);
+
 
             itemView.setOnClickListener(v->{
                 int boardId = list.get(getAdapterPosition()).getBoard().getId();
