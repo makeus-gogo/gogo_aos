@@ -20,7 +20,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/bg_circle_5"
+            android:background="@drawable/bg_circle_5_click"
             android:textSize="13sp"
             android:padding="10dp"
             android:textColorHint="@color/black"

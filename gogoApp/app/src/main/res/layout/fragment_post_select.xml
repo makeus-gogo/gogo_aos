@@ -9,7 +9,7 @@
     tools:context=".src.post.fragment.PostSelectFragment">
 
     <ImageView
-        android:id="@+id/post_second_img"
+        android:id="@+id/post_select_img"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="fitXY" />
@@ -26,7 +26,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/post_second_next_bg"
+        android:id="@+id/post_select_next_bg"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_alignParentEnd="true"
@@ -48,15 +48,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/post_select_tv_worry_cont"
+    <EditText
+        android:id="@+id/post_select_et_content"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_above="@+id/post_second_select"
         android:layout_marginBottom="90dp"
         android:gravity="center"
-        android:text="오늘 저녁에 식당 어디갈지 모르겠어요 모르겠어요 모르겠어요"
-        android:textColor="@color/white"
+        android:theme="@style/customTheme"
+        android:hint="여기에 고민을\n입력해주세요!"
+        android:background="@drawable/bg_circle_5_click"
+        android:padding="20dp"
+        android:textColor="@color/black"
         android:textSize="22sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/guideline_horizontal"
@@ -94,14 +97,14 @@
 
 
     <LinearLayout
-        android:id="@+id/post_second_ll_color"
+        android:id="@+id/post_select_ll_color"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="15dp"
         android:orientation="horizontal"
         android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/post_second_style"
+        app:layout_constraintBottom_toTopOf="@+id/post_select_style"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
@@ -129,7 +132,7 @@
         </RelativeLayout>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/post_second_rv_color"
+            android:id="@+id/post_select_rv_color"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:orientation="horizontal"
@@ -139,7 +142,7 @@
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/post_second_rv_txt"
+        android:id="@+id/post_select_rv_txt"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_centerHorizontal="true"
@@ -147,13 +150,13 @@
         android:orientation="horizontal"
         android:visibility="gone"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toTopOf="@id/post_second_style"
+        app:layout_constraintBottom_toTopOf="@id/post_select_style"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@id/post_second_style"
+        app:layout_constraintStart_toStartOf="@id/post_select_style"
         tools:listitem="@layout/item_txt" />
 
     <RadioGroup
-        android:id="@+id/post_second_style"
+        android:id="@+id/post_select_style"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:layout_marginHorizontal="20dp"
@@ -165,14 +168,14 @@
         app:layout_constraintBottom_toBottomOf="parent">
 
         <RadioButton
-            android:id="@+id/post_second_camera"
+            android:id="@+id/post_select_camera"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/selector_camera"
             android:button="@color/transparent" />
 
         <RadioButton
-            android:id="@+id/post_second_write"
+            android:id="@+id/post_select_write"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
@@ -180,7 +183,7 @@
             android:button="@color/transparent" />
 
         <RadioButton
-            android:id="@+id/post_second_typo"
+            android:id="@+id/post_select_typo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/selector_typo"

@@ -41,7 +41,7 @@ public class PostFirstFragment extends BaseFragment<FragmentPostFirstBinding> im
         int index = binding.postFirstViewPager.getCurrentItem();
         switch (v.getId()) {
             case R.id.post_first_next:
-                mParentAt.setValueString("description", binding.postFirstWorryContent.getText().toString());
+//                mParentAt.setValueString("description", binding.postFirstWorryContent.getText().toString());
                 mParentAt.switchFragment(index+1);
                 break;
             case R.id.post_first_img_left:

@@ -8,13 +8,15 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.sixthank.gogo.R;
+import com.sixthank.gogo.src.common.OnItemClickListener;
 
 import java.util.ArrayList;
 
 
 public class ExploreWorryListAdapter extends RecyclerView.Adapter<ExploreWorryListAdapter.WorryHolder> {
 
-    ArrayList<String> list;
+    private ArrayList<String> list;
+    private OnItemClickListener listener;
 
     public ExploreWorryListAdapter(ArrayList<String> list) {
         this.list = list;
@@ -39,10 +41,19 @@ public class ExploreWorryListAdapter extends RecyclerView.Adapter<ExploreWorryLi
         return list.size();
     }
 
-    class WorryHolder extends RecyclerView.ViewHolder {
+    class WorryHolder extends RecyclerView.ViewHolder{
 
         public WorryHolder(@NonNull View itemView) {
             super(itemView);
+            itemView.setOnClickListener(v->{
+                if(listener != null) {
+                    listener.onItemClick(v, list.get(this.getAdapterPosition()));
+                }
+            });
         }
+    }
+
+    public void setListener(OnItemClickListener listener) {
+        this.listener = listener;
     }
 }

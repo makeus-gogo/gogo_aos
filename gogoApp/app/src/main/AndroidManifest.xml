@@ -21,7 +21,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MaterialComponents.Light.NoActionBar">
-        <activity android:name=".src.signup.SignUpActivity"></activity>
+        <activity android:name=".src.detail.BoardDetailActivity"
+            android:theme="@style/fullTheme"></activity>
+        <activity android:name=".src.signup.SignUpActivity" />
 
         <meta-data
             android:name="com.kakao.sdk.AppKey"
@@ -29,7 +31,7 @@
 
         <activity
             android:name=".src.post.PostActivity"
-            android:theme="@style/customTheme">
+            android:theme="@style/customThemeNoStatusBar2">
 
             <!-- <intent-filter> -->
             <!-- <action android:name="android.intent.action.MAIN" /> -->
@@ -40,36 +42,35 @@
         </activity>
         <activity
             android:name=".src.login.LoginActivity"
-            android:theme="@style/fullTheme">
+            android:theme="@style/customTheme">
 
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
+<!--             <intent-filter>-->
+<!--             <action android:name="android.intent.action.MAIN" />-->
 
 
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
-            <!-- <data android:host="oauth" -->
-            <!-- android:scheme="kakao01a404aabef97ace6b01f9314142e38d" /> -->
+<!--             <category android:name="android.intent.category.LAUNCHER" />-->
+<!--             </intent-filter>-->
+
         </activity>
         <activity
             android:name=".src.splash.SplashActivity"
             android:theme="@style/fullTheme">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+             <intent-filter>
+             <action android:name="android.intent.action.MAIN" />
+
+
+             <category android:name="android.intent.category.LAUNCHER" />
+             </intent-filter>
         </activity>
         <activity
             android:name=".src.main.MainActivity"
-            android:theme="@style/customThemeBlue">
+            android:theme="@style/customThemeNoStatusBar">
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
 
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-
-
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>intent-filter-->
         </activity>
 
         <provider

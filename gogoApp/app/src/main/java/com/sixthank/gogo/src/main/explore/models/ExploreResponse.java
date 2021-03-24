@@ -54,6 +54,8 @@ public class ExploreResponse {
         private String mTitle;
         @SerializedName("type")
         private String mType;
+        @SerializedName("pictureUrl")
+        private String mPictureUrl;
 
         public String getDescription() {
             return mDescription;
@@ -111,5 +113,12 @@ public class ExploreResponse {
             mType = type;
         }
 
+        public String getPictureUrl() {
+            return mPictureUrl;
+        }
+
+        public void setPictureUrl(String pictureUrl) {
+            mPictureUrl = pictureUrl;
+        }
     }
 }

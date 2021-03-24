@@ -3,6 +3,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="kakao_app_key">01a404aabef97ace6b01f9314142e38d</string>
+    <string name="web_client_id">728830747388-hn9om6b93ojqcuh6cp0h99m9bn2f7o55.apps.googleusercontent.com</string>
     <!--    <string name="default_web_client_id">aaaaaa</string>-->
 
     <string name="network_error">네트워크가 원활하지 않습니다.</string>
@@ -10,4 +11,5 @@
     <!-- 회원가입 -->
     <string name="sign_up_success">회원가입을 완료했습니다.</string>
     <string name="sign_up_fail">회원가입을 다시 진행해주세요</string>
+
 </resources>

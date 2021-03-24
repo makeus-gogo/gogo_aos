@@ -17,8 +17,6 @@ public class PostBody {
     private List<String> mHashTags;
     @SerializedName("pictureUrl")
     private String mPictureUrl;
-    @SerializedName("title")
-    private String mTitle;
     @SerializedName("type")
     private String mType;
 
@@ -55,14 +53,6 @@ public class PostBody {
         mPictureUrl = pictureUrl;
     }
 
-    public String getTitle() {
-        return mTitle;
-    }
-
-    public void setTitle(String title) {
-        mTitle = title;
-    }
-
     public String getType() {
         return mType;
     }
@@ -71,14 +61,12 @@ public class PostBody {
         mType = type;
     }
 
-    public PostBody toMap(HashMap<String, Object> map) { // title 입력받도록 해야함.
-        if(map.containsKey("title"))
-            this.mTitle = (String) map.get("title");
-        else this.mTitle = "TITLE";
+    public PostBody toMap(HashMap<String, Object> map) {
         if(map.containsKey("description"))
             this.mDescription = (String) map.get("description");
         if(map.containsKey("pictureUrl"))
             this.mPictureUrl = (String) map.get("pictureUrl");
+        else this.mPictureUrl = "";
         if(map.containsKey("type"))
             this.mType = (String) map.get("type");
         if(map.containsKey("contents"))

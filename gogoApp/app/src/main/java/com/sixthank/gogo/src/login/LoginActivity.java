@@ -70,21 +70,25 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding> implements
 //            Log.d("KAKAO_API", "loginBtnKakaoStart");
 //            mSession.open(AuthType.KAKAO_LOGIN_ALL, LoginActivity.this);
 //        });
-        binding.logoutBtnKakao.setOnClickListener(v->{
-            UserManagement.getInstance().requestLogout(new LogoutResponseCallback() {
-                        @Override
-                        public void onCompleteLogout() {
-                            Log.d("KAKAO_API", "로그아웃되었습니다."); }
-            });
-        });
-
-        binding.loginBtnGoogle.setOnClickListener(v -> {
-            googleLogin();
-        });
-
-        binding.logoutBtnGoogle.setOnClickListener(v -> {
-            FirebaseAuth.getInstance().signOut();
-        });
+//        binding.logoutBtnKakao.setOnClickListener(v->{
+//            UserManagement.getInstance().requestLogout(new LogoutResponseCallback() {
+//                        @Override
+//                        public void onCompleteLogout() {
+//                            Log.d("KAKAO_API", "로그아웃되었습니다."); }
+//            });
+//        });
+//
+//        binding.loginBtnGoogle.setOnClickListener(v -> {
+//            googleLogin();
+//        });
+//
+//        binding.logoutBtnGoogle.setOnClickListener(v -> {
+//            FirebaseAuth.getInstance().signOut();
+//        });
+//
+//        binding.loginBtnGoogle2.setOnClickListener(v->{
+//            googleLogin();
+//        });
 
     }
 
@@ -92,11 +96,11 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding> implements
         mAuth = FirebaseAuth.getInstance();
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestIdToken(getString(R.string.web_client_id))
                 .requestEmail()
                 .build();
-        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
@@ -117,8 +121,8 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding> implements
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             showCustomToast("Login Success!");
+
                             FirebaseUser user = mAuth.getCurrentUser();
-                            mAuth.getAccessToken(true).toString();
                             updateUI(user);
                         } else {
                             showCustomToast("Login Failure!");
@@ -149,17 +153,18 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding> implements
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         // 간편로그인 실행 결과를 받아서 SDK로 전달
-//        showCustomToast("onActivityResult: " + mSession.getAccessTokenCallback());
+
         if (requestCode == RC_SIGN_IN) {
-            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
-            String mbc = result.getSignInAccount().getIdToken();
-            Log.d("GOOGLE_API", "this: " + mbc);
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
                 // Google Sign In was successful, authenticate with Firebase
                 GoogleSignInAccount account = task.getResult(ApiException.class);
-                firebaseAuthWithGoogle(account);
+                String token = account.getIdToken();
+                Log.d("GOOGLE_API", "token: " + token);
+
+//                firebaseAuthWithGoogle(account);
             } catch (ApiException e) {
+                Log.d("GOOGLE_API", "error: " + e.getStatusCode());
             }
         } else {
             if (Session.getCurrentSession().handleActivityResult(requestCode, resultCode, data)) {

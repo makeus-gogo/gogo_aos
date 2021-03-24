@@ -36,7 +36,8 @@ public class MyPageFragment extends BaseFragment<FragmentMyPageBinding> implemen
 
     @Override
     public void getMemberSuccess() {
-        showCustomToast("마이페이지 조회 성공");
+
+//        showCustomToast("마이페이지 조회 성공");
     }
 
     @Override

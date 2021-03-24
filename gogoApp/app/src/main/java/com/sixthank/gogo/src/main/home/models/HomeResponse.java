@@ -47,9 +47,9 @@ public class HomeResponse {
         @SerializedName("endDateTime")
         private String mEndDateTime;
         @SerializedName("id")
-        private Long mId;
+        private int mId;
         @SerializedName("memberId")
-        private Long mMemberId;
+        private int mMemberId;
         @SerializedName("pictureUrl")
         private String mPictureUrl;
         @SerializedName("startDateTime")
@@ -73,19 +73,19 @@ public class HomeResponse {
             mEndDateTime = endDateTime;
         }
 
-        public Long getId() {
+        public int getId() {
             return mId;
         }
 
-        public void setId(Long id) {
+        public void setId(int id) {
             mId = id;
         }
 
-        public Long getMemberId() {
+        public int getMemberId() {
             return mMemberId;
         }
 
-        public void setMemberId(Long memberId) {
+        public void setMemberId(int memberId) {
             mMemberId = memberId;
         }
 

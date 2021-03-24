@@ -122,5 +122,7 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> implements H
         showCustomToast("List Failure");
     }
 
-
+    public void getBoardList() {
+        mHomeService.getListBoardList(1, 10);
+    }
 }

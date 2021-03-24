@@ -41,18 +41,19 @@
         android:padding="10dp"
         android:src="@drawable/ic_next" />
 
-    <TextView
-        android:id="@+id/post_second_tv_worry_cont"
+    <EditText
+        android:id="@+id/post_second_et_content"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_above="@+id/post_second_select"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="90dp"
         android:gravity="center"
-        android:text="오늘 저녁에 식당 어디갈지 모르겠어요 모르겠어요 모르겠어요"
-        android:textColor="@color/white"
-        android:textSize="22sp"
-        android:textStyle="bold" />
+        android:padding="20dp"
+        android:hint="여기에 고민을\n입력해주세요"
+        android:background="@drawable/bg_circle_5_click"
+        android:textColor="@color/black"
+        android:textSize="22sp"/>
 
     <LinearLayout
         android:id="@+id/post_second_select"

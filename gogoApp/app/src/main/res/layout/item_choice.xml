@@ -17,16 +17,26 @@
             android:layout_gravity="center_vertical"
             android:src="@drawable/ic_select_order" />
 
-        <TextView
-            android:id="@+id/item_answer_tv_content"
+        <EditText
+            android:id="@+id/item_choice_et_content"
             android:layout_width="175dp"
             android:layout_height="match_parent"
             android:background="@drawable/bg_circle_5_click"
             android:textSize="13sp"
-            android:paddingTop="7dp"
+            android:paddingStart="10dp"
             android:paddingEnd="10dp"
-            android:paddingStart="10dp" />
+            android:inputType="text"
+            android:imeOptions="actionNext"
+            android:textColorHint="@color/black"
+            android:hint="답변을 입력해주세요" />
 
+        <ImageView
+            android:id="@+id/item_choice_iv_remove"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="5dp"
+            android:src="@drawable/ic_close" />
     </LinearLayout>
 
 </LinearLayout>
