@@ -1,5 +1,6 @@
 package com.sixthank.gogo.src.login;
 
+import android.app.Activity;
 import android.util.Log;
 
 import com.kakao.auth.ISessionCallback;
@@ -14,6 +15,11 @@ import com.sixthank.gogo.src.login.models.LoginBody;
 public class SessionCallback implements ISessionCallback {
     // 로그인에 성공한 상태
     private String mAccessToken;
+    private LoginActivity loginActivity;
+
+    public SessionCallback(LoginActivity loginActivity) {
+        this.loginActivity = loginActivity;
+    }
 
     @Override
     public void onSessionOpened() {
@@ -44,14 +50,8 @@ public class SessionCallback implements ISessionCallback {
                     public void onSuccess(MeV2Response result) {
                         mAccessToken = Session.getCurrentSession().getTokenInfo().getAccessToken();
                         Log.i("KAKAO_API", "token: " + mAccessToken);
-                        LoginActivity activity = new LoginActivity();
-                        activity.kakaoLogin();
-//                        mLoginService.kakaoLogin(new LoginBody(accessToken));
+                        loginActivity.kakaoLogin(mAccessToken);
                     }
                 });
-    }
-
-    public String getAccessToken() {
-        return mAccessToken;
     }
 }

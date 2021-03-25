@@ -19,7 +19,7 @@ import com.sixthank.gogo.src.signup.SignUpActivity;
 
 public class LoginActivity extends BaseActivity<ActivityLoginBinding> implements LoginActivityView {
 
-    private final SessionCallback mSessionCallback = new SessionCallback();
+    private final SessionCallback mSessionCallback = new SessionCallback(this);
     private LoginService mLoginService;
 
     @Override
@@ -34,11 +34,12 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding> implements
     private void initVariable() {
         Session session = Session.getCurrentSession();
         session.addCallback(mSessionCallback);
+
         mLoginService = new LoginService(this);
     }
 
-    public void kakaoLogin() {
-        mLoginService.kakaoLogin(new LoginBody(mSessionCallback.getAccessToken()));
+    public void kakaoLogin(String token) {
+        mLoginService.kakaoLogin(new LoginBody(token));
     }
 
     @Override
