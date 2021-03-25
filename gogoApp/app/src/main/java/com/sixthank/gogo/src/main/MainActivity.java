@@ -2,6 +2,7 @@ package com.sixthank.gogo.src.main;
 
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.view.WindowManager;
 
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -17,6 +19,7 @@ import com.sixthank.gogo.R;
 
 import com.sixthank.gogo.databinding.ActivityMainBinding;
 import com.sixthank.gogo.src.common.BaseActivity;
+import com.sixthank.gogo.src.common.FirebaseStorageUtil;
 import com.sixthank.gogo.src.main.explore.ExploreFragment;
 import com.sixthank.gogo.src.main.home.HomeFragment;
 import com.sixthank.gogo.src.main.mypage.MyPageFragment;
@@ -76,5 +79,17 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements B
                 return true;
         }
         return false;
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        // 개인 프로필 변경
+        if(requestCode == RESULT_OK) {
+            if(data != null)
+                FirebaseStorageUtil.uploadImage(data.getData());
+        }
     }
 }

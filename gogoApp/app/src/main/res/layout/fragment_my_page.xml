@@ -17,9 +17,9 @@
             android:layout_width="match_parent"
             android:layout_height="140dp"
             android:layout_marginHorizontal="20dp"
-            app:cardElevation="1dp"
             android:layout_marginVertical="15dp"
-            app:cardCornerRadius="8dp">
+            app:cardCornerRadius="8dp"
+            app:cardElevation="1dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -36,9 +36,10 @@
 
                 <ImageView
                     android:id="@+id/my_iv_setting"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="20dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="10dp"
+                    android:padding="12dp"
                     android:src="@drawable/ic_setting"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -118,12 +119,120 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/card_info_edit"
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginVertical="15dp"
+            android:visibility="gone"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="1dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/my_iv_profile_edit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="30dp"
+                    android:src="@drawable/ic_profile_70"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/my_tv_edit_completed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="20dp"
+                    android:text="완료"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/my_tv_nickname_edit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="30dp"
+                    android:text="우유부단"
+                    android:textColor="@color/black"
+                    android:textSize="27sp"
+                    android:background="@drawable/bg_circle_5"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@+id/my_iv_profile_edit"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/my_tv_email_edit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="30dp"
+                    android:layout_marginTop="5dp"
+                    android:text="lyla234@gmail.com"
+                    android:textColor="#17172A"
+                    app:layout_constraintStart_toEndOf="@id/my_iv_profile_edit"
+                    app:layout_constraintTop_toBottomOf="@+id/my_tv_nickname_edit" />
+
+                <TextView
+                    android:id="@+id/tv_following_edit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="30dp"
+                    android:text="팔로잉"
+                    android:textSize="11sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/my_iv_profile_edit"
+                    app:layout_constraintTop_toBottomOf="@+id/my_tv_email_edit" />
+
+                <TextView
+                    android:id="@+id/my_tv_following_cnt_edit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="237명"
+                    android:textColor="#F94FC4"
+                    android:textSize="11sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/tv_following_edit"
+                    app:layout_constraintTop_toBottomOf="@+id/my_tv_email_edit" />
+
+                <TextView
+                    android:id="@+id/tv_follower_edit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="30dp"
+                    android:text="팔로워"
+                    android:textSize="11sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/my_tv_following_cnt_edit"
+                    app:layout_constraintTop_toBottomOf="@+id/my_tv_email_edit" />
+
+                <TextView
+                    android:id="@+id/my_tv_follower_cnt_edit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="237명"
+                    android:textColor="#4854FB"
+                    android:textSize="11sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/tv_follower_edit"
+                    app:layout_constraintTop_toBottomOf="@+id/my_tv_email_edit" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
             android:id="@+id/card_badge"
-            app:cardElevation="1dp"
             android:layout_width="match_parent"
             android:layout_height="220dp"
             android:layout_marginHorizontal="20dp"
-            app:cardCornerRadius="8dp">
+            app:cardCornerRadius="8dp"
+            app:cardElevation="1dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -146,10 +255,10 @@
             android:id="@+id/card_post_cnt"
             android:layout_width="match_parent"
             android:layout_height="65dp"
-            app:cardElevation="1dp"
             android:layout_marginHorizontal="20dp"
             android:layout_marginTop="15dp"
-            app:cardCornerRadius="8dp">
+            app:cardCornerRadius="8dp"
+            app:cardElevation="1dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -181,11 +290,11 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/card_participate_cnt"
             android:layout_width="match_parent"
-            app:cardElevation="1dp"
             android:layout_height="65dp"
             android:layout_marginHorizontal="20dp"
             android:layout_marginTop="15dp"
-            app:cardCornerRadius="8dp">
+            app:cardCornerRadius="8dp"
+            app:cardElevation="1dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -218,10 +327,10 @@
             android:id="@+id/card_info_setting"
             android:layout_width="match_parent"
             android:layout_height="65dp"
-            app:cardElevation="1dp"
             android:layout_marginHorizontal="20dp"
             android:layout_marginTop="15dp"
-            app:cardCornerRadius="8dp">
+            app:cardCornerRadius="8dp"
+            app:cardElevation="1dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -254,10 +363,10 @@
             android:id="@+id/card_call_center"
             android:layout_width="match_parent"
             android:layout_height="65dp"
-            app:cardElevation="1dp"
             android:layout_marginHorizontal="20dp"
             android:layout_marginVertical="15dp"
-            app:cardCornerRadius="8dp">
+            app:cardCornerRadius="8dp"
+            app:cardElevation="1dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
