@@ -9,11 +9,11 @@ import com.sixthank.gogo.databinding.ActivityBoardDetailBinding;
 import com.sixthank.gogo.src.common.BaseActivity;
 import com.sixthank.gogo.src.detail.fragment.BoardDetailChoiceFragment;
 import com.sixthank.gogo.src.detail.fragment.BoardDetailOXFragment;
-import com.sixthank.gogo.src.detail.interfaces.BoardDetailFragmentView;
+import com.sixthank.gogo.src.detail.interfaces.BoardDetailActivityView;
 import com.sixthank.gogo.src.detail.models.BoardDetailResponse;
 import com.sixthank.gogo.src.detail.service.BoardDetailService;
 
-public class BoardDetailActivity extends BaseActivity<ActivityBoardDetailBinding> implements BoardDetailFragmentView {
+public class BoardDetailActivity extends BaseActivity<ActivityBoardDetailBinding> implements BoardDetailActivityView {
 
     private int mBoardId;
     private BoardDetailService mBoardDetailService;

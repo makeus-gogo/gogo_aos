@@ -16,11 +16,18 @@ import com.sixthank.gogo.R;
 
 import com.sixthank.gogo.databinding.FragmentBoardOXBinding;
 import com.sixthank.gogo.src.common.BaseFragment;
+import com.sixthank.gogo.src.detail.interfaces.BoardDetailFragmentView;
+import com.sixthank.gogo.src.detail.models.BoardAnswerBody;
 import com.sixthank.gogo.src.detail.models.BoardDetailResponse;
+import com.sixthank.gogo.src.detail.service.BoardDetailService;
 
-public class BoardDetailOXFragment extends BaseFragment<FragmentBoardOXBinding> {
+import java.util.List;
+
+public class BoardDetailOXFragment extends BaseFragment<FragmentBoardOXBinding> implements BoardDetailFragmentView {
 
     private BoardDetailResponse.Data boardItem;
+    private List<BoardDetailResponse.AnswerResultDtoList> answerList;
+    private BoardDetailService mBoardDetailService;
     private int mContentId;
 
     public static BoardDetailOXFragment newInstance(BoardDetailResponse.Data data) {
@@ -38,6 +45,7 @@ public class BoardDetailOXFragment extends BaseFragment<FragmentBoardOXBinding> 
 
         if (getArguments() != null) {
             boardItem = (BoardDetailResponse.Data) getArguments().getSerializable("boardItem");
+            answerList = boardItem.getAnswerResultDtoList();
         }
     }
 
@@ -46,13 +54,19 @@ public class BoardDetailOXFragment extends BaseFragment<FragmentBoardOXBinding> 
                              Bundle savedInstanceState) {
         binding = FragmentBoardOXBinding.inflate(inflater);
 
+        initView();
         initVariable();
         initListener();
 
         return binding.getRoot();
     }
 
+    private void initView() {
+
+    }
+
     private void initVariable() {
+        mBoardDetailService = new BoardDetailService(this);
         binding.boardOxDescription.setText(boardItem.getDescription());
         if (getContext() != null && !boardItem.getPictureUrl().isEmpty())
             Glide.with(getContext()).load(Uri.parse(boardItem.getPictureUrl())).into(binding.boardOxImg);
@@ -62,19 +76,35 @@ public class BoardDetailOXFragment extends BaseFragment<FragmentBoardOXBinding> 
         binding.boardOxIvClose.setOnClickListener(v -> {
             getActivity().finish();
         });
+
         binding.boardOxRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @SuppressLint("NonConstantResourceId")
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId) {
                     case R.id.board_radio_o:
-                        mContentId = boardItem.getContents().get(0).getId();
+                        mContentId = answerList.get(0).getContentId();
+                        mBoardDetailService.postBoardAnswer(new BoardAnswerBody(mContentId), boardItem.getBoardId());
                         break;
                     case R.id.board_radio_x:
-                        mContentId = boardItem.getContents().get(1).getId();
+                        mContentId = answerList.get(1).getContentId();
+                        mBoardDetailService.postBoardAnswer(new BoardAnswerBody(mContentId), boardItem.getBoardId());
                         break;
                 }
             }
         });
+    }
+
+    @Override
+    public void postBoardAnswerSuccess() {
+        showCustomToast("success");
+    }
+
+    @Override
+    public void postBoardAnswerFailure(String message) {
+        showCustomToast(message);
+        binding.boardOxRadioGroup.clearCheck();
+//        binding.boardRadioO.setFocusable(false);
+//        binding.boardRadioX.setFocusable(false);
     }
 }

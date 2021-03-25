@@ -14,7 +14,6 @@ import com.sixthank.gogo.databinding.FragmentBoardChoiceBinding;
 import com.sixthank.gogo.src.common.BaseFragment;
 import com.sixthank.gogo.src.common.OnItemClickListener;
 import com.sixthank.gogo.src.detail.models.BoardDetailResponse;
-import com.sixthank.gogo.src.main.home.models.HomeResponse;
 import com.sixthank.gogo.src.post.fragment.adapter.AnswerListAdapter;
 
 import java.util.ArrayList;
@@ -55,10 +54,10 @@ public class BoardDetailChoiceFragment extends BaseFragment<FragmentBoardChoiceB
     }
 
     private void initVariable() {
-        ArrayList<BoardDetailResponse.Content> contents
-                = (ArrayList<BoardDetailResponse.Content>) boardItem.getContents();
+//        ArrayList<BoardDetailResponse.Content> contents
+//                = (ArrayList<BoardDetailResponse.Content>) boardItem.getContents();
 
-        mAnswerListAdapter = new AnswerListAdapter(contents);
+//        mAnswerListAdapter = new AnswerListAdapter(contents);
     }
 
     private void initListener() {

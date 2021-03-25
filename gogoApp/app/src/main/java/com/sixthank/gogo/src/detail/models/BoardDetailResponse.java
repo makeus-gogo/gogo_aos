@@ -39,60 +39,39 @@ public class BoardDetailResponse implements Serializable {
         mMessage = message;
     }
 
-    public static class Content implements Serializable{
-
-        @SerializedName("content")
-        private String mContent;
-        @SerializedName("id")
-        private int mId;
-
-        public String getContent() {
-            return mContent;
-        }
-
-        public void setContent(String content) {
-            mContent = content;
-        }
-
-        public int getId() {
-            return mId;
-        }
-
-        public void setId(int id) {
-            mId = id;
-        }
-
-    }
-
     public static class Data implements Serializable{
 
-        @SerializedName("contents")
-        private List<Content> mContents;
+        @SerializedName("answerResultDtoList")
+        private List<AnswerResultDtoList> mAnswerResultDtoList;
+        @SerializedName("boardId")
+        private int mBoardId;
         @SerializedName("description")
         private String mDescription;
         @SerializedName("endDateTime")
         private String mEndDateTime;
         @SerializedName("hashTags")
         private List<String> mHashTags;
-        @SerializedName("id")
-        private int mId;
-        @SerializedName("memberId")
-        private Long mMemberId;
-        @SerializedName("startDateTime")
-        private String mStartDateTime;
-        @SerializedName("title")
-        private String mTitle;
-        @SerializedName("type")
-        private String mType;
         @SerializedName("pictureUrl")
         private String mPictureUrl;
+        @SerializedName("startDateTime")
+        private String mStartDateTime;
+        @SerializedName("type")
+        private String mType;
 
-        public List<Content> getContents() {
-            return mContents;
+        public List<AnswerResultDtoList> getAnswerResultDtoList() {
+            return mAnswerResultDtoList;
         }
 
-        public void setContents(List<Content> contents) {
-            mContents = contents;
+        public void setAnswerResultDtoList(List<AnswerResultDtoList> answerResultDtoList) {
+            mAnswerResultDtoList = answerResultDtoList;
+        }
+
+        public int getBoardId() {
+            return mBoardId;
+        }
+
+        public void setBoardId(int boardId) {
+            mBoardId = boardId;
         }
 
         public String getDescription() {
@@ -119,20 +98,12 @@ public class BoardDetailResponse implements Serializable {
             mHashTags = hashTags;
         }
 
-        public int getId() {
-            return mId;
+        public String getPictureUrl() {
+            return mPictureUrl;
         }
 
-        public void setId(int id) {
-            mId = id;
-        }
-
-        public Long getMemberId() {
-            return mMemberId;
-        }
-
-        public void setMemberId(Long memberId) {
-            mMemberId = memberId;
+        public void setPictureUrl(String pictureUrl) {
+            mPictureUrl = pictureUrl;
         }
 
         public String getStartDateTime() {
@@ -143,14 +114,6 @@ public class BoardDetailResponse implements Serializable {
             mStartDateTime = startDateTime;
         }
 
-        public String getTitle() {
-            return mTitle;
-        }
-
-        public void setTitle(String title) {
-            mTitle = title;
-        }
-
         public String getType() {
             return mType;
         }
@@ -159,12 +122,49 @@ public class BoardDetailResponse implements Serializable {
             mType = type;
         }
 
-        public String getPictureUrl() {
-            return mPictureUrl;
+    }
+
+    public static class AnswerResultDtoList implements Serializable{
+
+        @SerializedName("check")
+        private int mCheck;
+        @SerializedName("content")
+        private String mContent;
+        @SerializedName("contentId")
+        private int mContentId;
+        @SerializedName("percentage")
+        private int mPercentage;
+
+        public int getCheck() {
+            return mCheck;
         }
 
-        public void setPictureUrl(String pictureUrl) {
-            mPictureUrl = pictureUrl;
+        public void setCheck(int check) {
+            mCheck = check;
+        }
+
+        public String getContent() {
+            return mContent;
+        }
+
+        public void setContent(String content) {
+            mContent = content;
+        }
+
+        public int getContentId() {
+            return mContentId;
+        }
+
+        public void setContentId(int contentId) {
+            mContentId = contentId;
+        }
+
+        public int getPercentage() {
+            return mPercentage;
+        }
+
+        public void setPercentage(int percentage) {
+            mPercentage = percentage;
         }
 
     }

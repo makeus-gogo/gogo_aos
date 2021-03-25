@@ -1,13 +1,9 @@
 package com.sixthank.gogo.src.post.fragment.adapter;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,10 +16,10 @@ import java.util.ArrayList;
 
 public class AnswerListAdapter extends RecyclerView.Adapter<AnswerListAdapter.AnswerHolder> {
 
-    private ArrayList<BoardDetailResponse.Content> list;
+    private ArrayList<BoardDetailResponse.AnswerResultDtoList> list;
     private OnItemClickListener listener;
 
-    public AnswerListAdapter(ArrayList<BoardDetailResponse.Content> list) {
+    public AnswerListAdapter(ArrayList<BoardDetailResponse.AnswerResultDtoList> list) {
         this.list = list;
     }
 
