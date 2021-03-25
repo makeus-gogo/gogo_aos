@@ -42,7 +42,7 @@
         </activity>
         <activity
             android:name=".src.login.LoginActivity"
-            android:theme="@style/customTheme">
+            android:theme="@style/fullTheme">
 
 <!--             <intent-filter>-->
 <!--             <action android:name="android.intent.action.MAIN" />-->
