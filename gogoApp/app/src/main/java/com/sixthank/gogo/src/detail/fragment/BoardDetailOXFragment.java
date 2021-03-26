@@ -25,10 +25,13 @@ import java.util.List;
 
 public class BoardDetailOXFragment extends BaseFragment<FragmentBoardOXBinding> implements BoardDetailFragmentView {
 
+    private BoardDetailService mBoardDetailService;
+
     private BoardDetailResponse.Data boardItem;
     private List<BoardDetailResponse.AnswerResultDtoList> answerList;
-    private BoardDetailService mBoardDetailService;
+
     private int mContentId;
+    private int selectType;
 
     public static BoardDetailOXFragment newInstance(BoardDetailResponse.Data data) {
 
@@ -36,6 +39,7 @@ public class BoardDetailOXFragment extends BaseFragment<FragmentBoardOXBinding> 
         args.putSerializable("boardItem", data);
         BoardDetailOXFragment fragment = new BoardDetailOXFragment();
         fragment.setArguments(args);
+
         return fragment;
     }
 
@@ -62,6 +66,29 @@ public class BoardDetailOXFragment extends BaseFragment<FragmentBoardOXBinding> 
     }
 
     private void initView() {
+        // 내 게시물일 때 -> 답변 확률 바로 보여줌
+        if (boardItem.getUserCheck() == 1) {
+
+            setAfterClick();
+
+            binding.boardOxTvOPercent.setBackgroundResource(R.drawable.ic_percent_blue);
+            binding.boardOxTvXPercent.setBackgroundResource(R.drawable.ic_percent_blue);
+
+            return;
+        }
+
+        // 내 게시물이 아닐 때
+        int checkAnswerIdx;
+        if (answerList.get(0).getCheck() == 1) checkAnswerIdx = 0;
+        else if (answerList.get(1).getCheck() == 1) checkAnswerIdx = 1;
+        else checkAnswerIdx = -1;
+
+        if (checkAnswerIdx == -1) {
+            showCustomToast("이미 투표하셨습니다.");
+            return;
+        }
+
+        setOXView(checkAnswerIdx);
 
     }
 
@@ -85,26 +112,50 @@ public class BoardDetailOXFragment extends BaseFragment<FragmentBoardOXBinding> 
                     case R.id.board_radio_o:
                         mContentId = answerList.get(0).getContentId();
                         mBoardDetailService.postBoardAnswer(new BoardAnswerBody(mContentId), boardItem.getBoardId());
+                        selectType = 0;
                         break;
                     case R.id.board_radio_x:
                         mContentId = answerList.get(1).getContentId();
                         mBoardDetailService.postBoardAnswer(new BoardAnswerBody(mContentId), boardItem.getBoardId());
+                        selectType = 1;
                         break;
                 }
             }
         });
     }
 
+    private void setAfterClick() {
+        binding.boardOxTvOPercent.setVisibility(View.VISIBLE);
+        binding.boardOxTvXPercent.setVisibility(View.VISIBLE);
+        binding.boardRadioO.setClickable(false);
+        binding.boardRadioX.setClickable(false);
+
+        binding.boardOxTvOPercent.setText(answerList.get(0).getPercentage() + "%");
+        binding.boardOxTvXPercent.setText(answerList.get(1).getPercentage() + "%");
+    }
+
+    private void setOXView(int type) {
+        setAfterClick();
+
+        if (type == 0) {
+            binding.boardOxTvOPercent.setBackgroundResource(R.drawable.ic_percent_blue);
+            binding.boardRadioO.setChecked(true);
+        } else {
+            binding.boardOxTvXPercent.setBackgroundResource(R.drawable.ic_percent_blue);
+            binding.boardRadioX.setChecked(true);
+        }
+
+    }
+
     @Override
     public void postBoardAnswerSuccess() {
         showCustomToast("success");
+        setOXView(selectType);
     }
 
     @Override
     public void postBoardAnswerFailure(String message) {
-        showCustomToast(message);
+        showCustomToast("자신의 게시물에 답변할 수 없습니다.");
         binding.boardOxRadioGroup.clearCheck();
-//        binding.boardRadioO.setFocusable(false);
-//        binding.boardRadioX.setFocusable(false);
     }
 }

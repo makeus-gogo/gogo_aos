@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_gradient_blue">
+    android:background="#1B1A1A">
 
     <ImageView
         android:id="@+id/board_ox_img"
@@ -41,29 +41,35 @@
         app:layout_constraintTop_toBottomOf="@+id/board_ox_guide_h_content" />
 
     <TextView
-        android:visibility="gone"
+        android:id="@+id/board_ox_tv_x_percent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_circle_25"
+        android:background="@drawable/ic_percent_white"
         android:paddingHorizontal="8dp"
         android:paddingVertical="5dp"
         android:text="99.9%"
+        android:gravity="center"
         android:textSize="13sp"
+        android:visibility="gone"
+        android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="@id/board_ox_guide_v_center"
         app:layout_constraintBottom_toBottomOf="@id/board_ox_guide_h_center"
-        android:layout_marginStart="45dp" />
+        android:layout_marginStart="40dp" />
 
     <TextView
-        android:visibility="gone"
+        android:id="@+id/board_ox_tv_o_percent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_circle_25"
+        android:gravity="center"
+        android:visibility="gone"
+        android:background="@drawable/ic_percent_white"
         android:paddingHorizontal="8dp"
         android:paddingVertical="5dp"
         android:text="99.9%"
-        app:layout_constraintBottom_toBottomOf="@id/board_ox_guide_h_center"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="@id/board_ox_guide_v_center"
-        android:layout_marginEnd="45dp" />
+        app:layout_constraintBottom_toBottomOf="@id/board_ox_guide_h_center"
+        android:layout_marginEnd="40dp" />
 
     <RadioGroup
         android:id="@+id/board_ox_radio_group"

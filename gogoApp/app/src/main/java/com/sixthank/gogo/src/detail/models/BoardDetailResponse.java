@@ -57,6 +57,8 @@ public class BoardDetailResponse implements Serializable {
         private String mStartDateTime;
         @SerializedName("type")
         private String mType;
+        @SerializedName("userCheck")
+        private int mUserCheck;
 
         public List<AnswerResultDtoList> getAnswerResultDtoList() {
             return mAnswerResultDtoList;
@@ -120,6 +122,14 @@ public class BoardDetailResponse implements Serializable {
 
         public void setType(String type) {
             mType = type;
+        }
+
+        public int getUserCheck() {
+            return mUserCheck;
+        }
+
+        public void setUserCheck(int userCheck) {
+            mUserCheck = userCheck;
         }
 
     }
