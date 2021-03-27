@@ -1,6 +1,7 @@
 package com.sixthank.gogo.src.detail.fragment;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -15,6 +16,7 @@ import com.bumptech.glide.Glide;
 import com.sixthank.gogo.R;
 
 import com.sixthank.gogo.databinding.FragmentBoardOXBinding;
+import com.sixthank.gogo.src.comment.BoardCommentActivity;
 import com.sixthank.gogo.src.common.BaseFragment;
 import com.sixthank.gogo.src.common.models.AnswerResultDtoList;
 import com.sixthank.gogo.src.detail.interfaces.BoardDetailFragmentView;
@@ -135,6 +137,15 @@ public class BoardDetailOXFragment extends BaseFragment<FragmentBoardOXBinding> 
                         break;
                 }
             }
+        });
+
+        binding.boardOxComment.setOnClickListener(v->{
+            Intent intent = new Intent(getActivity(), BoardCommentActivity.class);
+            intent.putExtra("pictureUrl", boardItem.getPictureUrl());
+            intent.putExtra("boardId", boardItem.getBoardId());
+            intent.putExtra("profileUrl", mProfileUrl);
+            intent.putExtra("nickname", mNickname);
+            startActivity(intent);
         });
     }
 
