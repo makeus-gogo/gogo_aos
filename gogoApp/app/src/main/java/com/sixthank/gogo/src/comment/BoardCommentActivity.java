@@ -10,8 +10,11 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.sixthank.gogo.databinding.ActivityBoardCommentBinding;
 import com.sixthank.gogo.src.comment.interfaces.CommentActivityView;
 import com.sixthank.gogo.src.comment.models.CommentBody;
+import com.sixthank.gogo.src.comment.models.Data;
 import com.sixthank.gogo.src.comment.service.CommentService;
 import com.sixthank.gogo.src.common.BaseActivity;
+
+import java.util.List;
 
 import jp.wasabeef.glide.transformations.BlurTransformation;
 
@@ -22,6 +25,7 @@ public class BoardCommentActivity extends BaseActivity<ActivityBoardCommentBindi
     private String mNickname, mProfileUrl, mPictureUrl;
 
     private CommentService mCommentService;
+    private CommentListAdapter mCommentListAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +36,7 @@ public class BoardCommentActivity extends BaseActivity<ActivityBoardCommentBindi
         initVariable();
         initView();
         initListener();
+        initData();
     }
 
     private void initVariable() {
@@ -43,6 +48,8 @@ public class BoardCommentActivity extends BaseActivity<ActivityBoardCommentBindi
         }
 
         mCommentService = new CommentService(this);
+        mCommentListAdapter = new CommentListAdapter();
+
     }
 
     private void initView(){
@@ -66,9 +73,27 @@ public class BoardCommentActivity extends BaseActivity<ActivityBoardCommentBindi
         });
     }
 
+    private void initData() {
+        mCommentService.getComments(mBoardId);
+    }
+
     @Override
-    public void postCommentSuccess() {
-        showCustomToast("ok");
+    public void getCommentsSuccess(List<Data> list) {
+        mCommentListAdapter.setComments(list);
+        binding.commentRvList.setAdapter(mCommentListAdapter);
+    }
+
+    @Override
+    public void getCommentsFailure(String message) {
+        showCustomToast(message);
+    }
+
+    @Override
+    public void postCommentSuccess(Data data) {
+        data.setMemberProfileUrl(mProfileUrl);
+        mCommentListAdapter.addItem(data);
+        binding.commentEtContent.setText("");
+        showCustomToast("댓글이 등록되었습니다.");
     }
 
     @Override

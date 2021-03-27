@@ -5,6 +5,7 @@ import com.sixthank.gogo.src.comment.interfaces.CommentRetrofitInterface;
 import com.sixthank.gogo.src.comment.models.CommentBody;
 import com.sixthank.gogo.src.comment.models.CommentPostResponse;
 
+import com.sixthank.gogo.src.comment.models.CommentResponse;
 import com.sixthank.gogo.src.common.ErrorBodyConverter;
 import com.sixthank.gogo.src.common.models.ErrorResponse;
 
@@ -22,6 +23,26 @@ public class CommentService {
         this.commentActivityView = commentActivityView;
     }
 
+    public void getComments(int boardId) {
+        commentRetrofitInterface.getComments(boardId).enqueue(new Callback<CommentResponse>() {
+            @Override
+            public void onResponse(Call<CommentResponse> call, Response<CommentResponse> response) {
+                CommentResponse commentResponse = response.body();
+                if(commentResponse == null) {
+                    ErrorResponse errorResponse = ErrorBodyConverter.getErrorResponse(response.errorBody());
+                    commentActivityView.getCommentsFailure(errorResponse.getMessage());
+                    return;
+                }
+                commentActivityView.getCommentsSuccess(commentResponse.getData());
+            }
+
+            @Override
+            public void onFailure(Call<CommentResponse> call, Throwable t) {
+                commentActivityView.getCommentsFailure(null);
+            }
+        });
+    }
+
     public void addComment(CommentBody body, int boardId) {
         commentRetrofitInterface.postComment(body, boardId).enqueue(new Callback<CommentPostResponse>() {
             @Override
@@ -32,7 +53,7 @@ public class CommentService {
                     commentActivityView.postCommentFailure(errorResponse.getMessage());
                     return;
                 }
-                commentActivityView.postCommentSuccess();
+                commentActivityView.postCommentSuccess(commentResponse.getData());
             }
 
             @Override
