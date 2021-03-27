@@ -65,8 +65,12 @@ public class WorryListAdapter extends RecyclerView.Adapter<WorryListAdapter.Worr
 
             itemView.setOnClickListener(v->{
                 int boardId = list.get(getAdapterPosition()).getBoard().getId();
+                String nickname = list.get(getAdapterPosition()).getCreator().getName();
+                String profileUrl = list.get(getAdapterPosition()).getCreator().getProfileUrl();
                 Intent intent = new Intent(context, BoardDetailActivity.class);
                 intent.putExtra("boardId", boardId);
+                intent.putExtra("nickname", nickname);
+                intent.putExtra("profileUrl", profileUrl);
                 context.startActivity(intent);
             });
         }

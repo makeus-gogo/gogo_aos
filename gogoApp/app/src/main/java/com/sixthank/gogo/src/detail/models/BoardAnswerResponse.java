@@ -2,6 +2,10 @@
 package com.sixthank.gogo.src.detail.models;
 
 import com.google.gson.annotations.SerializedName;
+import com.sixthank.gogo.src.common.models.AnswerResultDtoList;
+
+import java.util.List;
+
 
 public class BoardAnswerResponse {
 
@@ -38,12 +42,28 @@ public class BoardAnswerResponse {
 
     public static class Data {
 
+        @SerializedName("answerId")
+        private int mAnswerId;
+        @SerializedName("answerResultDtoList")
+        private List<AnswerResultDtoList> mAnswerResultDtoList;
         @SerializedName("boardId")
         private int mBoardId;
-        @SerializedName("contentId")
-        private int mContentId;
-        @SerializedName("id")
-        private int mId;
+
+        public int getAnswerId() {
+            return mAnswerId;
+        }
+
+        public void setAnswerId(int answerId) {
+            mAnswerId = answerId;
+        }
+
+        public List<AnswerResultDtoList> getAnswerResultDtoList() {
+            return mAnswerResultDtoList;
+        }
+
+        public void setAnswerResultDtoList(List<AnswerResultDtoList> answerResultDtoList) {
+            mAnswerResultDtoList = answerResultDtoList;
+        }
 
         public int getBoardId() {
             return mBoardId;
@@ -51,22 +71,6 @@ public class BoardAnswerResponse {
 
         public void setBoardId(int boardId) {
             mBoardId = boardId;
-        }
-
-        public int getContentId() {
-            return mContentId;
-        }
-
-        public void setContentId(int contentId) {
-            mContentId = contentId;
-        }
-
-        public int getId() {
-            return mId;
-        }
-
-        public void setId(int id) {
-            mId = id;
         }
 
     }

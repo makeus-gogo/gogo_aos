@@ -1,32 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="35dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="210dp"
         android:layout_marginTop="5dp"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            android:layout_gravity="center_vertical"
-            android:src="@drawable/ic_select_order" />
+    <ImageView
+        android:id="@+id/item_answer_iv_order"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_select_order"
+        app:layout_constraintBottom_toBottomOf="@+id/item_answer_bg"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/item_answer_tv_content"
-            android:layout_width="175dp"
-            android:layout_height="match_parent"
-            android:background="@drawable/bg_circle_5_click"
-            android:textSize="13sp"
-            android:paddingTop="7dp"
-            android:paddingEnd="10dp"
-            android:paddingStart="10dp" />
+    <View
+        android:id="@+id/item_answer_bg"
+        android:layout_marginStart="10dp"
+        android:layout_width="0dp"
+        android:layout_height="35dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/bg_circle_5_click"
+        app:layout_constraintStart_toEndOf="@+id/item_answer_iv_order"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    </LinearLayout>
+    <TextView
+        android:id="@+id/item_answer_tv_content"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="dddd"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="10dp"
+        android:textColor="#17172A"
+        app:layout_constraintStart_toStartOf="@+id/item_answer_bg"
+        app:layout_constraintEnd_toStartOf="@+id/item_answer_tv_percent"
+        app:layout_constraintTop_toTopOf="@+id/item_answer_bg"
+        app:layout_constraintBottom_toBottomOf="@+id/item_answer_bg" />
 
+    <TextView
+        android:id="@+id/item_answer_tv_percent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@+id/item_answer_bg"
+        android:textSize="13sp"
+        android:textColor="#4A5BF7"
+        android:visibility="gone"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintTop_toTopOf="@+id/item_answer_bg"
+        app:layout_constraintBottom_toBottomOf="@+id/item_answer_bg" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>

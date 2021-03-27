@@ -16,8 +16,10 @@ import com.sixthank.gogo.R;
 
 import com.sixthank.gogo.databinding.FragmentBoardOXBinding;
 import com.sixthank.gogo.src.common.BaseFragment;
+import com.sixthank.gogo.src.common.models.AnswerResultDtoList;
 import com.sixthank.gogo.src.detail.interfaces.BoardDetailFragmentView;
 import com.sixthank.gogo.src.detail.models.BoardAnswerBody;
+import com.sixthank.gogo.src.detail.models.BoardAnswerResponse;
 import com.sixthank.gogo.src.detail.models.BoardDetailResponse;
 import com.sixthank.gogo.src.detail.service.BoardDetailService;
 
@@ -28,15 +30,17 @@ public class BoardDetailOXFragment extends BaseFragment<FragmentBoardOXBinding> 
     private BoardDetailService mBoardDetailService;
 
     private BoardDetailResponse.Data boardItem;
-    private List<BoardDetailResponse.AnswerResultDtoList> answerList;
+    private List<AnswerResultDtoList> answerList;
 
-    private int mContentId;
-    private int selectType;
+    private int mContentId, mSelectType;
+    private String mNickname, mProfileUrl;
 
-    public static BoardDetailOXFragment newInstance(BoardDetailResponse.Data data) {
+    public static BoardDetailOXFragment newInstance(BoardDetailResponse.Data data, String nickname, String profileUrl) {
 
         Bundle args = new Bundle();
         args.putSerializable("boardItem", data);
+        args.putString("nickname", nickname);
+        args.putString("profileUrl", profileUrl);
         BoardDetailOXFragment fragment = new BoardDetailOXFragment();
         fragment.setArguments(args);
 
@@ -50,6 +54,8 @@ public class BoardDetailOXFragment extends BaseFragment<FragmentBoardOXBinding> 
         if (getArguments() != null) {
             boardItem = (BoardDetailResponse.Data) getArguments().getSerializable("boardItem");
             answerList = boardItem.getAnswerResultDtoList();
+            mNickname = String.valueOf(getArguments().get("nickname"));
+            mProfileUrl = String.valueOf(getArguments().get("profileUrl"));
         }
     }
 
@@ -66,6 +72,15 @@ public class BoardDetailOXFragment extends BaseFragment<FragmentBoardOXBinding> 
     }
 
     private void initView() {
+        // 프로필 및 닉네임
+        if(boardItem.getPictureUrl() != null && !mProfileUrl.isEmpty())
+            Glide.with(getContext())
+                    .load(Uri.parse(mProfileUrl))
+                    .circleCrop()
+                    .into(binding.boardOxProfile);
+
+        binding.boardOxTvNickname.setText(mNickname);
+
         // 내 게시물일 때 -> 답변 확률 바로 보여줌
         if (boardItem.getUserCheck() == 1) {
 
@@ -89,7 +104,6 @@ public class BoardDetailOXFragment extends BaseFragment<FragmentBoardOXBinding> 
         }
 
         setOXView(checkAnswerIdx);
-
     }
 
     private void initVariable() {
@@ -112,12 +126,12 @@ public class BoardDetailOXFragment extends BaseFragment<FragmentBoardOXBinding> 
                     case R.id.board_radio_o:
                         mContentId = answerList.get(0).getContentId();
                         mBoardDetailService.postBoardAnswer(new BoardAnswerBody(mContentId), boardItem.getBoardId());
-                        selectType = 0;
+                        mSelectType = 0;
                         break;
                     case R.id.board_radio_x:
                         mContentId = answerList.get(1).getContentId();
                         mBoardDetailService.postBoardAnswer(new BoardAnswerBody(mContentId), boardItem.getBoardId());
-                        selectType = 1;
+                        mSelectType = 1;
                         break;
                 }
             }
@@ -148,9 +162,9 @@ public class BoardDetailOXFragment extends BaseFragment<FragmentBoardOXBinding> 
     }
 
     @Override
-    public void postBoardAnswerSuccess() {
+    public void postBoardAnswerSuccess(BoardAnswerResponse.Data data) {
         showCustomToast("success");
-        setOXView(selectType);
+        setOXView(mSelectType);
     }
 
     @Override

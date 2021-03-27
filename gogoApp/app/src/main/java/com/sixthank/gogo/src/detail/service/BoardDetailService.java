@@ -1,17 +1,18 @@
 package com.sixthank.gogo.src.detail.service;
 
+import com.sixthank.gogo.src.common.ErrorBodyConverter;
 import com.sixthank.gogo.src.detail.interfaces.BoardDetailActivityView;
 import com.sixthank.gogo.src.detail.interfaces.BoardDetailFragmentView;
 import com.sixthank.gogo.src.detail.interfaces.BoardDetailRetrofitInterface;
 import com.sixthank.gogo.src.detail.models.BoardAnswerBody;
 import com.sixthank.gogo.src.detail.models.BoardAnswerResponse;
 import com.sixthank.gogo.src.detail.models.BoardDetailResponse;
+import com.sixthank.gogo.src.common.models.ErrorResponse;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.sixthank.gogo.config.AppConstants.NOT_FOUND_EXCEPTION;
 import static com.sixthank.gogo.config.ApplicationClass.getRetrofit;
 
 public class BoardDetailService {
@@ -53,11 +54,15 @@ public class BoardDetailService {
             @Override
             public void onResponse(Call<BoardAnswerResponse> call, Response<BoardAnswerResponse> response) {
                 BoardAnswerResponse boardAnswerResponse = response.body();
+
                 if(boardAnswerResponse == null) {
-                    boardDetailFragmentView.postBoardAnswerFailure(null);
+                    ErrorResponse error = ErrorBodyConverter.getErrorResponse(response.errorBody());
+                    boardDetailFragmentView.postBoardAnswerFailure(error.getMessage());
+
                     return;
                 }
-                boardDetailFragmentView.postBoardAnswerSuccess();
+
+                boardDetailFragmentView.postBoardAnswerSuccess(boardAnswerResponse.getData());
             }
 
             @Override

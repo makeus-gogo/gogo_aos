@@ -48,7 +48,7 @@ public class WorryRankAdapter extends RecyclerView.Adapter<WorryRankAdapter.Worr
         holder.nickName.setText(item.getNickname());
         if(!item.getBoardImageUrl().isEmpty())
             Glide.with(context).load(Uri.parse(item.getBoardImageUrl())).into(holder.worryImage);
-        else holder.worryImage.setImageResource(R.drawable.temp);
+
         if(item.getProfileImageUrl() != null) {
             Glide.with(context).load(Uri.parse(item.getProfileImageUrl())).circleCrop().into(holder.profile);
         }
@@ -72,8 +72,13 @@ public class WorryRankAdapter extends RecyclerView.Adapter<WorryRankAdapter.Worr
 
             itemView.setOnClickListener(v->{
                 int boardId = list.get(getAdapterPosition()).getBoardId();
+                String nickname = list.get(getAdapterPosition()).getNickname();
+                String profileUrl = list.get(getAdapterPosition()).getProfileImageUrl();
                 Intent intent = new Intent(context, BoardDetailActivity.class);
                 intent.putExtra("boardId", boardId);
+                intent.putExtra("nickname", nickname);
+                intent.putExtra("profileUrl", profileUrl);
+
                 context.startActivity(intent);
             });
         }

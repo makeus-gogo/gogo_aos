@@ -7,20 +7,56 @@
 
     <ImageView
         android:id="@+id/board_ox_img"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         android:scaleType="fitXY" />
 
     <ImageView
-        android:id="@+id/board_ox_iv_close"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginHorizontal="15dp"
-        android:layout_marginTop="25dp"
-        android:padding="11dp"
-        android:src="@drawable/ic_close"
+        android:id="@+id/board_ox_profile"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="25dp"
+        android:src="@drawable/ic_profile"
+        app:layout_constraintBottom_toBottomOf="@id/board_ox_iv_close"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/board_ox_iv_close" />
+
+    <TextView
+        android:id="@+id/board_ox_tv_nickname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="tt"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="@+id/board_ox_profile"
+        app:layout_constraintStart_toEndOf="@+id/board_ox_profile"
+        app:layout_constraintTop_toTopOf="@id/board_ox_profile" />
+
+    <ImageView
+        android:id="@+id/board_ox_iv_close"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="10dp"
+        android:padding="10dp"
+        android:src="@drawable/ic_close_24"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/board_ox_iv_alert"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:padding="7dp"
+        android:src="@drawable/ic_alert"
+        app:layout_constraintEnd_toStartOf="@+id/board_ox_iv_close"
+        app:layout_constraintTop_toTopOf="@+id/board_ox_iv_close" />
+
 
     <TextView
         android:id="@+id/board_ox_description"
@@ -44,59 +80,68 @@
         android:id="@+id/board_ox_tv_x_percent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
         android:background="@drawable/ic_percent_white"
+        android:gravity="center"
         android:paddingHorizontal="8dp"
         android:paddingVertical="5dp"
         android:text="99.9%"
-        android:gravity="center"
+        android:textColor="@color/white"
         android:textSize="13sp"
         android:visibility="gone"
-        android:textColor="@color/white"
-        app:layout_constraintStart_toStartOf="@id/board_ox_guide_v_center"
         app:layout_constraintBottom_toBottomOf="@id/board_ox_guide_h_center"
-        android:layout_marginStart="40dp" />
+        app:layout_constraintStart_toStartOf="@id/board_ox_guide_v_center" />
 
     <TextView
         android:id="@+id/board_ox_tv_o_percent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:visibility="gone"
+        android:layout_marginEnd="40dp"
         android:background="@drawable/ic_percent_white"
+        android:gravity="center"
         android:paddingHorizontal="8dp"
         android:paddingVertical="5dp"
         android:text="99.9%"
         android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="@id/board_ox_guide_v_center"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@id/board_ox_guide_h_center"
-        android:layout_marginEnd="40dp" />
+        app:layout_constraintEnd_toEndOf="@id/board_ox_guide_v_center" />
 
     <RadioGroup
         android:id="@+id/board_ox_radio_group"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/board_ox_guide_h_center"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_height="wrap_content">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/board_ox_guide_h_center">
 
         <RadioButton
             android:id="@+id/board_radio_o"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:buttonTint="@color/transparent"
             android:layout_marginEnd="10dp"
-            android:background="@drawable/selector_btn_o" />
+            android:background="@drawable/selector_btn_o"
+            android:buttonTint="@color/transparent" />
 
         <RadioButton
             android:id="@+id/board_radio_x"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:buttonTint="@color/transparent"
             android:layout_marginStart="10dp"
-            android:background="@drawable/selector_btn_x" />
+            android:background="@drawable/selector_btn_x"
+            android:buttonTint="@color/transparent" />
     </RadioGroup>
 
+    <ImageView
+        android:id="@+id/board_ox_comment"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_margin="10dp"
+        android:padding="15dp"
+        android:src="@drawable/ic_comment"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/board_ox_guide_h_center"
