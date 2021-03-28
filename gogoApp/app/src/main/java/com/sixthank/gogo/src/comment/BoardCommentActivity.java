@@ -48,7 +48,7 @@ public class BoardCommentActivity extends BaseActivity<ActivityBoardCommentBindi
         }
 
         mCommentService = new CommentService(this);
-        mCommentListAdapter = new CommentListAdapter();
+        mCommentListAdapter = new CommentListAdapter(getApplicationContext());
 
     }
 

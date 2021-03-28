@@ -43,7 +43,7 @@ public class MyPageResponse {
         @SerializedName("email")
         private String mEmail;
         @SerializedName("id")
-        private Long mId;
+        private int mId;
         @SerializedName("name")
         private String mName;
         @SerializedName("profileUrl")
@@ -59,11 +59,11 @@ public class MyPageResponse {
             mEmail = email;
         }
 
-        public Long getId() {
+        public int getId() {
             return mId;
         }
 
-        public void setId(Long id) {
+        public void setId(int id) {
             mId = id;
         }
 

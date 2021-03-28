@@ -5,42 +5,28 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import com.bumptech.glide.Glide;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 import com.sixthank.gogo.R;
-import com.sixthank.gogo.databinding.FragmentMyPageBinding;
+
 import com.sixthank.gogo.src.common.BaseFragment;
 import com.sixthank.gogo.src.common.FirebaseStorageUtil;
+import com.sixthank.gogo.src.main.MainActivity;
 import com.sixthank.gogo.src.main.mypage.interfaces.MyPageFragmentView;
 import com.sixthank.gogo.src.main.mypage.models.MyPageBody;
 import com.sixthank.gogo.src.main.mypage.models.MyPageResponse;
 import com.sixthank.gogo.src.main.mypage.service.MyPageService;
+import com.sixthank.gogo.databinding.FragmentMyPageBinding;
 
-public class MyPageFragment extends BaseFragment<FragmentMyPageBinding> implements MyPageFragmentView, View.OnClickListener {
+public class MyPageFragment extends BaseFragment<FragmentMyPageBinding> implements
+        MyPageFragmentView, View.OnClickListener, FirebaseStorageUtil.CallBackListener {
 
     private MyPageService mMyPageService;
     private MyPageResponse.Data mData;
-    private String currentPhotoPath;
-    private Uri imgUri;
-    private String imageFileName;
-    private StorageReference mStorageRef;
-    private FirebaseStorage mStorage;
-
-    private String sendUrl;
-
-    private final String mStorageUrl = "gs://gogoapp-29dcf.appspot.com";
+    private MainActivity mParentActivity;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -56,11 +42,15 @@ public class MyPageFragment extends BaseFragment<FragmentMyPageBinding> implemen
     }
 
     private void initVariable() {
+        mParentActivity = (MainActivity) getActivity();
         mMyPageService = new MyPageService(this);
     }
 
     private void initListener() {
         binding.myIvSetting.setOnClickListener(this);
+        binding.myTvEditCompleted.setOnClickListener(this);
+        binding.myIvProfileEdit.setOnClickListener(this);
+        FirebaseStorageUtil.setCallBackListener(this);
     }
 
     @SuppressLint("NonConstantResourceId")
@@ -82,16 +72,17 @@ public class MyPageFragment extends BaseFragment<FragmentMyPageBinding> implemen
     }
 
     private void editMyInfo() {
-        String nickname = String.valueOf(binding.myTvNicknameEdit.getText());
-        String pictureUrl = FirebaseStorageUtil.getUrl();
-        String orgPictureUrl = mData.getProfileUrl();
-        MyPageBody myPageBody;
-        if(orgPictureUrl != null)
-            myPageBody = new MyPageBody(nickname, orgPictureUrl);
-        else
-            myPageBody = new MyPageBody(nickname);
+        showProgressDialog();
+        if(mParentActivity.isImageChange()) {
+            FirebaseStorageUtil.uploadProfileImage(mParentActivity.getImageUrl(), mData.getId());
+        } else {
+            String nickname = String.valueOf(binding.myTvNicknameEdit.getText());
+            String orgPictureUrl = mData.getProfileUrl();
 
-        mMyPageService.editMember(myPageBody);
+            MyPageBody myPageBody = new MyPageBody(nickname, orgPictureUrl);
+
+            mMyPageService.editMember(myPageBody);
+        }
     }
 
     public void getAlbum() {
@@ -102,8 +93,18 @@ public class MyPageFragment extends BaseFragment<FragmentMyPageBinding> implemen
 
     @Override
     public void getMemberSuccess(MyPageResponse.Data data) {
+        binding.cardInfo.setVisibility(View.VISIBLE);
+        binding.cardInfoEdit.setVisibility(View.GONE);
         if(getContext() != null && data.getProfileUrl() != null && !data.getProfileUrl().isEmpty())
-            Glide.with(getContext()).load(Uri.parse(data.getProfileUrl())).into(binding.myIvProfile);
+            Glide.with(getContext())
+                    .load(Uri.parse(data.getProfileUrl()))
+                    .circleCrop()
+                    .into(binding.myIvProfile);
+        if(getContext() != null && data.getProfileUrl() != null && !data.getProfileUrl().isEmpty())
+            Glide.with(getContext())
+                    .load(Uri.parse(data.getProfileUrl()))
+                    .circleCrop()
+                    .into(binding.myIvProfileEdit);
         binding.myTvEmail.setText(data.getEmail());
         binding.myTvNickname.setText(data.getName());
         binding.myTvNicknameEdit.setText(data.getName());
@@ -112,22 +113,37 @@ public class MyPageFragment extends BaseFragment<FragmentMyPageBinding> implemen
     }
 
     @Override
-    public void getMemberFailure() {
-        showCustomToast("마이페이지 조회 실패");
+    public void getMemberFailure(String message) {
+        showCustomToast(message);
     }
 
     @Override
     public void patchMemberSuccess(MyPageResponse.Data data) {
         showCustomToast("변경되었습니다.");
-        binding.cardInfo.setVisibility(View.VISIBLE);
-        binding.cardInfo.setVisibility(View.GONE);
+        hideProgressDialog();
+
+        if(getContext() != null && data.getProfileUrl() != null && !data.getProfileUrl().isEmpty())
+        Glide.with(getContext())
+                .load(Uri.parse(data.getProfileUrl()))
+                .circleCrop()
+                .into(binding.myIvProfile);
+        if(getContext() != null && data.getProfileUrl() != null && !data.getProfileUrl().isEmpty())
+            Glide.with(getContext())
+                    .load(Uri.parse(data.getProfileUrl()))
+                    .circleCrop()
+                    .into(binding.myIvProfileEdit);
+
         binding.myTvNickname.setText(data.getName());
         binding.myTvNicknameEdit.setText(data.getName());
+
+        binding.cardInfo.setVisibility(View.VISIBLE);
+        binding.cardInfoEdit.setVisibility(View.GONE);
     }
 
     @Override
-    public void patchMemberFailure() {
-        showCustomToast("변경실패.");
+    public void patchMemberFailure(String message) {
+        hideProgressDialog();
+        showCustomToast(message);
     }
 
     private boolean validation() {
@@ -139,4 +155,26 @@ public class MyPageFragment extends BaseFragment<FragmentMyPageBinding> implemen
         return true;
     }
 
+    public void setProfileImage(Uri uri) {
+        Glide.with(getContext())
+                .load(uri)
+                .circleCrop()
+                .into(binding.myIvProfileEdit);
+    }
+
+    @Override
+    public void callback(String url) {
+        String nickname = String.valueOf(binding.myTvNicknameEdit.getText());
+        String pictureUrl = url;
+        String orgPictureUrl = mData.getProfileUrl();
+
+        MyPageBody myPageBody;
+        if(mParentActivity.isImageChange()) {
+            myPageBody = new MyPageBody(nickname, pictureUrl);
+        } else {
+            myPageBody = new MyPageBody(nickname, orgPictureUrl);
+        }
+
+        mMyPageService.editMember(myPageBody);
+    }
 }

@@ -3,6 +3,7 @@ package com.sixthank.gogo.src.main;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,13 +20,9 @@ import com.sixthank.gogo.R;
 
 import com.sixthank.gogo.databinding.ActivityMainBinding;
 import com.sixthank.gogo.src.common.BaseActivity;
-import com.sixthank.gogo.src.common.FirebaseStorageUtil;
 import com.sixthank.gogo.src.main.explore.ExploreFragment;
 import com.sixthank.gogo.src.main.home.HomeFragment;
 import com.sixthank.gogo.src.main.mypage.MyPageFragment;
-
-
-import java.util.ArrayList;
 
 public class MainActivity extends BaseActivity<ActivityMainBinding> implements BottomNavigationView.OnNavigationItemSelectedListener{
 
@@ -34,6 +31,9 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements B
     private final Fragment myPageFragment = new MyPageFragment();
     private final FragmentManager fm = getSupportFragmentManager();
     Fragment active = homeFragment;
+
+    private boolean isImageChange;
+    private Uri mImageUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +49,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements B
         fm.beginTransaction().add(R.id.main_container, myPageFragment, "3").hide(myPageFragment).commit();
         fm.beginTransaction().add(R.id.main_container, exploreFragment, "2").hide(exploreFragment).commit();
         fm.beginTransaction().add(R.id.main_container, homeFragment, "1").commit();
+
     }
 
     void initView() {
@@ -87,9 +88,22 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements B
         super.onActivityResult(requestCode, resultCode, data);
 
         // 개인 프로필 변경
-        if(requestCode == RESULT_OK) {
-            if(data != null)
-                FirebaseStorageUtil.uploadImage(data.getData());
+        MyPageFragment fragment = (MyPageFragment) myPageFragment;
+        if(resultCode == RESULT_OK) {
+            if(data != null) {
+                isImageChange = true;
+                mImageUri = data.getData();
+                fragment.setProfileImage(data.getData());
+            }
         }
+    }
+
+    public Uri getImageUrl() {
+        return mImageUri;
+    }
+
+
+    public boolean isImageChange() {
+        return isImageChange;
     }
 }

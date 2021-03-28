@@ -9,6 +9,8 @@ import androidx.annotation.NonNull;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.UploadTask;
+import com.sixthank.gogo.src.common.ErrorBodyConverter;
+import com.sixthank.gogo.src.common.models.ErrorResponse;
 import com.sixthank.gogo.src.main.mypage.interfaces.MyPageFragmentView;
 import com.sixthank.gogo.src.main.mypage.interfaces.MyPageRetrofitInterface;
 import com.sixthank.gogo.src.main.mypage.models.MyPageBody;
@@ -33,7 +35,8 @@ public class MyPageService {
             public void onResponse(Call<MyPageResponse> call, Response<MyPageResponse> response) {
                 MyPageResponse myPageResponse = response.body();
                 if(myPageResponse == null) {
-                    myPageFragmentView.getMemberFailure();
+                    ErrorResponse errorResponse = ErrorBodyConverter.getErrorResponse(response.errorBody());
+                    myPageFragmentView.getMemberFailure(errorResponse.getMessage());
                     return;
                 }
                 myPageFragmentView.getMemberSuccess(myPageResponse.getData());
@@ -41,7 +44,7 @@ public class MyPageService {
 
             @Override
             public void onFailure(Call<MyPageResponse> call, Throwable t) {
-                myPageFragmentView.getMemberFailure();
+                myPageFragmentView.getMemberFailure(null);
             }
         });
     }
@@ -52,14 +55,15 @@ public class MyPageService {
             public void onResponse(Call<MyPageResponse> call, Response<MyPageResponse> response) {
                 MyPageResponse myPageResponse = response.body();
                 if(myPageResponse == null) {
-                    myPageFragmentView.getMemberFailure();
+                    ErrorResponse errorResponse = ErrorBodyConverter.getErrorResponse(response.errorBody());
+                    myPageFragmentView.patchMemberFailure(errorResponse.getMessage());
                 }
-                myPageFragmentView.getMemberSuccess(myPageResponse.getData());
+                myPageFragmentView.patchMemberSuccess(myPageResponse.getData());
             }
 
             @Override
             public void onFailure(Call<MyPageResponse> call, Throwable t) {
-                myPageFragmentView.getMemberFailure();
+                myPageFragmentView.patchMemberFailure(null);
             }
         });
     }

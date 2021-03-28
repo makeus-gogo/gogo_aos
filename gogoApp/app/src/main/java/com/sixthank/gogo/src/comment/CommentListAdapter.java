@@ -1,5 +1,6 @@
 package com.sixthank.gogo.src.comment;
 
+import android.content.Context;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,7 +21,11 @@ import java.util.List;
 public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.CommentHolder> {
 
     private List<Data> list;
+    private Context context;
 
+    public CommentListAdapter(Context context) {
+        this.context = context;
+    }
     public void setComments(List<Data> list) {
         this.list = list;
     }
@@ -37,10 +42,10 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
     @Override
     public void onBindViewHolder(@NonNull CommentListAdapter.CommentHolder holder, int position) {
         Data data = list.get(position);
-        Glide.with(holder.itemView.getContext())
+        Glide.with(context)
                 .load(Uri.parse(data.getMemberProfileUrl()))
-                .into(holder.ivProfile)
-                .onLoadFailed(ContextCompat.getDrawable(holder.itemView.getContext(), R.drawable.ic_profile_70));
+                .circleCrop()
+                .into(holder.ivProfile);
 
         holder.tvNickname.setText(data.getDescription());
     }
