@@ -1,5 +1,7 @@
 package com.sixthank.gogo.src.post.service;
 
+import com.sixthank.gogo.src.common.ErrorBodyConverter;
+import com.sixthank.gogo.src.common.models.ErrorResponse;
 import com.sixthank.gogo.src.post.interfaces.PostRetrofitInterface;
 import com.sixthank.gogo.src.post.interfaces.PostActivityView;
 import com.sixthank.gogo.src.post.models.PostBody;
@@ -26,35 +28,14 @@ public class PostService {
 
     private final PostRetrofitInterface postRetrofitInterface = getRetrofit().create(PostRetrofitInterface.class);
 
-    public void uploadFile(File file) {
-        RequestBody requestFile = RequestBody.create(file, MediaType.parse("image/*"));
-        MultipartBody.Part image = MultipartBody.Part.createFormData("file", file.getName(), requestFile);
-
-        postRetrofitInterface.uploadFile(image).enqueue(new Callback<PostImageResponse>() {
-            @Override
-            public void onResponse(Call<PostImageResponse> call, Response<PostImageResponse> response) {
-                PostImageResponse postImageResponse = response.body();
-                if(postImageResponse == null) {
-                    postActivityView.uploadFileFailure();
-                    return;
-                }
-                postActivityView.uploadFileSuccess(postImageResponse);
-            }
-
-            @Override
-            public void onFailure(Call<PostImageResponse> call, Throwable t) {
-                postActivityView.uploadFileFailure();
-            }
-        });
-    }
-
     public void addBoard(PostBody body) {
         postRetrofitInterface.addBoard(body).enqueue(new Callback<PostResponse>() {
             @Override
             public void onResponse(Call<PostResponse> call, Response<PostResponse> response) {
                 PostResponse postResponse = response.body();
                 if(postResponse == null) {
-                    postActivityView.addBoardFailure();
+                    ErrorResponse errorResponse = ErrorBodyConverter.getErrorResponse(response.errorBody());
+                    postActivityView.addBoardFailure(errorResponse.getMessage());
                     return;
                 }
                 postActivityView.addBoardSuccess();
@@ -62,7 +43,7 @@ public class PostService {
 
             @Override
             public void onFailure(Call<PostResponse> call, Throwable t) {
-                postActivityView.addBoardFailure();
+                postActivityView.addBoardFailure(null);
             }
         });
     }

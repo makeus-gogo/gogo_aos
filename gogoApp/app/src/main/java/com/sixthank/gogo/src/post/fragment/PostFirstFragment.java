@@ -14,14 +14,20 @@ import com.sixthank.gogo.src.common.BaseFragment;
 import com.sixthank.gogo.src.post.PostActivity;
 import com.sixthank.gogo.src.post.fragment.adapter.RandomPagerAdapter;
 
-import java.util.ArrayList;
-import java.util.List;
-
 
 public class PostFirstFragment extends BaseFragment<FragmentPostFirstBinding> implements View.OnClickListener {
 
-    private PostActivity mParentAt;
+    private PostActivity mParentActivity;
+    private String mDescription;
 
+    public static PostFirstFragment newInstance(String worryContent) {
+
+        Bundle args = new Bundle();
+        args.putString("description", worryContent);
+        PostFirstFragment fragment = new PostFirstFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -29,38 +35,21 @@ public class PostFirstFragment extends BaseFragment<FragmentPostFirstBinding> im
         binding = FragmentPostFirstBinding.inflate(inflater, container, false);
 
         initVariable();
+        initView();
         initListener();
 
         return binding.getRoot();
 
     }
 
-    @SuppressLint("NonConstantResourceId")
-    @Override
-    public void onClick(View v) {
-        int index = binding.postFirstViewPager.getCurrentItem();
-        switch (v.getId()) {
-            case R.id.post_first_next:
-//                mParentAt.setValueString("description", binding.postFirstWorryContent.getText().toString());
-                mParentAt.switchFragment(index+1);
-                break;
-            case R.id.post_first_img_left:
-                if(index != 0) {
-                    binding.postFirstViewPager.setCurrentItem(index-1);
-                    setAnswerKind(index-1);
-                }
-                break;
-            case R.id.post_first_img_right:
-                if(index != 2) {
-                    binding.postFirstViewPager.setCurrentItem(index+1);
-                    setAnswerKind(index+1);
-                }
-                break;
-            case R.id.post_first_img_close:
-                getActivity().finish();
-                break;
+    private void initVariable() {
+        mParentActivity = (PostActivity) getActivity();
+        mDescription = getArguments().getString("description");
+    }
 
-        }
+    private void initView() {
+        binding.postFirstViewPager.setAdapter(new RandomPagerAdapter(getContext()));
+        binding.postFirstDescription.setText(mDescription);
     }
 
     private void initListener() {
@@ -70,9 +59,34 @@ public class PostFirstFragment extends BaseFragment<FragmentPostFirstBinding> im
         binding.postFirstImgClose.setOnClickListener(this);
     }
 
-    private void initVariable() {
-        mParentAt = (PostActivity) getActivity();
-        binding.postFirstViewPager.setAdapter(new RandomPagerAdapter(getContext()));
+
+    @SuppressLint("NonConstantResourceId")
+    @Override
+    public void onClick(View v) {
+        int index = binding.postFirstViewPager.getCurrentItem();
+        switch (v.getId()) {
+            case R.id.post_first_next:
+                mParentActivity.setValueString("description", binding.postFirstDescription.getText().toString());
+                binding.postFirstDescription.setText("");
+                mParentActivity.switchFragment(index + 1);
+                break;
+            case R.id.post_first_img_left:
+                if (index != 0) {
+                    binding.postFirstViewPager.setCurrentItem(index - 1);
+                    setAnswerKind(index - 1);
+                }
+                break;
+            case R.id.post_first_img_right:
+                if (index != 2) {
+                    binding.postFirstViewPager.setCurrentItem(index + 1);
+                    setAnswerKind(index + 1);
+                }
+                break;
+            case R.id.post_first_img_close:
+                getActivity().finish();
+                break;
+
+        }
     }
 
     private void setAnswerKind(int index) {

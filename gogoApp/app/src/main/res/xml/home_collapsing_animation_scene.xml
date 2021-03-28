@@ -26,7 +26,7 @@
             motion:layout_constraintTop_toTopOf="parent" />
 
         <Constraint
-            android:id="@+id/text_view"
+            android:id="@+id/home_et_worry_content"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginStart="20dp"
@@ -40,7 +40,7 @@
             motion:layout_constraintTop_toTopOf="parent" />
 
         <Constraint
-            android:id="@+id/menu_icon"
+            android:id="@+id/home_iv_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:elevation="4dp"
@@ -83,7 +83,7 @@
             motion:layout_constraintGuide_begin="117dp" />
 
         <Constraint
-            android:id="@id/menu_icon"
+            android:id="@id/home_iv_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:elevation="4dp"

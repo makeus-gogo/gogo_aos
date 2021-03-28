@@ -6,42 +6,6 @@
     android:layout_height="match_parent"
     app:layoutDescription="@xml/home_collapsing_animation_scene">
 
-    <!--    <View-->
-    <!--        android:id="@+id/toolbar"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="0dp"-->
-    <!--        android:background="@drawable/bg_gradient_blue"-->
-    <!--        android:elevation="4dp"-->
-    <!--        app:layout_constraintBottom_toTopOf="@id/guideline_toolbar"-->
-    <!--        app:layout_constraintTop_toTopOf="parent" />-->
-
-    <!--    <TextView-->
-    <!--        android:id="@+id/text_view"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="0dp"-->
-    <!--        android:layout_marginStart="20dp"-->
-    <!--        android:layout_marginTop="60dp"-->
-    <!--        android:layout_marginEnd="80dp"-->
-    <!--        android:clickable="true"-->
-    <!--        android:elevation="4dp"-->
-    <!--        android:background="@drawable/selector_circle_25"-->
-    <!--        android:paddingStart="25dp"-->
-    <!--        android:paddingTop="12dp"-->
-    <!--        android:text="오늘은 어떤 고민이 있으신가요?"-->
-    <!--        app:layout_constraintTop_toTopOf="parent"-->
-    <!--        app:layout_constraintBottom_toTopOf="@+id/guideline_text_view" />-->
-
-
-    <!--    <ImageView-->
-    <!--        android:id="@+id/menu_icon"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:elevation="4dp"-->
-    <!--        android:src="@drawable/home_pink_ball"-->
-    <!--        app:layout_constraintBottom_toTopOf="@+id/guideline_pink_ball"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent" />-->
-
-
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_toolbar"
         android:layout_width="wrap_content"
@@ -162,25 +126,28 @@
         app:layout_constraintBottom_toTopOf="@id/guideline_toolbar"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/text_view"
+    <EditText
+        android:id="@+id/home_et_worry_content"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="60dp"
         android:layout_marginEnd="80dp"
-        android:background="@drawable/selector_circle_25"
+        android:background="@drawable/bg_circle_25"
         android:clickable="true"
         android:elevation="4dp"
+        android:theme="@style/customTheme"
         android:paddingStart="25dp"
         android:paddingTop="12dp"
-        android:text="오늘은 어떤 고민이 있으신가요?"
+        android:gravity="top"
+        android:textSize="15sp"
+        android:hint="오늘은 어떤 고민이 있으신가요?"
         app:layout_constraintBottom_toTopOf="@+id/guideline_text_view"
         app:layout_constraintTop_toTopOf="parent" />
 
 
     <ImageView
-        android:id="@+id/menu_icon"
+        android:id="@+id/home_iv_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:elevation="4dp"

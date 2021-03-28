@@ -1,6 +1,7 @@
 package com.sixthank.gogo.src.post.fragment;
 
 import android.annotation.SuppressLint;
+import android.net.Uri;
 import android.os.Bundle;
 
 import android.view.LayoutInflater;
@@ -21,6 +22,16 @@ public class PostSelectFragment extends BaseFragment<FragmentPostSelectBinding> 
 
     private PostActivity mParentActivity;
     private ChoiceListAdapter mChoiceListAdapter;
+    private String mDescription;
+
+    public static PostSelectFragment newInstance(String description) {
+
+        Bundle args = new Bundle();
+        args.putString("description", description);
+        PostSelectFragment fragment = new PostSelectFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -28,6 +39,7 @@ public class PostSelectFragment extends BaseFragment<FragmentPostSelectBinding> 
         binding = FragmentPostSelectBinding.inflate(inflater);
 
         initVariable();
+        initView();
         initListener();
 
         return binding.getRoot();
@@ -36,13 +48,16 @@ public class PostSelectFragment extends BaseFragment<FragmentPostSelectBinding> 
     private void initVariable() {
         mParentActivity = (PostActivity) getActivity();
         mChoiceListAdapter = new ChoiceListAdapter(getContext());
+        mDescription = getArguments().getString("description");
+    }
+
+    private void initView() {
         binding.postSelectRvChoice.setAdapter(mChoiceListAdapter);
+        binding.postSelectEtContent.setText(mDescription);
     }
 
     private void initListener() {
-        binding.postSelectClose.setOnClickListener(this);
-        binding.postSelectNext.setOnClickListener(this);
-        binding.postSelectPlus.setOnClickListener(this);
+
         binding.postSelectStyle.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @SuppressLint("NonConstantResourceId")
             @Override
@@ -51,19 +66,27 @@ public class PostSelectFragment extends BaseFragment<FragmentPostSelectBinding> 
                     case R.id.post_select_camera:
                         binding.postSelectLlColor.setVisibility(View.INVISIBLE);
                         binding.postSelectRvTxt.setVisibility(View.INVISIBLE);
-                        mParentActivity.getAlbum();
+                        binding.postSelectClPhoto.setVisibility(View.VISIBLE);
                         break;
                     case R.id.post_select_write:
                         binding.postSelectLlColor.setVisibility(View.VISIBLE);
                         binding.postSelectRvTxt.setVisibility(View.INVISIBLE);
+                        binding.postSelectClPhoto.setVisibility(View.INVISIBLE);
                         break;
                     case R.id.post_select_typo:
                         binding.postSelectLlColor.setVisibility(View.INVISIBLE);
                         binding.postSelectRvTxt.setVisibility(View.VISIBLE);
+                        binding.postSelectClPhoto.setVisibility(View.INVISIBLE);
                         break;
                 }
             }
         });
+
+        binding.postSelectClose.setOnClickListener(this);
+        binding.postSelectNext.setOnClickListener(this);
+        binding.postSelectPlus.setOnClickListener(this);
+        binding.postSelectTvTakePhoto.setOnClickListener(this);
+        binding.postSelectTvAlbum.setOnClickListener(this);
     }
 
     @SuppressLint("NonConstantResourceId")
@@ -82,10 +105,16 @@ public class PostSelectFragment extends BaseFragment<FragmentPostSelectBinding> 
             case R.id.post_select_plus:
                 mChoiceListAdapter.addItem();
                 break;
+            case R.id.post_select_tv_take_photo:
+                mParentActivity.takePhoto();
+                break;
+            case R.id.post_select_tv_album:
+                mParentActivity.getAlbum();
+                break;
         }
     }
 
-    public FragmentPostSelectBinding getBinding() {
-        return binding;
+    public void setBindingImage(Uri uri) {
+        binding.postSelectImg.setImageURI(uri);
     }
 }

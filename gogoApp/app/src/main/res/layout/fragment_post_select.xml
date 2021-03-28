@@ -198,4 +198,42 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.4" />
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/post_select_cl_photo"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        app:layout_constraintBottom_toTopOf="@+id/post_select_style"
+        android:layout_marginHorizontal="50dp"
+        android:visibility="gone"
+        android:layout_marginBottom="10dp"
+        android:backgroundTint="@color/main_blue"
+        android:background="@drawable/bg_circle_5">
+
+        <TextView
+            android:id="@+id/post_select_tv_take_photo"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="사진찍기"
+            android:gravity="center"
+            android:background="@color/white"
+            android:textColor="@color/main_blue"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/post_select_tv_album"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/post_select_tv_album"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="앨범에서 가져오기"
+            android:textColor="@color/main_blue"
+            android:gravity="center"
+            android:layout_marginStart="1dp"
+            android:background="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/post_select_tv_take_photo"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

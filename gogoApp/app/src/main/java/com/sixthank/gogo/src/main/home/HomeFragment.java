@@ -55,8 +55,13 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> implements H
     }
 
     private void initListener() {
-        binding.textView.setOnClickListener(v -> {
-            startActivity(new Intent(getActivity(), PostActivity.class));
+
+        binding.homeIvBtn.setOnClickListener(v->{
+            Intent intent = new Intent(getActivity(), PostActivity.class);
+            intent.putExtra("description", String.valueOf(binding.homeEtWorryContent.getText()));
+            startActivity(intent);
+
+            binding.homeEtWorryContent.setText("");
         });
 
         binding.scrollableContent.getViewTreeObserver()
@@ -78,7 +83,6 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> implements H
                         }
                     }
                 });
-
     }
 
     private void initData() {

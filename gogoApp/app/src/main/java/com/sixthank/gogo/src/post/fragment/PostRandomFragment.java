@@ -25,37 +25,6 @@ public class PostRandomFragment extends BaseFragment<FragmentPostRandomBinding> 
     private Random mRandom;
     int num = 0;
 
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-
-    private String mParam1;
-    private String mParam2;
-
-    public PostRandomFragment() {
-        // Required empty public constructor
-    }
-
-
-    public static PostRandomFragment newInstance(String param1, String param2) {
-        PostRandomFragment fragment = new PostRandomFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentPostRandomBinding.inflate(inflater);
@@ -64,7 +33,7 @@ public class PostRandomFragment extends BaseFragment<FragmentPostRandomBinding> 
             getActivity().finish();
         });
         mRandom = new Random();
-        mTimer = new RandomTimer(10000, 1000); //60sec, 1sec
+        mTimer = new RandomTimer(5000, 1000); //5sec, 1sec
 
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {

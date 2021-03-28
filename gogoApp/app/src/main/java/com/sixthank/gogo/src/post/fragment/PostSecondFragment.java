@@ -1,6 +1,7 @@
 package com.sixthank.gogo.src.post.fragment;
 
 import android.annotation.SuppressLint;
+import android.net.Uri;
 import android.os.Bundle;
 
 import android.view.LayoutInflater;
@@ -20,13 +21,22 @@ import com.sixthank.gogo.src.post.fragment.adapter.TextListAdapter;
 public class PostSecondFragment extends BaseFragment<FragmentPostSecondBinding> implements View.OnClickListener {
 
     private PostActivity mParentActivity;
+    private String mDescription;
+
+    public static PostSecondFragment newInstance(String description) {
+
+        Bundle args = new Bundle();
+        args.putString("description", description);
+        PostSecondFragment fragment = new PostSecondFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         mParentActivity = (PostActivity) getActivity();
-
 
     }
 
@@ -35,16 +45,21 @@ public class PostSecondFragment extends BaseFragment<FragmentPostSecondBinding> 
                              Bundle savedInstanceState) {
         binding = FragmentPostSecondBinding.inflate(inflater, container, false);
 
-        initVariable();
-
+        intiVariable();
+        initView();
         initListener();
 
         return binding.getRoot();
     }
 
-    private void initVariable() {
+    private void intiVariable() {
+        mDescription = getArguments().getString("description");
+    }
+
+    private void initView() {
         binding.postSecondRvColor.setAdapter(new ColorListAdapter());
         binding.postSecondRvTxt.setAdapter(new TextListAdapter());
+        binding.postSecondEtContent.setText(mDescription);
     }
 
     private void initListener() {
@@ -56,16 +71,17 @@ public class PostSecondFragment extends BaseFragment<FragmentPostSecondBinding> 
                     case R.id.post_second_camera:
                         binding.postSecondLlColor.setVisibility(View.INVISIBLE);
                         binding.postSecondRvTxt.setVisibility(View.INVISIBLE);
-//                        mParentActivity.getAlbum();
-                        mParentActivity.takePhoto();
+                        binding.postSecondClPhoto.setVisibility(View.VISIBLE);
                         break;
                     case R.id.post_second_write:
                         binding.postSecondLlColor.setVisibility(View.VISIBLE);
                         binding.postSecondRvTxt.setVisibility(View.INVISIBLE);
+                        binding.postSecondClPhoto.setVisibility(View.INVISIBLE);
                         break;
                     case R.id.post_second_typo:
                         binding.postSecondLlColor.setVisibility(View.INVISIBLE);
                         binding.postSecondRvTxt.setVisibility(View.VISIBLE);
+                        binding.postSecondClPhoto.setVisibility(View.INVISIBLE);
                         break;
                 }
             }
@@ -73,6 +89,8 @@ public class PostSecondFragment extends BaseFragment<FragmentPostSecondBinding> 
 
         binding.postSecondNext.setOnClickListener(this);
         binding.postSecondImgClose.setOnClickListener(this);
+        binding.postSecondTvTakePhoto.setOnClickListener(this);
+        binding.postSecondTvAlbum.setOnClickListener(this);
     }
 
     @SuppressLint("NonConstantResourceId")
@@ -87,11 +105,18 @@ public class PostSecondFragment extends BaseFragment<FragmentPostSecondBinding> 
             case R.id.post_second_img_close:
                 mParentActivity.finish();
                 break;
+            case R.id.post_second_tv_take_photo:
+                mParentActivity.takePhoto();
+                binding.postSecondClPhoto.setVisibility(View.INVISIBLE);
+                break;
+            case R.id.post_second_tv_album:
+                mParentActivity.getAlbum();
+                binding.postSecondClPhoto.setVisibility(View.INVISIBLE);
+                break;
         }
     }
 
-    public FragmentPostSecondBinding getBinding() {
-        return binding;
+    public void setBindingImage(Uri uri) {
+        binding.postSecondImg.setImageURI(uri);
     }
-
 }
