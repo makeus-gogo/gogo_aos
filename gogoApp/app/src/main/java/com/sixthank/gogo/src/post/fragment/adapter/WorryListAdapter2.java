@@ -32,7 +32,7 @@ public class WorryListAdapter2 extends RecyclerView.Adapter<WorryListAdapter2.Wo
     @Override
     public void onBindViewHolder(@NonNull WorryHolder holder, int position) {
         WorryResponse worry = list.get(position);
-        TextView worryContent = holder.itemView.findViewById(R.id.worry_item_txt_content);
+        TextView worryContent = holder.itemView.findViewById(R.id.item_search_tv_content);
         worryContent.setText(worry.getContent());
     }
 
