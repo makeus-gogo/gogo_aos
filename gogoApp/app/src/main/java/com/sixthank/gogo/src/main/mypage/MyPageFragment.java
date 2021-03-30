@@ -107,6 +107,7 @@ public class MyPageFragment extends BaseFragment<FragmentMyPageBinding> implemen
                     .into(binding.myIvProfileEdit);
         binding.myTvEmail.setText(data.getEmail());
         binding.myTvNickname.setText(data.getName());
+        binding.myTvEmailEdit.setText(data.getEmail());
         binding.myTvNicknameEdit.setText(data.getName());
 
         mData = data;
