@@ -71,6 +71,8 @@ public class BoardCommentActivity extends BaseActivity<ActivityBoardCommentBindi
                 mCommentService.addComment(new CommentBody(content), mBoardId);
             }
         });
+
+        binding.commentIvClose.setOnClickListener(v->{ finish(); });
     }
 
     private void initData() {
