@@ -68,6 +68,7 @@ public class BoardCommentActivity extends BaseActivity<ActivityBoardCommentBindi
             if(content.isEmpty()) {
                 showCustomToast("내용을 입력해주세요.");
             } else {
+                hideKeyboard(binding.commentEtContent);
                 mCommentService.addComment(new CommentBody(content), mBoardId);
             }
         });

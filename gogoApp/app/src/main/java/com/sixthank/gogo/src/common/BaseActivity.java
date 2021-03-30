@@ -1,6 +1,9 @@
 package com.sixthank.gogo.src.common;
 
+import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,6 +32,13 @@ public class BaseActivity<B extends ViewBinding> extends AppCompatActivity {
     public void hideProgressDialog() {
         if(mProgressDialog != null && mProgressDialog.isShowing()) {
             mProgressDialog.dismiss();
+        }
+    }
+
+    public void hideKeyboard(View view) {
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
     }
 }
