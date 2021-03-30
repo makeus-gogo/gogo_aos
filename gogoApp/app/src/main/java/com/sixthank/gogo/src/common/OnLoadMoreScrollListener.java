@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 public abstract class OnLoadMoreScrollListener extends RecyclerView.OnScrollListener {
-    private int visibleThreshold = 5;
+    private int visibleThreshold = 2;
 
     // The current offset index of data you have loaded
     private int currentPage = 0;
