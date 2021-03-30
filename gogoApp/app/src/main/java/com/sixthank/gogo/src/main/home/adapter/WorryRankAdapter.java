@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -46,12 +47,25 @@ public class WorryRankAdapter extends RecyclerView.Adapter<WorryRankAdapter.Worr
         holder.worryContent.setText(item.getDescription());
         holder.worryImage.setImageURI(Uri.parse(item.getBoardImageUrl()));
         holder.nickName.setText(item.getNickname());
-        if(!item.getBoardImageUrl().isEmpty())
-            Glide.with(context).load(Uri.parse(item.getBoardImageUrl())).into(holder.worryImage);
 
-        if(item.getProfileImageUrl() != null) {
-            Glide.with(context).load(Uri.parse(item.getProfileImageUrl())).circleCrop().into(holder.profile);
-        }
+        if(item.getBoardImageUrl() != null && !item.getBoardImageUrl().isEmpty())
+            Glide.with(context)
+                    .load(Uri.parse(item.getBoardImageUrl()))
+                    .into(holder.worryImage);
+        else
+            Glide.with(context)
+                    .load(ContextCompat.getDrawable(context, R.drawable.bg_glide_load_default))
+                    .into(holder.worryImage);
+
+        if(item.getProfileImageUrl() != null && !item.getProfileImageUrl().isEmpty())
+            Glide.with(context)
+                    .load(Uri.parse(item.getProfileImageUrl()))
+                    .circleCrop()
+                    .into(holder.profile);
+        else
+            Glide.with(context)
+                    .load(ContextCompat.getDrawable(context, R.drawable.ic_profile))
+                    .into(holder.worryImage);
 
     }
 

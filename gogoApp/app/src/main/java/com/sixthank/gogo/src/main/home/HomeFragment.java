@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 
 
+import androidx.core.widget.NestedScrollView;
+
 import com.sixthank.gogo.databinding.FragmentHomeBinding;
 import com.sixthank.gogo.src.common.BaseFragment;
 import com.sixthank.gogo.src.main.home.adapter.WorryListAdapter;
@@ -40,12 +42,6 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> implements H
         initData();
 
         return binding.getRoot();
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-
     }
 
     private void initVariable() {

@@ -59,7 +59,7 @@ public class ExploreWorryListAdapter extends RecyclerView.Adapter<ExploreWorryLi
                     .into(holder.ivExploreImage);
         } else {
             Glide.with(context)
-                    .load(ContextCompat.getDrawable(context, R.drawable.temp))
+                    .load(ContextCompat.getDrawable(context, R.drawable.bg_glide_load_default))
                     .into(holder.ivExploreImage);
         }
         // profile add
