@@ -93,6 +93,9 @@ public class BoardDetailChoiceFragment extends BaseFragment<FragmentBoardChoiceB
             intent.putExtra("nickname", mNickname);
             startActivity(intent);
         });
+        binding.boardChoiceIvAlert.setOnClickListener(v->{
+            showCustomToast("신고되었습니다.");
+        });
     }
 
     private void initData() {

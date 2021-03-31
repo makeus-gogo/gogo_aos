@@ -57,8 +57,8 @@ public class PostSecondFragment extends BaseFragment<FragmentPostSecondBinding> 
     }
 
     private void initView() {
-        binding.postSecondRvColor.setAdapter(new ColorListAdapter());
-        binding.postSecondRvTxt.setAdapter(new TextListAdapter());
+        binding.postSecondRvColor.setAdapter(new ColorListAdapter(getContext()));
+        binding.postSecondRvTxt.setAdapter(new TextListAdapter(getContext()));
         binding.postSecondEtContent.setText(mDescription);
     }
 
@@ -107,10 +107,12 @@ public class PostSecondFragment extends BaseFragment<FragmentPostSecondBinding> 
                 break;
             case R.id.post_second_tv_take_photo:
                 mParentActivity.takePhoto();
+                binding.postSecondCamera.setChecked(false);
                 binding.postSecondClPhoto.setVisibility(View.INVISIBLE);
                 break;
             case R.id.post_second_tv_album:
                 mParentActivity.getAlbum();
+                binding.postSecondCamera.setChecked(false);
                 binding.postSecondClPhoto.setVisibility(View.INVISIBLE);
                 break;
         }

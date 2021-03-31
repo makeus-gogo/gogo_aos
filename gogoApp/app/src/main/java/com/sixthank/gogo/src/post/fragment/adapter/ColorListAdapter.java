@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
@@ -17,6 +18,11 @@ import java.util.ArrayList;
 
 public class ColorListAdapter extends RecyclerView.Adapter<ColorListAdapter.ColorHolder> {
 
+    Context context;
+
+    public ColorListAdapter(Context context) {
+        this.context = context;
+    }
 
     int[] list = new int[]{
             R.drawable.bg_circle_red,R.drawable.bg_circle_orange,R.drawable.bg_circle_yellow,
@@ -48,6 +54,10 @@ public class ColorListAdapter extends RecyclerView.Adapter<ColorListAdapter.Colo
 
         public ColorHolder(@NonNull View itemView) {
             super(itemView);
+
+            itemView.setOnClickListener(v->{
+                Toast.makeText(context, "준비 중입니다.", Toast.LENGTH_SHORT).show();
+            });
         }
     }
 }

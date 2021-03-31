@@ -1,11 +1,13 @@
 package com.sixthank.gogo.src.post.fragment.adapter;
 
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
@@ -15,6 +17,11 @@ import com.sixthank.gogo.R;
 
 public class TextListAdapter extends RecyclerView.Adapter<TextListAdapter.TxtHolder> {
 
+    Context context;
+
+    public TextListAdapter(Context context) {
+        this.context = context;
+    }
 
     int[] list = new int[]{
             R.drawable.bg_circle_white_op,R.drawable.bg_circle_white,
@@ -52,6 +59,9 @@ public class TextListAdapter extends RecyclerView.Adapter<TextListAdapter.TxtHol
             super(itemView);
             txtBg = itemView.findViewById(R.id.item_txt_bg);
             txt = itemView.findViewById(R.id.item_txt);
+            itemView.setOnClickListener(v->{
+                Toast.makeText(context, "준비 중입니다.", Toast.LENGTH_SHORT).show();
+            });
         }
     }
 }

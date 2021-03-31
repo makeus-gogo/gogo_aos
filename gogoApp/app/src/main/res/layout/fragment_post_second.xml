@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#1B1A1A"
+    android:background="@drawable/bg_gradient_sky"
     tools:context=".src.post.fragment.PostSecondFragment">
 
     <ImageView
@@ -192,7 +192,7 @@
         android:layout_marginHorizontal="50dp"
         android:visibility="gone"
         android:layout_marginBottom="10dp"
-        android:backgroundTint="@color/main_blue"
+        android:backgroundTint="@color/post_third_txt"
         android:background="@drawable/bg_circle_5">
 
         <TextView
@@ -202,7 +202,7 @@
             android:text="사진찍기"
             android:gravity="center"
             android:background="@color/white"
-            android:textColor="@color/main_blue"
+            android:textColor="@color/post_third_txt"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/post_second_tv_album"
             app:layout_constraintStart_toStartOf="parent"
@@ -213,7 +213,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:text="앨범에서 가져오기"
-            android:textColor="@color/main_blue"
+            android:textColor="@color/post_third_txt"
             android:gravity="center"
             android:layout_marginStart="1dp"
             android:background="@color/white"

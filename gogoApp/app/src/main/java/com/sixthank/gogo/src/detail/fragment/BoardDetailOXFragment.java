@@ -147,6 +147,10 @@ public class BoardDetailOXFragment extends BaseFragment<FragmentBoardOXBinding> 
             intent.putExtra("nickname", mNickname);
             startActivity(intent);
         });
+
+        binding.boardOxIvAlert.setOnClickListener(v->{
+            showCustomToast("신고되었습니다.");
+        });
     }
 
     private void setAfterClick() {

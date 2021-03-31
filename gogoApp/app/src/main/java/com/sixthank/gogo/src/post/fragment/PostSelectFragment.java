@@ -15,6 +15,8 @@ import com.sixthank.gogo.databinding.FragmentPostSelectBinding;
 import com.sixthank.gogo.src.post.PostActivity;
 import com.sixthank.gogo.src.post.fragment.adapter.AnswerListAdapter;
 import com.sixthank.gogo.src.post.fragment.adapter.ChoiceListAdapter;
+import com.sixthank.gogo.src.post.fragment.adapter.ColorListAdapter;
+import com.sixthank.gogo.src.post.fragment.adapter.TextListAdapter;
 
 import java.util.ArrayList;
 
@@ -52,6 +54,8 @@ public class PostSelectFragment extends BaseFragment<FragmentPostSelectBinding> 
     }
 
     private void initView() {
+        binding.postSelectRvColor.setAdapter(new ColorListAdapter(getContext()));
+        binding.postSelectRvTxt.setAdapter(new TextListAdapter(getContext()));
         binding.postSelectRvChoice.setAdapter(mChoiceListAdapter);
         binding.postSelectEtContent.setText(mDescription);
     }

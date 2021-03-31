@@ -38,4 +38,5 @@
     <!-- default image -->
     <color name="bg_default_img">#E63C3B3B</color>
     <color name="bg_light_blue">#EEEFFE</color>
+    <color name="bg_post">#1B1A1A</color>
 </resources>

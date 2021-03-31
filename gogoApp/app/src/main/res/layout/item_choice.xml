@@ -19,7 +19,7 @@
 
         <EditText
             android:id="@+id/item_choice_et_content"
-            android:layout_width="175dp"
+            android:layout_width="180dp"
             android:layout_height="match_parent"
             android:background="@drawable/bg_circle_5_click"
             android:textSize="13sp"
@@ -35,7 +35,7 @@
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_gravity="center_vertical"
-            android:layout_marginStart="5dp"
+            android:layout_marginStart="4dp"
             android:src="@drawable/ic_answer_close" />
     </LinearLayout>
 
