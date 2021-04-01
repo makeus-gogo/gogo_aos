@@ -7,8 +7,8 @@ import java.util.List;
 
 public interface HomeFragmentView {
     void getTopNBoardListSuccess(List<BoardTopNResponse.Data> data);
-    void getTopNBoardListFailure();
+    void getTopNBoardListFailure(String message);
 
     void getBoardListSuccess(List<HomeResponse.Data> data);
-    void getBoardListFailure();
+    void getBoardListFailure(String message);
 }

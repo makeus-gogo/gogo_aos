@@ -82,11 +82,13 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> implements H
     }
 
     private void initData() {
+        showProgressDialog();
         mHomeService.getTopNListBoardList();
     }
 
     @Override
     public void getTopNBoardListSuccess(List<BoardTopNResponse.Data> data) {
+        hideProgressDialog();
         if (data.size() == 0) {
             binding.mainTvTop3.setVisibility(View.VISIBLE);
             binding.mainTvTop3.setText("조회 목록이 없습니다.");
@@ -95,8 +97,9 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> implements H
     }
 
     @Override
-    public void getTopNBoardListFailure() {
-        showCustomToast("TopN Failure");
+    public void getTopNBoardListFailure(String message) {
+        hideProgressDialog();
+        showCustomToast(message);
     }
 
     @Override
@@ -118,11 +121,11 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> implements H
     }
 
     @Override
-    public void getBoardListFailure() {
-        showCustomToast("List Failure");
+    public void getBoardListFailure(String message) {
+        showCustomToast(message);
     }
 
     public void getBoardList() {
-        mHomeService.getListBoardList(1, 10);
+        mHomeService.getListBoardList(mWorryListAdapter.getLastId(), 10);
     }
 }

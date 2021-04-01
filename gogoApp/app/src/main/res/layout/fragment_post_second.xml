@@ -50,6 +50,7 @@
         android:layout_marginBottom="90dp"
         android:background="@drawable/bg_circle_5_click"
         android:gravity="center"
+        android:maxLength="36"
         android:hint="여기에 고민을\n입력해주세요"
         android:padding="20dp"
         android:textColor="@color/black"

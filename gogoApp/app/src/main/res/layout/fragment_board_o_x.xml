@@ -9,11 +9,11 @@
         android:id="@+id/board_ox_img"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:scaleType="fitXY" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/board_ox_profile"
@@ -64,8 +64,6 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="90dp"
-        android:background="@drawable/bg_circle_25"
-        android:backgroundTint="@color/white_op_50"
         android:gravity="center"
         android:padding="20dp"
         android:text="오늘 저녁에 식당 어디갈지 모르겠어요 모르겠어요 모르겠어요"
@@ -80,7 +78,6 @@
         android:id="@+id/board_ox_tv_x_percent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
         android:background="@drawable/ic_percent_white"
         android:gravity="center"
         android:paddingHorizontal="8dp"
@@ -88,50 +85,41 @@
         android:text="99.9%"
         android:textColor="@color/white"
         android:textSize="13sp"
-        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@id/board_ox_guide_h_center"
-        app:layout_constraintStart_toStartOf="@id/board_ox_guide_v_center" />
+        app:layout_constraintEnd_toEndOf="@+id/board_radio_x"
+        app:layout_constraintStart_toStartOf="@id/board_radio_x" />
 
     <TextView
         android:id="@+id/board_ox_tv_o_percent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="40dp"
         android:background="@drawable/ic_percent_white"
         android:gravity="center"
         android:paddingHorizontal="8dp"
         android:paddingVertical="5dp"
         android:text="99.9%"
         android:textColor="@color/white"
-        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@id/board_ox_guide_h_center"
-        app:layout_constraintEnd_toEndOf="@id/board_ox_guide_v_center" />
+        app:layout_constraintEnd_toEndOf="@id/board_radio_o"
+        app:layout_constraintStart_toStartOf="@id/board_radio_o" />
 
-    <RadioGroup
-        android:id="@+id/board_ox_radio_group"
+    <ImageView
+        android:id="@+id/board_radio_o"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/board_ox_guide_h_center">
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/ic_bg_gray_o_white"
+        app:layout_constraintEnd_toEndOf="@+id/board_ox_guide_v_center"
+        app:layout_constraintTop_toTopOf="@id/board_ox_guide_h_center" />
 
-        <RadioButton
-            android:id="@+id/board_radio_o"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            android:background="@drawable/selector_btn_o"
-            android:buttonTint="@color/transparent" />
-
-        <RadioButton
-            android:id="@+id/board_radio_x"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:background="@drawable/selector_btn_x"
-            android:buttonTint="@color/transparent" />
-    </RadioGroup>
+    <ImageView
+        android:id="@+id/board_radio_x"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:background="@drawable/ic_bg_gray_x_white"
+        app:layout_constraintStart_toStartOf="@id/board_ox_guide_v_center"
+        app:layout_constraintTop_toTopOf="@id/board_ox_guide_h_center" />
 
     <ImageView
         android:id="@+id/board_ox_comment"

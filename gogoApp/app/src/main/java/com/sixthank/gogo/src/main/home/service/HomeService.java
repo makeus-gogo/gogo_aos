@@ -1,5 +1,7 @@
 package com.sixthank.gogo.src.main.home.service;
 
+import com.sixthank.gogo.src.common.ErrorBodyConverter;
+import com.sixthank.gogo.src.common.models.ErrorResponse;
 import com.sixthank.gogo.src.main.home.interfaces.HomeFragmentView;
 import com.sixthank.gogo.src.main.home.interfaces.HomeRetrofitInterface;
 import com.sixthank.gogo.src.main.home.models.BoardTopNResponse;
@@ -26,7 +28,8 @@ public class HomeService {
             public void onResponse(Call<BoardTopNResponse> call, Response<BoardTopNResponse> response) {
                 BoardTopNResponse boardTopNResponse = response.body();
                 if (boardTopNResponse == null) {
-                    homeFragmentView.getTopNBoardListFailure();
+                    ErrorResponse errorResponse = ErrorBodyConverter.getErrorResponse(response.errorBody());
+                    homeFragmentView.getTopNBoardListFailure(errorResponse.getMessage());
                     return;
                 }
                 homeFragmentView.getTopNBoardListSuccess(boardTopNResponse.getData());
@@ -34,7 +37,7 @@ public class HomeService {
 
             @Override
             public void onFailure(Call<BoardTopNResponse> call, Throwable t) {
-                homeFragmentView.getTopNBoardListFailure();
+                homeFragmentView.getTopNBoardListFailure(null);
             }
         });
     }
@@ -45,7 +48,8 @@ public class HomeService {
             public void onResponse(Call<HomeResponse> call, Response<HomeResponse> response) {
                 HomeResponse homeResponse = response.body();
                 if(homeResponse == null) {
-                    homeFragmentView.getBoardListFailure();
+                    ErrorResponse errorResponse = ErrorBodyConverter.getErrorResponse(response.errorBody());
+                    homeFragmentView.getBoardListFailure(errorResponse.getMessage());
                     return;
                 }
                 homeFragmentView.getBoardListSuccess(homeResponse.getData());
@@ -53,7 +57,7 @@ public class HomeService {
 
             @Override
             public void onFailure(Call<HomeResponse> call, Throwable t) {
-                homeFragmentView.getBoardListFailure();
+                homeFragmentView.getBoardListFailure(null);
             }
         });
     }

@@ -6,7 +6,9 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +20,8 @@ import com.sixthank.gogo.R;
 import com.sixthank.gogo.databinding.FragmentBoardOXBinding;
 import com.sixthank.gogo.src.comment.BoardCommentActivity;
 import com.sixthank.gogo.src.common.BaseFragment;
+import com.sixthank.gogo.src.common.CustomDialog;
+import com.sixthank.gogo.src.common.CustomDialogCallback;
 import com.sixthank.gogo.src.common.models.AnswerResultDtoList;
 import com.sixthank.gogo.src.detail.interfaces.BoardDetailFragmentView;
 import com.sixthank.gogo.src.detail.models.BoardAnswerBody;
@@ -27,7 +31,7 @@ import com.sixthank.gogo.src.detail.service.BoardDetailService;
 
 import java.util.List;
 
-public class BoardDetailOXFragment extends BaseFragment<FragmentBoardOXBinding> implements BoardDetailFragmentView {
+public class BoardDetailOXFragment extends BaseFragment<FragmentBoardOXBinding> implements BoardDetailFragmentView, CustomDialogCallback {
 
     private BoardDetailService mBoardDetailService;
 
@@ -36,6 +40,8 @@ public class BoardDetailOXFragment extends BaseFragment<FragmentBoardOXBinding> 
 
     private int mContentId, mSelectType;
     private String mNickname, mProfileUrl;
+
+    private CustomDialog mPopupDialog;
 
     public static BoardDetailOXFragment newInstance(BoardDetailResponse.Data data, String nickname, String profileUrl) {
 
@@ -66,8 +72,8 @@ public class BoardDetailOXFragment extends BaseFragment<FragmentBoardOXBinding> 
                              Bundle savedInstanceState) {
         binding = FragmentBoardOXBinding.inflate(inflater);
 
-        initView();
         initVariable();
+        initView();
         initListener();
 
         return binding.getRoot();
@@ -100,15 +106,11 @@ public class BoardDetailOXFragment extends BaseFragment<FragmentBoardOXBinding> 
         else if (answerList.get(1).getCheck() == 1) checkAnswerIdx = 1;
         else checkAnswerIdx = -1;
 
-        if (checkAnswerIdx == -1) {
-            showCustomToast("이미 투표하셨습니다.");
-            return;
-        }
-
         setOXView(checkAnswerIdx);
     }
 
     private void initVariable() {
+        mPopupDialog = new CustomDialog(getContext());
         mBoardDetailService = new BoardDetailService(this);
         binding.boardOxDescription.setText(boardItem.getDescription());
         if (getContext() != null && !boardItem.getPictureUrl().isEmpty())
@@ -116,27 +118,22 @@ public class BoardDetailOXFragment extends BaseFragment<FragmentBoardOXBinding> 
     }
 
     private void initListener() {
+        mPopupDialog.setPopupCallback(this);
+
         binding.boardOxIvClose.setOnClickListener(v -> {
             getActivity().finish();
         });
 
-        binding.boardOxRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @SuppressLint("NonConstantResourceId")
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                switch (checkedId) {
-                    case R.id.board_radio_o:
-                        mContentId = answerList.get(0).getContentId();
-                        mBoardDetailService.postBoardAnswer(new BoardAnswerBody(mContentId), boardItem.getBoardId());
-                        mSelectType = 0;
-                        break;
-                    case R.id.board_radio_x:
-                        mContentId = answerList.get(1).getContentId();
-                        mBoardDetailService.postBoardAnswer(new BoardAnswerBody(mContentId), boardItem.getBoardId());
-                        mSelectType = 1;
-                        break;
-                }
-            }
+        binding.boardRadioO.setOnClickListener(v->{
+            mContentId = answerList.get(0).getContentId();
+            mBoardDetailService.postBoardAnswer(new BoardAnswerBody(mContentId), boardItem.getBoardId());
+            mSelectType = 0;
+        });
+
+        binding.boardRadioX.setOnClickListener(v->{
+            mContentId = answerList.get(1).getContentId();
+            mBoardDetailService.postBoardAnswer(new BoardAnswerBody(mContentId), boardItem.getBoardId());
+            mSelectType = 1;
         });
 
         binding.boardOxComment.setOnClickListener(v->{
@@ -148,16 +145,15 @@ public class BoardDetailOXFragment extends BaseFragment<FragmentBoardOXBinding> 
             startActivity(intent);
         });
 
+
         binding.boardOxIvAlert.setOnClickListener(v->{
-            showCustomToast("신고되었습니다.");
+            mPopupDialog.showPopupDialog("신고하시겠습니까?", "report");
         });
     }
 
     private void setAfterClick() {
         binding.boardOxTvOPercent.setVisibility(View.VISIBLE);
         binding.boardOxTvXPercent.setVisibility(View.VISIBLE);
-        binding.boardRadioO.setClickable(false);
-        binding.boardRadioX.setClickable(false);
 
         binding.boardOxTvOPercent.setText(answerList.get(0).getPercentage() + "%");
         binding.boardOxTvXPercent.setText(answerList.get(1).getPercentage() + "%");
@@ -168,23 +164,29 @@ public class BoardDetailOXFragment extends BaseFragment<FragmentBoardOXBinding> 
 
         if (type == 0) {
             binding.boardOxTvOPercent.setBackgroundResource(R.drawable.ic_percent_blue);
-            binding.boardRadioO.setChecked(true);
+            binding.boardRadioO.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.ic_bg_white_o_blue));
         } else {
             binding.boardOxTvXPercent.setBackgroundResource(R.drawable.ic_percent_blue);
-            binding.boardRadioX.setChecked(true);
+            binding.boardRadioO.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.ic_bg_white_x_blue));
         }
 
     }
 
     @Override
     public void postBoardAnswerSuccess(BoardAnswerResponse.Data data) {
-        showCustomToast("success");
         setOXView(mSelectType);
     }
 
     @Override
     public void postBoardAnswerFailure(String message) {
-        showCustomToast("자신의 게시물에 답변할 수 없습니다.");
-        binding.boardOxRadioGroup.clearCheck();
+        showCustomToast(message);
     }
+
+    @Override
+    public void btnPositive(String type) {
+        showCustomToast("해당 게시글이 신고되었습니다.");
+    }
+
+    @Override
+    public void btnNegative() { }
 }

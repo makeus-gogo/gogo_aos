@@ -232,4 +232,5 @@ public class PostActivity extends BaseActivity<ActivityPostBinding> implements P
     public void setValueObject(String key, ArrayList<String> value) {
         mChildData.put(key, value);
     }
+
 }

@@ -21,13 +21,13 @@ public class PostThirdFragment extends BaseFragment<FragmentPostThirdBinding> {
                              Bundle savedInstanceState) {
         binding = FragmentPostThirdBinding.inflate(getLayoutInflater());
 
-        ArrayList<WorryResponse> wTopList = new ArrayList<>();
+//        ArrayList<WorryResponse> wTopList = new ArrayList<>();
+//
+//        for(int i = 0; i < 5; i++)
+//            wTopList.add(new WorryResponse("고민있어요 고민있어요 고민있어요"));
 
-        for(int i = 0; i < 5; i++)
-            wTopList.add(new WorryResponse("고민있어요 고민있어요 고민있어요"));
-
-        WorryListAdapter2 wTopAdapter = new WorryListAdapter2(wTopList);
-        binding.postThirdRvList.setAdapter(wTopAdapter);
+//        WorryListAdapter2 wTopAdapter = new WorryListAdapter2(wTopList);
+//        binding.postThirdRvList.setAdapter(wTopAdapter);
 
         binding.postThirdImgClose.setOnClickListener(v->{
             getActivity().finish();

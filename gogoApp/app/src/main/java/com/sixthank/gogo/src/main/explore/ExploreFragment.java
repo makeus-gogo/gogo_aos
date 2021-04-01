@@ -43,7 +43,7 @@ public class ExploreFragment extends BaseFragment<FragmentExploreBinding> implem
         initView();
         initListener();
 
-        mExploreService.getExploreList(mKeyword, 0, 1);
+        mExploreService.getExploreList(mKeyword, 0, 4);
 
          return binding.getRoot();
 
@@ -73,7 +73,7 @@ public class ExploreFragment extends BaseFragment<FragmentExploreBinding> implem
                 Log.d("ExploreFragment", "onLoadMore");
                 isSearch = false;
                 insertBeforeIdx += 9;
-                mExploreService.getExploreList(mKeyword, mExploreWorryListAdapter.getLastId(), 9);
+                mExploreService.getExploreList(mKeyword, mExploreWorryListAdapter.getLastId(), 4);
             }
         };
 
@@ -100,6 +100,10 @@ public class ExploreFragment extends BaseFragment<FragmentExploreBinding> implem
 
     @Override
     public void getSearchListFailure(String message) {
+        showCustomToast(message);
+    }
 
+    public void getSearchList() {
+        mExploreService.getExploreList(mKeyword, 0, 4);
     }
 }
