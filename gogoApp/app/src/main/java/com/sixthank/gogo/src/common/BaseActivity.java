@@ -16,6 +16,7 @@ public class BaseActivity<B extends ViewBinding> extends AppCompatActivity {
     protected final HashMap<String, Object> mChildData = new HashMap<>();
     protected ProgressDialog mProgressDialog;
 
+    private long backBtnTime = 0;
 
     public void showCustomToast(final String message) {
         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
@@ -41,4 +42,20 @@ public class BaseActivity<B extends ViewBinding> extends AppCompatActivity {
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        long curTime = System.currentTimeMillis();
+        long gapTime = curTime - backBtnTime;
+
+        if(0 <= gapTime && 2000 >= gapTime) {
+            super.onBackPressed();
+        }
+        else {
+            backBtnTime = curTime;
+            Toast.makeText(this, "한번 더 누르면 앱이 종료됩니다.",Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
 }
