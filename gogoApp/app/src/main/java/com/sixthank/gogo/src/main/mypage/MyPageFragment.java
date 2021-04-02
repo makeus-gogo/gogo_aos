@@ -5,15 +5,23 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.fragment.app.FragmentManager;
+
 import com.bumptech.glide.Glide;
+import com.kakao.usermgmt.UserManagement;
+import com.kakao.usermgmt.callback.LogoutResponseCallback;
 import com.sixthank.gogo.R;
 
 import com.sixthank.gogo.src.common.BaseFragment;
+import com.sixthank.gogo.src.common.CustomDialog;
+import com.sixthank.gogo.src.common.CustomDialogCallback;
 import com.sixthank.gogo.src.common.FirebaseStorageUtil;
+import com.sixthank.gogo.src.login.LoginActivity;
 import com.sixthank.gogo.src.main.MainActivity;
 import com.sixthank.gogo.src.main.mypage.interfaces.MyPageFragmentView;
 import com.sixthank.gogo.src.main.mypage.models.MyPageBody;
@@ -22,7 +30,7 @@ import com.sixthank.gogo.src.main.mypage.service.MyPageService;
 import com.sixthank.gogo.databinding.FragmentMyPageBinding;
 
 public class MyPageFragment extends BaseFragment<FragmentMyPageBinding> implements
-        MyPageFragmentView, View.OnClickListener, FirebaseStorageUtil.CallBackListener {
+        MyPageFragmentView, View.OnClickListener, FirebaseStorageUtil.CallBackListener, CustomDialogCallback {
 
     private MyPageService mMyPageService;
     private MyPageResponse.Data mData;
@@ -50,6 +58,7 @@ public class MyPageFragment extends BaseFragment<FragmentMyPageBinding> implemen
         binding.myIvSetting.setOnClickListener(this);
         binding.myTvEditCompleted.setOnClickListener(this);
         binding.myIvProfileEdit.setOnClickListener(this);
+        binding.cardInfoSetting.setOnClickListener(this);
         FirebaseStorageUtil.setCallBackListener(this);
     }
 
@@ -66,6 +75,11 @@ public class MyPageFragment extends BaseFragment<FragmentMyPageBinding> implemen
                 break;
             case R.id.my_iv_profile_edit:
                 getAlbum();
+                break;
+            case R.id.card_info_setting:
+                CustomDialog dialog = new CustomDialog(getContext());
+                dialog.setPopupCallback(this);
+                dialog.showPopupDialog("로그아웃 하시겠습니까?", "");
                 break;
 
         }
@@ -177,5 +191,34 @@ public class MyPageFragment extends BaseFragment<FragmentMyPageBinding> implemen
         }
 
         mMyPageService.editMember(myPageBody);
+    }
+
+    @Override
+    public void btnPositive(String type) {
+        showProgressDialog();
+        UserManagement.getInstance().requestLogout(new LogoutResponseCallback() {
+            @Override
+            public void onCompleteLogout() {
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        showCustomToast("로그아웃되었습니다");
+                        hideProgressDialog();
+                    }
+                });
+
+                Log.d("KAKAO_API", "로그아웃되었습니다.");
+
+                getActivity().finish();
+                Intent intent = new Intent(getActivity(), LoginActivity.class);
+                startActivity(intent);
+
+            }
+        });
+    }
+
+    @Override
+    public void btnNegative() {
+
     }
 }

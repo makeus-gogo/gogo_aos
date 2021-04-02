@@ -97,7 +97,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="40dp"
-                    android:text="스피드하게! 고민을 해졀해주세요"
+                    android:text="스피드하게! 고민을 해결해주세요"
                     android:textColor="@color/black"
                     android:textSize="22sp"
                     android:textStyle="bold" />
