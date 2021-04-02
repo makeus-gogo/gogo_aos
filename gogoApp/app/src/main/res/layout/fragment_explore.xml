@@ -16,6 +16,8 @@
         android:backgroundTint="@color/explore_gray"
         android:gravity="center_vertical"
         android:paddingStart="15dp"
+        android:inputType="text"
+        android:imeOptions="actionSearch"
         android:theme="@style/customTheme"
         android:textSize="15sp"
         android:clickable="true"

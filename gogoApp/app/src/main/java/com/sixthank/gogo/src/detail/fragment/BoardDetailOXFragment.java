@@ -2,6 +2,7 @@ package com.sixthank.gogo.src.detail.fragment;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -80,6 +81,13 @@ public class BoardDetailOXFragment extends BaseFragment<FragmentBoardOXBinding> 
     }
 
     private void initView() {
+        // 사진
+        binding.boardOxDescription.setText(boardItem.getDescription());
+        if (getContext() != null && !boardItem.getPictureUrl().isEmpty())
+            Glide.with(getContext()).load(Uri.parse(boardItem.getPictureUrl())).into(binding.boardOxImg);
+        else
+            binding.boardOxDescription.setTextColor(Color.WHITE);
+
         // 프로필 및 닉네임
         if(boardItem.getPictureUrl() != null && !mProfileUrl.isEmpty())
             Glide.with(getContext())
@@ -106,15 +114,15 @@ public class BoardDetailOXFragment extends BaseFragment<FragmentBoardOXBinding> 
         else if (answerList.get(1).getCheck() == 1) checkAnswerIdx = 1;
         else checkAnswerIdx = -1;
 
-        setOXView(checkAnswerIdx);
+        if(checkAnswerIdx != -1) {
+            setOXView(checkAnswerIdx);
+        }
     }
 
     private void initVariable() {
         mPopupDialog = new CustomDialog(getContext());
         mBoardDetailService = new BoardDetailService(this);
-        binding.boardOxDescription.setText(boardItem.getDescription());
-        if (getContext() != null && !boardItem.getPictureUrl().isEmpty())
-            Glide.with(getContext()).load(Uri.parse(boardItem.getPictureUrl())).into(binding.boardOxImg);
+
     }
 
     private void initListener() {
@@ -165,7 +173,7 @@ public class BoardDetailOXFragment extends BaseFragment<FragmentBoardOXBinding> 
         if (type == 0) {
             binding.boardOxTvOPercent.setBackgroundResource(R.drawable.ic_percent_blue);
             binding.boardRadioO.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.ic_bg_white_o_blue));
-        } else {
+        } else if(type == 1){
             binding.boardOxTvXPercent.setBackgroundResource(R.drawable.ic_percent_blue);
             binding.boardRadioX.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.ic_bg_white_x_blue));
         }

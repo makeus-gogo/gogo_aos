@@ -3,9 +3,12 @@ package com.sixthank.gogo.src.main.explore;
 import android.os.Bundle;
 
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.widget.TextView;
 
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -61,10 +64,17 @@ public class ExploreFragment extends BaseFragment<FragmentExploreBinding> implem
 
     private void initListener(){
         binding.exploreViewSearch.setOnClickListener(v->{
-            mKeyword = String.valueOf(binding.exploreEtKeyword.getText());
-            binding.exploreEtKeyword.setText("");
-            isSearch = true;
-            mExploreService.getExploreList(mKeyword, 0, 6);
+            search();
+        });
+        binding.exploreEtKeyword.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if(actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    search();
+                    hideKeyboard(binding.exploreEtKeyword, getContext());
+                }
+                return false;
+            }
         });
 
         OnLoadMoreScrollListener onLoadMoreScrollListener = new OnLoadMoreScrollListener(mLoadManager) {
@@ -80,6 +90,13 @@ public class ExploreFragment extends BaseFragment<FragmentExploreBinding> implem
         binding.exploreRvWorries.addOnScrollListener(onLoadMoreScrollListener);
         binding.exploreRvWorries.setAdapter(mExploreWorryListAdapter);
 
+    }
+
+    private void search() {
+        mKeyword = String.valueOf(binding.exploreEtKeyword.getText());
+        binding.exploreEtKeyword.setText("");
+        isSearch = true;
+        mExploreService.getExploreList(mKeyword, 0, 6);
     }
 
     @Override
