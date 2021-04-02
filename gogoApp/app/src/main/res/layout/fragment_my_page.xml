@@ -142,6 +142,16 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
+                    android:id="@+id/my_tv_edit_cancel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="20dp"
+                    android:text="취소"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toStartOf="@id/my_tv_edit_completed"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
                     android:id="@+id/my_tv_edit_completed"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -156,11 +166,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="30dp"
+                    android:background="@drawable/bg_circle_5"
                     android:text="우유부단"
                     android:textColor="@color/black"
                     android:textSize="27sp"
-                    android:background="@drawable/bg_circle_5"
                     android:textStyle="bold"
+                    android:theme="@style/customTheme"
                     app:layout_constraintStart_toEndOf="@+id/my_iv_profile_edit"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -253,32 +264,32 @@
                 <ImageView
                     android:id="@+id/my_iv_badge_1"
                     android:layout_width="wrap_content"
-                    android:layout_marginStart="30dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
                     android:src="@drawable/ic_badge_example"
-                    app:layout_constraintTop_toBottomOf="@+id/my_tv_badge"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/my_tv_badge" />
 
                 <ImageView
                     android:id="@+id/my_iv_badge_2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_badge_bg"
-                    app:layout_constraintTop_toBottomOf="@+id/my_tv_badge"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/my_iv_badge_3"
-                    app:layout_constraintStart_toEndOf="@+id/my_iv_badge_1" />
+                    app:layout_constraintStart_toEndOf="@+id/my_iv_badge_1"
+                    app:layout_constraintTop_toBottomOf="@+id/my_tv_badge" />
 
                 <ImageView
                     android:id="@+id/my_iv_badge_3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_badge_bg"
-                    app:layout_constraintTop_toBottomOf="@+id/my_tv_badge"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/my_iv_badge_2" />
+                    app:layout_constraintStart_toEndOf="@+id/my_iv_badge_2"
+                    app:layout_constraintTop_toBottomOf="@+id/my_tv_badge" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
 
@@ -415,14 +426,14 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-<!--                <ImageView-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginEnd="20dp"-->
-<!--                    android:src="@drawable/ic_arrow_blue"-->
-<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                    app:layout_constraintEnd_toEndOf="parent"-->
-<!--                    app:layout_constraintTop_toTopOf="parent" />-->
+                <!--                <ImageView-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginEnd="20dp"-->
+                <!--                    android:src="@drawable/ic_arrow_blue"-->
+                <!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+                <!--                    app:layout_constraintEnd_toEndOf="parent"-->
+                <!--                    app:layout_constraintTop_toTopOf="parent" />-->
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
     </LinearLayout>

@@ -59,6 +59,7 @@ public class MyPageFragment extends BaseFragment<FragmentMyPageBinding> implemen
         binding.myTvEditCompleted.setOnClickListener(this);
         binding.myIvProfileEdit.setOnClickListener(this);
         binding.cardInfoSetting.setOnClickListener(this);
+        binding.myTvEditCancel.setOnClickListener(this);
         FirebaseStorageUtil.setCallBackListener(this);
     }
 
@@ -80,6 +81,10 @@ public class MyPageFragment extends BaseFragment<FragmentMyPageBinding> implemen
                 CustomDialog dialog = new CustomDialog(getContext());
                 dialog.setPopupCallback(this);
                 dialog.showPopupDialog("로그아웃 하시겠습니까?", "");
+                break;
+            case R.id.my_tv_edit_cancel:
+                binding.cardInfo.setVisibility(View.VISIBLE);
+                binding.cardInfoEdit.setVisibility(View.GONE);
                 break;
 
         }

@@ -48,25 +48,27 @@ public class WorryRankAdapter extends RecyclerView.Adapter<WorryRankAdapter.Worr
         holder.worryImage.setImageURI(Uri.parse(item.getBoardImageUrl()));
         holder.nickName.setText(item.getNickname());
 
-        if(item.getBoardImageUrl() != null && !item.getBoardImageUrl().isEmpty())
+        if(item.getBoardImageUrl() != null && !item.getBoardImageUrl().isEmpty()) {
             Glide.with(context)
                     .load(Uri.parse(item.getBoardImageUrl()))
                     .into(holder.worryImage);
-        else
+        }
+        else {
             Glide.with(context)
                     .load(ContextCompat.getDrawable(context, R.drawable.bg_glide_load_default))
                     .into(holder.worryImage);
-
-        if(item.getProfileImageUrl() != null && !item.getProfileImageUrl().isEmpty())
+        }
+        if(item.getProfileImageUrl() != null && !item.getProfileImageUrl().isEmpty()) {
             Glide.with(context)
                     .load(Uri.parse(item.getProfileImageUrl()))
                     .circleCrop()
                     .into(holder.profile);
-        else
+        }
+        else {
             Glide.with(context)
                     .load(ContextCompat.getDrawable(context, R.drawable.ic_profile))
-                    .into(holder.worryImage);
-
+                    .into(holder.profile);
+        }
     }
 
     @Override
