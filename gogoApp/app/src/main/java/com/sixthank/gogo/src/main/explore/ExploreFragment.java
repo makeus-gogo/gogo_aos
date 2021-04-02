@@ -92,8 +92,10 @@ public class ExploreFragment extends BaseFragment<FragmentExploreBinding> implem
         binding.exploreRvWorries.post(new Runnable() {
             @Override
             public void run() {
-//                mExploreWorryListAdapter.notifyDataSetChanged();
-                mExploreWorryListAdapter.notifyItemRangeInserted(insertBeforeIdx, mExploreWorryListAdapter.getItemCount());
+                if(isSearch)
+                    mExploreWorryListAdapter.notifyDataSetChanged();
+                else
+                    mExploreWorryListAdapter.notifyItemRangeInserted(insertBeforeIdx, mExploreWorryListAdapter.getItemCount());
             }
         });
     }

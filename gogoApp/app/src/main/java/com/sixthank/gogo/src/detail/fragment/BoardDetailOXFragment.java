@@ -167,7 +167,7 @@ public class BoardDetailOXFragment extends BaseFragment<FragmentBoardOXBinding> 
             binding.boardRadioO.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.ic_bg_white_o_blue));
         } else {
             binding.boardOxTvXPercent.setBackgroundResource(R.drawable.ic_percent_blue);
-            binding.boardRadioO.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.ic_bg_white_x_blue));
+            binding.boardRadioX.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.ic_bg_white_x_blue));
         }
 
     }
