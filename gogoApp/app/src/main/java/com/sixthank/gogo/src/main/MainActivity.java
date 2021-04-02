@@ -36,14 +36,12 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements B
     private boolean isImageChange;
     private Uri mImageUri;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
-        initView();
-
         binding.bottomNav.setOnNavigationItemSelectedListener(this);
         binding.bottomNav.setItemIconTintList(null);
 
@@ -51,13 +49,24 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements B
         fm.beginTransaction().add(R.id.main_container, exploreFragment, "2").hide(exploreFragment).commit();
         fm.beginTransaction().add(R.id.main_container, homeFragment, "1").commit();
 
+        initVariable();
+        initView();
+    }
+
+    void initVariable() {
+
     }
 
     void initView() {
+
+
+
         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         getWindow().setStatusBarColor(0x00000000);
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+
+
     }
 
     @SuppressLint("NonConstantResourceId")

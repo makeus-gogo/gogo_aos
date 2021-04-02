@@ -66,7 +66,12 @@ public class PostFirstFragment extends BaseFragment<FragmentPostFirstBinding> im
         int index = binding.postFirstViewPager.getCurrentItem();
         switch (v.getId()) {
             case R.id.post_first_next:
-                mParentActivity.setValueString("description", binding.postFirstDescription.getText().toString());
+                String description = String.valueOf(binding.postFirstDescription.getText());
+                if(description.isEmpty()) {
+                    showCustomToast("고민을 입력해주세요");
+                    return;
+                }
+                mParentActivity.setValueString("description", description);
                 binding.postFirstDescription.setText("");
                 mParentActivity.switchFragment(index + 1);
                 break;

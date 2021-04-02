@@ -147,7 +147,7 @@ public class BoardDetailOXFragment extends BaseFragment<FragmentBoardOXBinding> 
 
 
         binding.boardOxIvAlert.setOnClickListener(v->{
-            mPopupDialog.showPopupDialog("신고하시겠습니까?", "report");
+            mPopupDialog.showPopupDialog("해당 글을 신고하시겠습니까??", "report");
         });
     }
 

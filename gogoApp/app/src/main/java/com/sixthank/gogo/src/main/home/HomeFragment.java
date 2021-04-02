@@ -3,6 +3,7 @@ package com.sixthank.gogo.src.main.home;
 import android.content.Intent;
 import android.os.Bundle;
 
+import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,6 +32,16 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> implements H
     private HomeService mHomeService;
     private WorryListAdapter mWorryListAdapter;
     private int mNotifyStartRange = 0;
+
+
+    public static HomeFragment newInstance(String nickname) {
+
+        Bundle args = new Bundle();
+        args.putString("nickname", nickname);
+        HomeFragment fragment = new HomeFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

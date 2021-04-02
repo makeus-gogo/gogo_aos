@@ -14,6 +14,8 @@ import com.bumptech.glide.Glide;
 import com.sixthank.gogo.databinding.FragmentBoardChoiceBinding;
 import com.sixthank.gogo.src.comment.BoardCommentActivity;
 import com.sixthank.gogo.src.common.BaseFragment;
+import com.sixthank.gogo.src.common.CustomDialog;
+import com.sixthank.gogo.src.common.CustomDialogCallback;
 import com.sixthank.gogo.src.common.OnItemClickListener;
 import com.sixthank.gogo.src.common.models.AnswerResultDtoList;
 import com.sixthank.gogo.src.detail.interfaces.BoardDetailFragmentView;
@@ -28,7 +30,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BoardDetailChoiceFragment extends BaseFragment<FragmentBoardChoiceBinding>
-        implements BoardDetailFragmentView, OnItemClickListener {
+        implements BoardDetailFragmentView, OnItemClickListener, CustomDialogCallback {
 
     private BoardDetailResponse.Data boardItem;
     private List<AnswerResultDtoList> answerList;
@@ -94,7 +96,9 @@ public class BoardDetailChoiceFragment extends BaseFragment<FragmentBoardChoiceB
             startActivity(intent);
         });
         binding.boardChoiceIvAlert.setOnClickListener(v->{
-            showCustomToast("신고되었습니다.");
+            CustomDialog customDialog = new CustomDialog(getContext());
+            customDialog.setPopupCallback(this);
+            customDialog.showPopupDialog("해당 글을 신고하시겠습니까?", "");
         });
     }
 
@@ -140,5 +144,15 @@ public class BoardDetailChoiceFragment extends BaseFragment<FragmentBoardChoiceB
     @Override
     public void postBoardAnswerFailure(String message) {
         showCustomToast(message);
+    }
+
+    @Override
+    public void btnPositive(String type) {
+        showCustomToast("신고되었습니다.");
+    }
+
+    @Override
+    public void btnNegative() {
+
     }
 }

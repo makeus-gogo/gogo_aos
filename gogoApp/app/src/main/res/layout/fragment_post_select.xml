@@ -52,19 +52,20 @@
         android:id="@+id/post_select_et_content"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/post_second_select"
-        android:layout_marginBottom="90dp"
-        android:gravity="center"
-        android:theme="@style/customTheme"
-        android:hint="여기에 고민을\n입력해주세요!"
+        android:layout_marginTop="60dp"
         android:background="@drawable/bg_circle_5_click"
+        android:gravity="center"
+        android:hint="여기에 고민을\n입력해주세요!"
+        android:maxLines="5"
+        android:maxLength="45"
         android:padding="20dp"
         android:textColor="@color/black"
         android:textSize="22sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@id/guideline_horizontal"
+        android:theme="@style/customTheme"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/post_select_next_bg" />
 
     <LinearLayout
         android:id="@+id/post_second_select"
@@ -196,26 +197,26 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.4" />
+        app:layout_constraintGuide_percent="0.5" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/post_select_cl_photo"
         android:layout_width="match_parent"
         android:layout_height="55dp"
-        app:layout_constraintBottom_toTopOf="@+id/post_select_style"
         android:layout_marginHorizontal="50dp"
-        android:visibility="gone"
         android:layout_marginBottom="10dp"
+        android:background="@drawable/bg_circle_5"
         android:backgroundTint="@color/post_third_txt"
-        android:background="@drawable/bg_circle_5">
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/post_select_style">
 
         <TextView
             android:id="@+id/post_select_tv_take_photo"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:text="사진찍기"
-            android:gravity="center"
             android:background="@color/white"
+            android:gravity="center"
+            android:text="사진찍기"
             android:textColor="@color/post_third_txt"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/post_select_tv_album"
@@ -226,11 +227,11 @@
             android:id="@+id/post_select_tv_album"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:text="앨범에서 가져오기"
-            android:textColor="@color/post_third_txt"
-            android:gravity="center"
             android:layout_marginStart="1dp"
             android:background="@color/white"
+            android:gravity="center"
+            android:text="앨범에서 가져오기"
+            android:textColor="@color/post_third_txt"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/post_select_tv_take_photo"

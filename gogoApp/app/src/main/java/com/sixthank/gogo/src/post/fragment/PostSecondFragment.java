@@ -98,8 +98,13 @@ public class PostSecondFragment extends BaseFragment<FragmentPostSecondBinding> 
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.post_second_next:
+                String description = String.valueOf(binding.postSecondEtContent.getText());
+                if(description.isEmpty()) {
+                    showCustomToast("고민을 입력해주세요.");
+                    return;
+                }
                 mParentActivity.setValueString("type", "OX");
-                mParentActivity.setValueString("description", binding.postSecondEtContent.getText().toString());
+                mParentActivity.setValueString("description", description);
                 mParentActivity.addBoard();
                 break;
             case R.id.post_second_img_close:

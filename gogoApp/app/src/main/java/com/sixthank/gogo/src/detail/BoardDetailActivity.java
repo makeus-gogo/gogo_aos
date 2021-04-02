@@ -58,4 +58,9 @@ public class BoardDetailActivity extends BaseActivity<ActivityBoardDetailBinding
     public void getBoardDetailFailure() {
         showCustomToast("detail failure");
     }
+
+    @Override
+    public void onBackPressed() {
+
+    }
 }

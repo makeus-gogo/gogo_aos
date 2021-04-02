@@ -61,6 +61,7 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding> implements
             intent.putExtras(bundle);
         } else {
             intent = new Intent(getApplicationContext(), MainActivity.class);
+            intent.putExtra("nickname", data.getName());
         }
 
         startActivity(intent);

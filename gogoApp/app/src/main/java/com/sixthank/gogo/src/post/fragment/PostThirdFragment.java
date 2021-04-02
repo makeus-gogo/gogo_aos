@@ -1,5 +1,6 @@
 package com.sixthank.gogo.src.post.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import android.view.LayoutInflater;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 
 import com.sixthank.gogo.databinding.FragmentPostThirdBinding;
 import com.sixthank.gogo.src.common.BaseFragment;
+import com.sixthank.gogo.src.main.MainActivity;
 import com.sixthank.gogo.src.main.home.models.WorryResponse;
 import com.sixthank.gogo.src.post.fragment.adapter.WorryListAdapter2;
 
@@ -31,6 +33,9 @@ public class PostThirdFragment extends BaseFragment<FragmentPostThirdBinding> {
 
         binding.postThirdImgClose.setOnClickListener(v->{
             getActivity().finish();
+            Intent intent = new Intent(getActivity(), MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
         });
         return binding.getRoot();
     }

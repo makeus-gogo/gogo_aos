@@ -100,6 +100,11 @@ public class PostActivity extends BaseActivity<ActivityPostBinding> implements P
 
     public void addBoard() {
         showProgressDialog();
+        if(mCurrentPhotoPath == null || mAlbumPhotoUri == null) {
+            PostBody body = new PostBody().toMap(mChildData);
+            mPostService.addBoard(body);
+            return;
+        }
         if(isTakePhoto) {
             Uri uri = Uri.fromFile(new File(mCurrentPhotoPath));
             FirebaseStorageUtil.uploadImage(uri);
@@ -233,4 +238,8 @@ public class PostActivity extends BaseActivity<ActivityPostBinding> implements P
         mChildData.put(key, value);
     }
 
+    @Override
+    public void onBackPressed() {
+
+    }
 }
