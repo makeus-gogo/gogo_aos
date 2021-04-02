@@ -31,6 +31,7 @@
             android:theme="@style/fullTheme" />
         <activity
             android:name=".src.signup.SignUpActivity"
+            android:theme="@style/customTheme"
             android:screenOrientation="portrait" />
 
         <meta-data
@@ -53,23 +54,23 @@
             android:name=".src.login.LoginActivity"
             android:screenOrientation="portrait"
             android:theme="@style/fullTheme">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
         </activity>
         <activity
             android:name=".src.splash.SplashActivity"
             android:screenOrientation="portrait"
             android:theme="@style/fullTheme">
 
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
+             <intent-filter>
+             <action android:name="android.intent.action.MAIN" />
 
 
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
+             <category android:name="android.intent.category.LAUNCHER" />
+             </intent-filter>
         </activity>
         <activity
             android:name=".src.main.MainActivity"

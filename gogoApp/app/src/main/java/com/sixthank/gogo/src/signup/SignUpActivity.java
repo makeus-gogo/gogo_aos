@@ -5,12 +5,11 @@ import android.os.Bundle;
 
 import androidx.fragment.app.FragmentManager;
 
-import com.google.android.gms.auth.api.signin.internal.SignInHubActivity;
+
 import com.sixthank.gogo.R;
+
 import com.sixthank.gogo.databinding.ActivitySignUpBinding;
 import com.sixthank.gogo.src.common.BaseActivity;
-import com.sixthank.gogo.src.detail.fragment.BoardDetailChoiceFragment;
-import com.sixthank.gogo.src.detail.fragment.BoardDetailOXFragment;
 import com.sixthank.gogo.src.login.models.LoginResponse;
 import com.sixthank.gogo.src.signup.fragment.CompletedSignUpFragment;
 import com.sixthank.gogo.src.signup.fragment.SetNicknameFragment;
@@ -49,7 +48,7 @@ public class SignUpActivity extends BaseActivity<ActivitySignUpBinding> implemen
     @Override
     public void signUpSuccess() {
         showCustomToast(getString(R.string.sign_up_success));
-        fm.beginTransaction().replace(R.id.board_detail_container, new CompletedSignUpFragment()).commit();
+        fm.beginTransaction().replace(R.id.sign_up_container, new CompletedSignUpFragment()).commit();
     }
 
     @Override

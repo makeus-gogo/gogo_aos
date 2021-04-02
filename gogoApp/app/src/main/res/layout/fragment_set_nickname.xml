@@ -49,26 +49,27 @@
         android:backgroundTint="#F6F6F8"
         android:hint="별명을 입력해주세요."
         android:paddingHorizontal="15dp"
-        android:paddingVertical="25dp"
+        android:maxLength="18"
+        android:maxLines="1"
         android:theme="@style/customTheme"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_desc_detail" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="특수 문자 및 이모티콘은 불가, 최대 10자"
-        android:textSize="12sp"
-        app:layout_constraintTop_toBottomOf="@+id/set_et_nickname"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="15dp" />
+<!--    <TextView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="특수 문자 및 이모티콘은 불가, 최대 10자"-->
+<!--        android:textSize="12sp"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/set_et_nickname"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        android:layout_marginStart="30dp"-->
+<!--        android:layout_marginTop="15dp" />-->
 
     <TextView
         android:id="@+id/set_tv_next"
         android:layout_width="0dp"
-        android:layout_height="96dp"
+        android:layout_height="80dp"
         android:background="@drawable/bg_gradient_blue"
         android:gravity="center"
         android:text="다음"
