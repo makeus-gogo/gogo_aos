@@ -3,6 +3,7 @@ package com.sixthank.gogo.src.main.home;
 import android.content.Intent;
 import android.os.Bundle;
 
+import android.os.Handler;
 import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -48,7 +49,10 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> implements H
                              Bundle savedInstanceState) {
         binding = FragmentHomeBinding.inflate(inflater);
 
+        showProgressDialog();
+
         initVariable();
+        initView();
         initListener();
         initData();
 
@@ -59,6 +63,10 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> implements H
         mHomeService = new HomeService(this);
         mWorryListAdapter = new WorryListAdapter(getContext());
         binding.mainRvList.setAdapter(mWorryListAdapter);
+    }
+
+    private void initView() {
+
     }
 
     private void initListener() {
@@ -115,7 +123,7 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding> implements H
 
     @Override
     public void getBoardListSuccess(List<HomeResponse.Data> data) {
-
+        hideProgressDialog();
         if(data.size() != 0) {
             mWorryListAdapter.addItems((ArrayList<HomeResponse.Data>) data);
             binding.mainRvList.post(new Runnable() {

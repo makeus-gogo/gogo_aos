@@ -8,8 +8,8 @@
 
     <ImageView
         android:id="@+id/post_third_img_close"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_margin="10dp"
         android:src="@drawable/ic_close_blue" />
 
@@ -17,18 +17,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_above="@+id/img_back"
+        android:layout_below="@+id/post_third_img_close"
+        android:layout_marginTop="80dp"
         android:gravity="center"
         android:textStyle="bold"
-        android:layout_marginBottom="50dp"
-        android:text="업로드 완료!\n비슷한 고민 해결을 도와주세요"
+        android:text="업로드 완료!\n남들의 고민도 해결해주세요"
         android:textColor="@color/post_third_txt"
         android:textSize="22sp" />
 
     <ImageView
         android:id="@+id/img_back"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="400dp"
         android:layout_alignParentBottom="true"
         android:scaleType="fitXY"
         android:src="@drawable/rectangle_big" />
@@ -100,7 +100,6 @@
         android:layout_marginTop="20dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:layout_below="@+id/img_shy"
-        tools:listitem="@layout/item_worry_long"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 </RelativeLayout>

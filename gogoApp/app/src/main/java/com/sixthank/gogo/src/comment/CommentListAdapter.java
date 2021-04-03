@@ -42,10 +42,18 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
     @Override
     public void onBindViewHolder(@NonNull CommentListAdapter.CommentHolder holder, int position) {
         Data data = list.get(position);
-        Glide.with(context)
-                .load(Uri.parse(data.getMemberProfileUrl()))
-                .circleCrop()
-                .into(holder.ivProfile);
+
+        if(data.getMemberProfileUrl() != null && !data.getMemberProfileUrl().isEmpty()) {
+            Glide.with(context)
+                    .load(Uri.parse(data.getMemberProfileUrl()))
+                    .circleCrop()
+                    .into(holder.ivProfile);
+        } else {
+            Glide.with(context)
+                    .load(ContextCompat.getDrawable(context, R.drawable.ic_profile))
+                    .circleCrop()
+                    .into(holder.ivProfile);
+        }
 
         holder.tvNickname.setText(data.getDescription());
     }

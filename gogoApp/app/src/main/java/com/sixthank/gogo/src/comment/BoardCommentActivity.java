@@ -54,12 +54,13 @@ public class BoardCommentActivity extends BaseActivity<ActivityBoardCommentBindi
 
     private void initView(){
         // 사진 처리
-        Glide.with(getApplicationContext())
-                .load(Uri.parse(mPictureUrl))
-                .transition(DrawableTransitionOptions.withCrossFade())
-                .placeholder(new ColorDrawable(Color.TRANSPARENT))
-                .transform(new BlurTransformation(25, 3))
-                .into(binding.commentImage);
+        if(mPictureUrl != null && !mPictureUrl.isEmpty())
+            Glide.with(getApplicationContext())
+                    .load(Uri.parse(mPictureUrl))
+                    .transition(DrawableTransitionOptions.withCrossFade())
+                    .placeholder(new ColorDrawable(Color.TRANSPARENT))
+                    .transform(new BlurTransformation(25, 3))
+                    .into(binding.commentImage);
     }
 
     private void initListener() {
@@ -84,6 +85,8 @@ public class BoardCommentActivity extends BaseActivity<ActivityBoardCommentBindi
     public void getCommentsSuccess(List<Data> list) {
         mCommentListAdapter.setComments(list);
         binding.commentRvList.setAdapter(mCommentListAdapter);
+
+
     }
 
     @Override
@@ -93,10 +96,17 @@ public class BoardCommentActivity extends BaseActivity<ActivityBoardCommentBindi
 
     @Override
     public void postCommentSuccess(Data data) {
-        data.setMemberProfileUrl(mProfileUrl);
+        data.setMemberProfileUrl(data.getMemberProfileUrl());
         mCommentListAdapter.addItem(data);
         binding.commentEtContent.setText("");
         showCustomToast("댓글이 등록되었습니다.");
+
+        binding.commentRvList.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                binding.commentRvList.scrollToPosition(mCommentListAdapter.getItemCount()-1);
+            }
+        }, 500);
     }
 
     @Override

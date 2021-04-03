@@ -5,12 +5,14 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
+import com.sixthank.gogo.R;
 import com.sixthank.gogo.databinding.FragmentBoardChoiceBinding;
 import com.sixthank.gogo.src.comment.BoardCommentActivity;
 import com.sixthank.gogo.src.common.BaseFragment;
@@ -116,6 +118,11 @@ public class BoardDetailChoiceFragment extends BaseFragment<FragmentBoardChoiceB
                     .load(Uri.parse(mProfileUrl))
                     .circleCrop()
                     .into(binding.boardChoiceProfile);
+        else
+            Glide.with(getContext())
+                    .load(ContextCompat.getDrawable(getContext(), R.drawable.ic_profile))
+                    .circleCrop()
+                    .into(binding.boardChoiceProfile);
 
         for(AnswerResultDtoList dto: answerList) {
             if(dto.getCheck() != 0) {
@@ -124,6 +131,7 @@ public class BoardDetailChoiceFragment extends BaseFragment<FragmentBoardChoiceB
         }
 
         if(mContentId != 0) mAnswerListAdapter.setSelected(mContentId);
+        mAnswerListAdapter.setUserCheck(boardItem.getUserCheck());
         binding.boardChoiceRv.setAdapter(mAnswerListAdapter);
     }
 

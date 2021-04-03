@@ -25,6 +25,7 @@ public class AnswerListAdapter extends RecyclerView.Adapter<AnswerListAdapter.An
     private OnItemClickListener listener;
     private Context context;
     private int selected = -1;
+    private int userCheck;
 
     public AnswerListAdapter(List<AnswerResultDtoList> list) {
         this.list = list;
@@ -46,6 +47,10 @@ public class AnswerListAdapter extends RecyclerView.Adapter<AnswerListAdapter.An
         this.listener = listener;
     }
 
+    public void setUserCheck(int userCheck) {
+        this.userCheck = userCheck;
+    }
+
     @NonNull
     @Override
     public AnswerListAdapter.AnswerHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -59,17 +64,23 @@ public class AnswerListAdapter extends RecyclerView.Adapter<AnswerListAdapter.An
         holder.content.setText(list.get(position).getContent());
         holder.percent.setText(list.get(position).getPercentage()+"%");
         // 변경
-        if (selected == -1) {
+        if(userCheck == 1) {
             holder.order.setImageResource(R.drawable.ic_select_order);
             holder.contentBg.setBackgroundResource(R.drawable.bg_circle_5_click);
-        } else if (selected == list.get(position).getContentId()) {
             holder.percent.setVisibility(View.VISIBLE);
-            holder.order.setImageResource(R.drawable.ic_select_order_on);
-            holder.contentBg.setBackgroundResource(R.drawable.bg_circle_5);
         } else {
-            holder.percent.setVisibility(View.VISIBLE);
-            holder.order.setImageResource(R.drawable.ic_select_order);
-            holder.contentBg.setBackgroundResource(R.drawable.bg_circle_5_click);
+            if (selected == -1) {
+                holder.order.setImageResource(R.drawable.ic_select_order);
+                holder.contentBg.setBackgroundResource(R.drawable.bg_circle_5_click);
+            } else if (selected == list.get(position).getContentId()) {
+                holder.percent.setVisibility(View.VISIBLE);
+                holder.order.setImageResource(R.drawable.ic_select_order_on);
+                holder.contentBg.setBackgroundResource(R.drawable.bg_circle_5);
+            } else {
+                holder.percent.setVisibility(View.VISIBLE);
+                holder.order.setImageResource(R.drawable.ic_select_order);
+                holder.contentBg.setBackgroundResource(R.drawable.bg_circle_5_click);
+            }
         }
     }
 

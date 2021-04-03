@@ -100,7 +100,7 @@ public class PostActivity extends BaseActivity<ActivityPostBinding> implements P
 
     public void addBoard() {
         showProgressDialog();
-        if(mCurrentPhotoPath == null || mAlbumPhotoUri == null) {
+        if(mCurrentPhotoPath == null && mAlbumPhotoUri == null) {
             PostBody body = new PostBody().toMap(mChildData);
             mPostService.addBoard(body);
             return;

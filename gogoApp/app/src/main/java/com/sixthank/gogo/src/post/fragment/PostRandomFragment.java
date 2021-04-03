@@ -2,16 +2,16 @@ package com.sixthank.gogo.src.post.fragment;
 
 import android.os.Bundle;
 
-import androidx.fragment.app.Fragment;
+
 
 import android.os.CountDownTimer;
 import android.os.Handler;
-import android.util.Log;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.sixthank.gogo.R;
+
 import com.sixthank.gogo.databinding.FragmentPostRandomBinding;
 import com.sixthank.gogo.src.common.BaseFragment;
 
@@ -33,7 +33,7 @@ public class PostRandomFragment extends BaseFragment<FragmentPostRandomBinding> 
             getActivity().finish();
         });
         mRandom = new Random();
-        mTimer = new RandomTimer(5000, 1000); //5sec, 1sec
+        mTimer = new RandomTimer(6000, 1000); //5sec, 1sec
 
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
@@ -76,8 +76,8 @@ public class PostRandomFragment extends BaseFragment<FragmentPostRandomBinding> 
                 binding.randomImgO.setVisibility(View.GONE);
                 binding.randomImgX.setVisibility(View.GONE);
             }
-            if(sec == 5) binding.postRandomTxt.setText("심호흡 한 번 하시고~");
-            else binding.postRandomTxt.setText(sec + " 초");
+//            if(sec == 5) binding.postRandomTxt.setText("심호흡 한 번 하시고~");
+            binding.postRandomTxt.setText(sec + " 초");
         }
 
         @Override

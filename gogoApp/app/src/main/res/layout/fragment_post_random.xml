@@ -23,7 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="10초동안\n고민을 생각해보세요"
+        android:text="5초동안\n고민을 생각해보세요"
         android:textColor="@color/white"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -38,6 +38,7 @@
         android:layout_margin="20dp"
         android:padding="10dp"
         android:src="@drawable/ic_next"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

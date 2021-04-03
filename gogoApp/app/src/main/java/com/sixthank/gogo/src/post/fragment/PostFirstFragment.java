@@ -111,8 +111,8 @@ public class PostFirstFragment extends BaseFragment<FragmentPostFirstBinding> im
             case 2:
                 binding.postFirstLlOx.setVisibility(View.INVISIBLE);
                 binding.postFirstLlSelect.setVisibility(View.INVISIBLE);
-                binding.postFirstLlRandom.setVisibility(View.VISIBLE);
-                binding.postFirstAnswerTxt.setText("제가 도와드릴께요!");
+                binding.postFirstLlRandom.setVisibility(View.INVISIBLE);
+                binding.postFirstAnswerTxt.setText("제가 도와드게릴요! 단, O/X만 가능합니다.");
                 break;
         }
     }

@@ -5,15 +5,24 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal">
 
+    <View
+        android:id="@+id/item_comment_view"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/bg_circle_25"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/item_comment_iv_profile"
         android:layout_width="32dp"
         android:layout_height="32dp"
-        android:layout_marginTop="15dp"
         android:src="@drawable/ic_profile_70"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="@+id/item_comment_view"
+        app:layout_constraintBottom_toBottomOf="@+id/item_comment_view"
+        app:layout_constraintEnd_toEndOf="@+id/item_comment_view"
+        app:layout_constraintTop_toTopOf="@+id/item_comment_view" />
 
     <TextView
         android:id="@+id/item_comment_tv_content"
