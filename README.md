@@ -10,7 +10,7 @@
 ## Contributor
 Android Developer: imcodding(Mia)
 
-BackEnd Developer: seungh0(Will)
+BackEnd Developer: seungh0(Will), nays111(tim)
 
 Designer: Amber
 
