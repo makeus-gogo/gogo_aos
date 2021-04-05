@@ -3,12 +3,15 @@
 
 # 고GO
 고민되는 순간에 쉽게 결정을 내리지 못하는 사람들의 고민을 빠르게 해결해주기 위한 앱
+
 [시연영상](https://youtu.be/LOE6TOqJiqo)
 
 
 ## Contributor
 Android Developer: imcodding(Mia)
+
 BackEnd Developer: seungh0(Will)
+
 Designer: Amber
 
 ## 기술 스택
@@ -22,3 +25,7 @@ Designer: Amber
 - QueryDSL
 
 ## Project
+![image](https://user-images.githubusercontent.com/55366664/113566852-7504e980-9648-11eb-8323-befcacfac854.png)
+
+## REST API
+![image](https://user-images.githubusercontent.com/55366664/113569718-e8f5c080-964d-11eb-931c-f2f52d782bb8.png)
