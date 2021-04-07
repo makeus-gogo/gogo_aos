@@ -51,6 +51,8 @@
         android:paddingHorizontal="15dp"
         android:maxLength="18"
         android:maxLines="1"
+        android:inputType="text"
+        android:imeOptions="actionDone"
         android:theme="@style/customTheme"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

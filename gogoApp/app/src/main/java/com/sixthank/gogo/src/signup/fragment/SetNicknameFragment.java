@@ -2,9 +2,12 @@ package com.sixthank.gogo.src.signup.fragment;
 
 import android.os.Bundle;
 
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.widget.TextView;
 
 import com.sixthank.gogo.databinding.FragmentSetNicknameBinding;
 import com.sixthank.gogo.src.common.BaseFragment;
@@ -29,13 +32,26 @@ public class SetNicknameFragment extends BaseFragment<FragmentSetNicknameBinding
         mParentActivity = (SignUpActivity) getActivity();
 
         binding.setTvNext.setOnClickListener(v->{
-            String nickname = String.valueOf(binding.setEtNickname.getText());
-            if(validation(nickname))
-                if(mParentActivity != null) {
-                    mParentActivity.setNickname(nickname);
-                    mParentActivity.signUp();
-                }
+            completed();
         });
+        binding.setEtNickname.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if(actionId == EditorInfo.IME_ACTION_DONE) {
+                    completed();
+                }
+                return false;
+            }
+        });
+    }
+
+    private void completed() {
+        String nickname = String.valueOf(binding.setEtNickname.getText());
+        if(validation(nickname))
+            if(mParentActivity != null) {
+                mParentActivity.setNickname(nickname);
+                mParentActivity.signUp();
+            }
     }
 
 
